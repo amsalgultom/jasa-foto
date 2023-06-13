@@ -42,7 +42,7 @@
                             <td>{{ ++$no }}</td>
                             <td>{{ $myorder->customer?->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($myorder->date)->format('d-m-Y') }}</td>
-                            <td>{{ 'Rp '.number_format($myorder->shipping_costs, 0, ',', '.') }}</td>
+                            <td>{{ $myorder->shipping_method . ' Rp '.number_format($myorder->shipping_costs, 0, ',', '.') }}</td>
                             <td>{{ 'Rp '.number_format($myorder->total, 0, ',', '.') }}</td>
                             <td>{{ $myorder->status?->name }}</td>
                             <td>

@@ -162,11 +162,6 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        $('#origin').select2();
-
-    });
-
 
     function buttonPriceModel(checkbox) {
         var hiddenInput = document.getElementById("priceModel" + checkbox.value);
