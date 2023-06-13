@@ -1,0 +1,35 @@
+@media (max-width: 767px) {
+  .image-models {
+     height: 300px;
+     width: 100%;
+  }
+
+  .image-product{
+    height: 300px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .image-models {
+     height: 250px;
+     width: 100%;
+  }
+
+  .image-product{
+    height: 200px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .image-models {
+     height: 150px;
+     width: 100%;
+  }
+
+  .image-product{
+    height: 200px;
+    width: 100%;
+  }
+}
