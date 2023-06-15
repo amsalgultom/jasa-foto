@@ -10,8 +10,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ (request()->segment(1) == 'dashboards') ? 'active' : '' }}">
-        <a class="nav-link" href="/dashboards">
+    <li class="nav-item {{ (request()->segment(1) == 'dashboard') ? 'active' : '' }}">
+        <a class="nav-link" href="/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -43,26 +43,10 @@
         <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ (request()->segment(1) == 'orders') ? 'active' : '' }}">
-        <a class="nav-link" href="/orders">
+    <li class="nav-item {{ (request()->segment(1) == 'listorders') ? 'active' : '' }}">
+        <a class="nav-link" href="/listorders">
             <i class="fa fa-cart-plus" aria-hidden="true"></i>
-            <span>Order</span></a>
-    </li>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item {{ (request()->segment(1) == 'hpp') ? 'active' : '' }}">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTree" aria-expanded="true" aria-controls="collapseTree">
-            <i class="fa fa-book"></i>
-            <span>Report</span>
-        </a>
-        <div id="collapseTree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Report Components:</h6>
-                <a class="collapse-item" href="/hpp">HPP</a>
-                <a class="collapse-item" href="/periode-hpp">Periode HPP</a>
-                <a class="collapse-item" href="/report-customer">Customer</a>
-            </div>
-        </div>
+            <span>List Order</span></a>
     </li>
     @elseif (Auth::user()->role == 'client')
     <!-- Nav Item - Dashboard -->
@@ -72,7 +56,7 @@
             <span>Order</span></a>
     </li>
     <li class="nav-item {{ (request()->segment(1) == 'myorders') ? 'active' : '' }}">
-        <a class="nav-link" href="/myorders">
+        <a class="nav-link" href="/myorders/{{ Auth::user()->id }}">
             <i class="fa fa-list-alt" aria-hidden="true"></i>
             <span>My Order</span></a>
     </li>
