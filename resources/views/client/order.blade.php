@@ -150,6 +150,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center my-5">
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <button type="submit" class="btn btn-primary">Buat Order</button>
             </div>
         </div>
