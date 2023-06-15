@@ -228,12 +228,32 @@ h6 {
   transition: 0.5s;
 }
 
+.mobile-nav-auth-toggle {
+  color: #A08336;
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  line-height: 0;
+  transition: 0.5s;
+}
+
 .mobile-nav-toggle.bi-x {
   color: #fff;
 }
 
+.mobile-nav-auth-toggle.bi-x {
+  color: #fff;
+  position: absolute;
+  top: 5%;
+  right: 10px;  
+}
+
 @media (max-width: 991px) {
   .mobile-nav-toggle {
+    display: block;
+  }
+
+  .mobile-nav-auth-toggle {
     display: block;
   }
 
@@ -242,6 +262,93 @@ h6 {
   }
 }
 
+.navbar-auth{
+  justify-content: right !important;
+}
+
+.navbar-mobile-auth {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgb(68 37 8 / 90%);
+  transition: 0.3s;
+  z-index: 999;
+}
+
+.navbar-mobile-auth .mobile-nav-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.navbar-mobile-auth ul {
+  display: block;
+  position: absolute;
+  top: 55px;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  padding: 10px 0;
+  background-color: #fff;
+  overflow-y: auto;
+  transition: 0.3s;
+}
+
+.navbar-mobile-auth a,
+.navbar-mobile-auth a:focus {
+  padding: 10px 20px;
+  font-size: 15px;
+  color: #A08336;
+}
+
+.navbar-mobile-auth a:hover,
+.navbar-mobile-auth .active,
+.navbar-mobile-auth li:hover>a {
+  color: #A08336;
+}
+
+.navbar-mobile-auth .getstarted,
+.navbar-mobile-auth .getstarted:focus {
+  margin: 15px;
+}
+
+.navbar-mobile-auth .dropdown ul {
+  position: static;
+  display: none;
+  margin: 10px 20px;
+  padding: 10px 0;
+  z-index: 99;
+  opacity: 1;
+  visibility: visible;
+  background: #fff;
+  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+}
+
+.navbar-mobile-auth .dropdown ul li {
+  min-width: 200px;
+}
+
+.navbar-mobile-auth .dropdown ul a {
+  padding: 10px 20px;
+}
+
+.navbar-mobile-auth .dropdown ul a i {
+  font-size: 12px;
+}
+
+.navbar-mobile-auth .dropdown ul a:hover,
+.navbar-mobile-auth .dropdown ul .active:hover,
+.navbar-mobile-auth .dropdown ul li:hover>a {
+  color: #A08336;
+}
+
+.navbar-mobile-auth .dropdown>.dropdown-active {
+  display: block;
+}
+/* */
 .navbar-mobile {
   position: fixed;
   overflow: hidden;
@@ -249,7 +356,7 @@ h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(22, 30, 56, 0.9);
+  background: rgb(68 37 8 / 90%);
   transition: 0.3s;
   z-index: 999;
 }
@@ -330,7 +437,8 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
+  height: 110vh;
+  margin-top: 65px;
   background-color: rgba(22, 30, 56, 0.8);
   overflow: hidden;
   position: relative;
@@ -461,7 +569,7 @@ h6 {
 
 @media (max-width: 992px) {
   #hero {
-    height: 100vh;
+    height: 60vh;
   }
 
   #hero .carousel-container {
@@ -485,7 +593,8 @@ h6 {
 
 @media (max-height: 500px) {
   #hero {
-    height: 120vh;
+    height: 85vh;
+    margin-top: 65px;
   }
 }
 

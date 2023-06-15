@@ -10,14 +10,17 @@
           <li><a href="{{ route('home') }}">Photo Model</a></li>
           <li><a href="{{ route('home') }}">Product</a></li>
         </ul>
-        <div class="d-flex login">
-          <a href="{{ route('login') }}">Login</a>
-          <a href="{{ route('register') }}">Register</a>
-        </div>
         
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      
+      <nav id="navbar-auth" class="navbar navbar-auth">
+        <ul>
+          <li><a href="">Login</a></li>
+          <li><a href="">Register</a></li>   
+        </ul>
+        
+        <i class="bi bi-person mobile-nav-auth-toggle"></i>
+      </nav><!-- .navbar -->
 
       <div class="logo text-center"><a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt=""></a></div>
 
