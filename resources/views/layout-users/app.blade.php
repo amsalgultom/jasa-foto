@@ -42,12 +42,8 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor-user JS Files -->
-<<<<<<< Updated upstream
 
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-=======
-    
->>>>>>> Stashed changes
     <script src="{{ asset('vendor-user/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
