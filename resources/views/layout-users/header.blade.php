@@ -1,29 +1,41 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
 
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <nav id="navbar" class="navbar">
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="active" href="{{ route('home') }}">Home</a></li>
+        <li><a href="{{ route('home') }}">Photo Model</a></li>
+        <li><a href="{{ route('home') }}">Product</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+    
+    <nav id="navbar-auth" class="navbar navbar-auth">
+        @if (Auth::user())
         <ul>
-          <li><a class="active" href="{{ route('home') }}">Home</a></li>
-          <li><a href="{{ route('home') }}">About Us</a></li>
-          <li><a href="{{ route('home') }}">Photo Model</a></li>
-          <li><a href="{{ route('home') }}">Our Service</a></li>
+          <li><a href="{{ route('order.service') }}">Buat Order</a></li>
+          <li><a href="/myorderservices/{{ Auth::user()->id }}">Order Saya</a></li>   
+          <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>   
+          <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
+          @csrf
+          </form>
         </ul>
-        
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-      <nav id="navbar-auth" class="navbar navbar-auth">
+      
+        @else
+
         <ul>
-          <li><a href="">Login</a></li>
-          <li><a href="">Register</a></li>   
+          <li><a href="{{ route('login') }}">Login</a></li>
+          <li><a href="{{ route('register') }}">Register</a></li>   
         </ul>
-        
+        @endif
         <i class="bi bi-person mobile-nav-auth-toggle"></i>
       </nav><!-- .navbar -->
 
-      <div class="logo text-center"><a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt=""></a></div>
+    <div class="logo text-center"><a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt=""></a></div>
 
-    </div>
-  </header><!-- End Header -->
+  </div>
+</header><!-- End Header -->
+

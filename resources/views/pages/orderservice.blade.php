@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Jasa Foto - Dashboard')
+@extends('layout-users.app')
+@section('title', 'ArtSpace Photoshoot')
 
 @section('content')
 
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 m-auto">
-                            <input type="checkbox" class="form-control" name="model[]" onclick="buttonPriceModel(this)" value="{{ $model->id }}" />
+                            <input type="checkbox" style="width:100%;height: 30px;" name="model[]" onclick="buttonPriceModel(this)" value="{{ $model->id }}" />
                             <input type="hidden" name="price_model[]" id="priceModel{{ $model->id }}" value="{{ $model->price }}" disabled>
                             <input type="hidden" name="name_model[]" id="nameModel{{ $model->id }}" value="{{ $model->name }}" disabled>
                             <input type="hidden" name="available_date_model[]" id="available_dateModel{{ $model->id }}" value="{{ $model->available_date }}" disabled>

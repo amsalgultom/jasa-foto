@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Customer;
 use App\Models\ItemModelOrder;
 use App\Models\ItemProductOrder;
+use App\Models\UploadResultImage;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
@@ -33,7 +34,7 @@ class OrderController extends Controller
         $products = Product::where('type', 'Produk Utama')->get();
         $productsmodel = Product::where('type', 'Model Kerudung')->get();
         $productshoes = Product::where('type', 'Aksesoris Sepatu')->get();
-        return view('client.order', compact('models', 'products', 'productsmodel', 'productshoes','origins'));
+        return view('client.order', compact('models', 'products', 'productsmodel', 'productshoes', 'origins'));
     }
 
     /**
@@ -56,6 +57,7 @@ class OrderController extends Controller
         // Create Order
         $totalOrder = array_sum($request->price_model) + $request->shipping_costs;
         $createOrder = [
+            'user_id' => $request->user_id,
             'customer_id' => $generateIdCustomer->id,
             'date' => now(),
             'shipping_costs' => $request->shipping_costs,
@@ -110,9 +112,9 @@ class OrderController extends Controller
         return redirect()->route('orders')->with('success', 'Order created successfully.');
     }
 
-    public function myorders()
+    public function myorders($user_id)
     {
-        $myorders = Order::all();
+        $myorders = Order::where('user_id', $user_id)->get();
         return view('client.myorders', compact('myorders'))->with('no');
     }
 
@@ -141,6 +143,52 @@ class OrderController extends Controller
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('client.payment', compact('snapToken'));
+
+        $order = Order::where('id', $request->order_id)->first();
+        $itemOrderProduct = ItemProductOrder::where('order_id', $request->order_id)
+            ->join('products', 'item_product_orders.product_id', '=', 'products.id')
+            ->select('item_product_orders.*', 'products.*')
+            ->get();
+        $itemOrderModel = ItemModelOrder::where('order_id', $request->order_id)
+            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
+            ->select('item_model_orders.*', 'models.*')
+            ->get();
+        return view('client.payment', compact('snapToken', 'order', 'itemOrderProduct', 'itemOrderModel'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Order $order)
+    {
+        $itemOrderProduct = ItemProductOrder::where('order_id', $order->id)
+            ->join('products', 'item_product_orders.product_id', '=', 'products.id')
+            ->select('item_product_orders.*', 'products.*')
+            ->get();
+        $itemOrderModel = ItemModelOrder::where('order_id', $order->id)
+            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
+            ->select('item_model_orders.*', 'models.*')
+            ->get();
+        // print_r(json_encode($itemOrderModel));die;
+        return view('client.detailorder', compact('order', 'itemOrderProduct', 'itemOrderModel'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function resultUpload(Order $order)
+    {
+        $itemOrderProduct = ItemProductOrder::where('order_id', $order->id)
+            ->join('products', 'item_product_orders.product_id', '=', 'products.id')
+            ->select('item_product_orders.*', 'products.*')
+            ->get();
+        $itemOrderModel = ItemModelOrder::where('order_id', $order->id)
+            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
+            ->select('item_model_orders.*', 'models.*')
+            ->get();
+        $itemResultImages = UploadResultImage::where('order_id', $order->id)
+            ->get();
+        // print_r(json_encode($itemOrderModel));die;
+        return view('client.result', compact('order', 'itemOrderProduct', 'itemOrderModel','itemResultImages'));
     }
 }
