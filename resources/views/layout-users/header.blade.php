@@ -7,8 +7,9 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="{{ route('home') }}">Home</a></li>
+          <li><a href="{{ route('home') }}">About Us</a></li>
           <li><a href="{{ route('home') }}">Photo Model</a></li>
-          <li><a href="{{ route('home') }}">Product</a></li>
+          <li><a href="{{ route('home') }}">Our Service</a></li>
         </ul>
         
         <i class="bi bi-list mobile-nav-toggle"></i>

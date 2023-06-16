@@ -8,17 +8,29 @@
     height: 300px;
     width: 100%;
   }
+
+  .box-about{
+    height: 400px;
+  }
+
+  .text-center-mobile{
+    text-align: center;
+  }
 }
 
 @media (max-width: 425px) {
   .image-models {
-     height: 250px;
+     height: 200px;
      width: 100%;
   }
 
   .image-product{
     height: 200px;
     width: 100%;
+  }
+
+  .box-about{
+    height: 300px;
   }
 }
 

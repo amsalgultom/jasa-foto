@@ -151,7 +151,31 @@
       heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
   });
 
-
+  $('.customer-logos').slick({
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    arrows: false,
+    dots: false,
+    pauseOnHover: false,
+    responsive: [{
+        breakpoint: 768,
+        settings: {
+          slidesToScroll: 4,
+          slidesToShow: 4
+        }
+    }, {
+        breakpoint: 520,
+        settings: {
+          slidesToScroll: 1,
+          slidesToShow: 1
+        }
+    }]
+});
 
 
 })()
+
+
+ 
