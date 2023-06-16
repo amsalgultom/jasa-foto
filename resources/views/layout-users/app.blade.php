@@ -40,11 +40,14 @@
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor-user JS Files -->
+    
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor-user/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ asset('js/all.js') }}"></script>
 
+    @stack('scripts')
 </body>
 
 </html>
