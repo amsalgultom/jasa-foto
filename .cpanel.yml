@@ -1,0 +1,9 @@
+---
+deployment:
+  task:
+    - export DEPLOYPATH=/home/u1721316/public_html/
+    -/bin/cp app $DEPLOYPATH
+    -/bin/cp public $DEPLOYPATH
+    -/bin/cp resource $DEPLOYPATH
+    -/bin/cp routes $DEPLOYPATH
+    -/bin/cp database $DEPLOYPATH
