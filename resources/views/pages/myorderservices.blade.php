@@ -69,7 +69,7 @@
                                                     </span>
                                                     <span class="text">Detail Order</span></a>
                                                 @if($myorder->status?->name == 'UnPaid')
-                                                <form action="{{ route('myorders.payment') }}" method="POST">
+                                                <form action="{{ route('myorderservices.payment') }}" method="POST">
                                                     @csrf
 
                                                     <input type="hidden" name="order_id" value="{{ $myorder->id }}">
@@ -84,7 +84,7 @@
                                                 </form>
                                                 @elseif($myorder->status?->name == 'Uploaded Image')
                                             </div>
-                                            <a href="{{ route('myorders.result',$myorder->id) }}" class="btn btn-secondary btn-icon-split mt-2">
+                                            <a href="{{ route('myorderservices.result',$myorder->id) }}" class="btn btn-secondary btn-icon-split mt-2">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-arrow-right"></i>
                                                 </span>
