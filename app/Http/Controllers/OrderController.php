@@ -55,7 +55,7 @@ class OrderController extends Controller
         $generateIdCustomer = Customer::create($createCustomer);
 
         // Create Order
-        $totalOrder = array_sum($request->price_model) + 10000;
+        $totalOrder = array_sum($request->price_model) + $request->shipping_costs;
         $createOrder = [
             'user_id' => $request->user_id,
             'customer_id' => $generateIdCustomer->id,

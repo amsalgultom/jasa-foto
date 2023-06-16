@@ -84,11 +84,24 @@
     this.classList.toggle('bi-x')
   })
 
+  on('click', '.mobile-nav-auth-toggle', function(e) {
+    select('#navbar-auth').classList.toggle('navbar-mobile-auth')
+    this.classList.toggle('bi-list')
+    this.classList.toggle('bi-x')
+  })
+
   /**
    * Mobile nav dropdowns activate
    */
   on('click', '.navbar .dropdown > a', function(e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
+      e.preventDefault()
+      this.nextElementSibling.classList.toggle('dropdown-active')
+    }
+  }, true)
+
+  on('click', '.navbar .dropdown > a', function(e) {
+    if (select('#navbar-auth').classList.contains('navbar-mobile-auth')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
     }
@@ -112,6 +125,20 @@
     }
   }, true)
 
+  on('click', '.scrollto', function(e) {
+    if (select(this.hash)) {
+      e.preventDefault()
+
+      let navbar = select('#navbar-auth')
+      if (navbar.classList.contains('navbar-mobile-auth')) {
+        navbar.classList.remove('navbar-mobile-auth')
+        let navbarToggle = select('.mobile-nav-auth-toggle')
+        navbarToggle.classList.toggle('bi-list')
+        navbarToggle.classList.toggle('bi-x')
+      }
+      scrollto(this.hash)
+    }
+  }, true)
   /**
    * Hero carousel indicators
    */
@@ -124,7 +151,31 @@
       heroCarouselIndicators.innerHTML += "<li data-bs-target='#heroCarousel' data-bs-slide-to='" + index + "'></li>"
   });
 
-
+  $('.customer-logos').slick({
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    autoplay: true,
+    autoplaySpeed: 1500,
+    arrows: false,
+    dots: false,
+    pauseOnHover: false,
+    responsive: [{
+        breakpoint: 768,
+        settings: {
+          slidesToScroll: 4,
+          slidesToShow: 4
+        }
+    }, {
+        breakpoint: 520,
+        settings: {
+          slidesToScroll: 1,
+          slidesToShow: 1
+        }
+    }]
+});
 
 
 })()
+
+
+ 
