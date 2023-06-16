@@ -64,6 +64,63 @@ class HomeController extends Controller
             ->select('item_model_orders.*', 'models.*')
             ->get();
         // print_r(json_encode($itemOrderModel));die;
-        return view('client.detailorder', compact('order', 'itemOrderProduct', 'itemOrderModel'));
+        return view('pages.detailorderservice', compact('order', 'itemOrderProduct', 'itemOrderModel'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function resultorderservicesUpload(Order $order)
+    {
+        $itemOrderProduct = ItemProductOrder::where('order_id', $order->id)
+            ->join('products', 'item_product_orders.product_id', '=', 'products.id')
+            ->select('item_product_orders.*', 'products.*')
+            ->get();
+        $itemOrderModel = ItemModelOrder::where('order_id', $order->id)
+            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
+            ->select('item_model_orders.*', 'models.*')
+            ->get();
+        $itemResultImages = UploadResultImage::where('order_id', $order->id)
+            ->get();
+        // print_r(json_encode($itemOrderModel));die;
+        return view('pages.resultorderservice', compact('order', 'itemOrderProduct', 'itemOrderModel', 'itemResultImages'));
+    }
+
+    public function paymentorderservice(Request $request)
+    {
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $request->order_id,
+                'gross_amount' => $request->gross_amount,
+            ),
+            'customer_details' => array(
+                'first_name' => $request->first_name,
+                'last_name' => '',
+                'email' => $request->email,
+                'phone' => $request->phone,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $order = Order::where('id', $request->order_id)->first();
+        $itemOrderProduct = ItemProductOrder::where('order_id', $request->order_id)
+            ->join('products', 'item_product_orders.product_id', '=', 'products.id')
+            ->select('item_product_orders.*', 'products.*')
+            ->get();
+        $itemOrderModel = ItemModelOrder::where('order_id', $request->order_id)
+            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
+            ->select('item_model_orders.*', 'models.*')
+            ->get();
+        return view('pages.paymentorderservice', compact('snapToken', 'order', 'itemOrderProduct', 'itemOrderModel'));
     }
 }
