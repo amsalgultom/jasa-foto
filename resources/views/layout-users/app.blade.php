@@ -15,6 +15,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    
 
     <!-- Vendor-user CSS Files -->
     <link href="{{ asset('vendor-user/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -45,6 +46,11 @@
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor-user/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('js/all.js') }}"></script>
 
