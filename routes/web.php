@@ -26,6 +26,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/ourservices', [HomeController::class, 'ourservices'])->name('ourservices');
 Route::get('/orderservices', [HomeController::class, 'userOrder'])->name('order.service');
 Route::get('/myorderservices/{user_id}', [HomeController::class, 'myorderservices'])->name('myorderservices');
 Route::get('/myorderservices/show/{order}', [HomeController::class, 'myorderservicesShow'])->name('myorderservices.show');

@@ -11292,3 +11292,10 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+@media (max-width: 991px){
+
+  .none-dflex-mobile{
+    display: block !important;
+  }
+}
