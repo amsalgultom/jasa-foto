@@ -20,6 +20,10 @@ class HomeController extends Controller
         $models = PhotoModel::all();
         return view('pages.home', compact('models'));
     }
+    public function ourservices()
+    {
+        return view('pages.ourservices');
+    }
 
     /**
      * Display a listing of the resource.
