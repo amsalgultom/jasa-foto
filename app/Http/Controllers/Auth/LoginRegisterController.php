@@ -87,7 +87,7 @@ class LoginRegisterController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard')
+            return redirect()->route('home')
                 ->withSuccess('You have successfully logged in!');
         }
 
@@ -106,7 +106,7 @@ class LoginRegisterController extends Controller
         if (Auth::check()) {
 
             $models = PhotoModel::all();
-            return view('pages.home', compact('models'));
+            return view('pages.dashboard', compact('models'));
         }
 
         return redirect()->route('login')
