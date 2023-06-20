@@ -32,8 +32,10 @@
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
     
-    <!-- <nav id="navbar-auth" class="navbar navbar-auth">
-        @if (Auth::user())
+
+    <nav id="navbar-auth" class="navbar navbar-auth">
+        @if (Auth::user() && Auth::user()->role == 'client')
+
         <ul>
           <li><a href="{{ route('order.service') }}">Buat Order</a></li>
           <li><a href="/myorderservices/{{ Auth::user()->id }}">Order Saya</a></li>   
@@ -43,6 +45,14 @@
           </form>
         </ul>
       
+        @elseif(Auth::user() && Auth::user()->role == 'admin')
+        <ul>
+          <li><a href="{{ route('dashboard') }}">My Admin</a></li>
+          <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>   
+          <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
+          @csrf
+          </form>
+        </ul>
         @else
 
         <ul>

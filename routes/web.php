@@ -30,6 +30,8 @@ Route::get('/ourservices', [HomeController::class, 'ourservices'])->name('ourser
 Route::get('/orderservices', [HomeController::class, 'userOrder'])->name('order.service');
 Route::get('/myorderservices/{user_id}', [HomeController::class, 'myorderservices'])->name('myorderservices');
 Route::get('/myorderservices/show/{order}', [HomeController::class, 'myorderservicesShow'])->name('myorderservices.show');
+Route::get('/myorderservices/result/{order}', [HomeController::class, 'resultorderservicesUpload'])->name('myorderservices.result');
+Route::post('/myorderservices/payment', [HomeController::class, 'paymentorderservice'])->name('myorderservices.payment');
 
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/register', 'register')->name('register');
