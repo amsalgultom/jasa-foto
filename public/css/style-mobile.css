@@ -28,7 +28,10 @@
     height: 200px;
     width: 100%;
   }
-
+  .video-crop{
+    height: auto;
+    width: 100%;
+  }
   .box-about{
     height: 300px;
   }
@@ -43,5 +46,16 @@
   .image-product{
     height: 200px;
     width: 100%;
+  }
+}
+
+@media (max-width: 991px){
+  .logo{
+    left: unset !important;
+    margin-left: 0 !important;
+  }
+
+  .none-dflex-mobile{
+    display: block !important;
   }
 }
