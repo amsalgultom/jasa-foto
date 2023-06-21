@@ -42,10 +42,10 @@ class HomeController extends Controller
 
         $origins = $result['rajaongkir']['results'];
         $models = PhotoModel::all();
-        $products = Product::where('type', 'Produk Utama')->get();
-        $productsmodel = Product::where('type', 'Model Kerudung')->get();
+        $products = Product::where('type', 'Product Foto')->get();
+        $productsoptional = Product::where('type', 'Our Service')->get();
         $productshoes = Product::where('type', 'Aksesoris Sepatu')->get();
-        return view('pages.orderservice', compact('models', 'products', 'productsmodel', 'productshoes', 'origins'));
+        return view('pages.orderservice', compact('models', 'products', 'productsoptional', 'origins'));
     }
 
     public function myorderservices($user_id)

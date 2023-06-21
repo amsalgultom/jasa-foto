@@ -61,7 +61,7 @@
         </ul>
         <!-- Step Wise Form Content -->
         <form action="{{ route('orders.store') }}" method="POST" class="mb-5">
-        @csrf
+            @csrf
             <!-- Step 1 Content -->
             <section id="step-1" class="form-step">
                 <div class="row multiple">
@@ -70,7 +70,7 @@
                             <h2 class="font-normal">Pilih Model</h2>
 
                             <div class="row my-2">
-                            @foreach ($models as $model)
+                                @foreach ($models as $model)
                                 <div class="col-lg-3 col-md-4 col-6 mb-4">
                                     <div class="image-models">
                                         <img src="{{ asset('uploads-images/models/').'/'.$model->image }}" class="img-model" alt="{{ $model->name }}">
@@ -123,7 +123,7 @@
                                     <select name="product_id[]" id="prod" class="form-control select-so w-100" required>
                                         <option value="" hidden>-- Pilih Product --</option>
                                         @foreach ($products as $prod)
-                                        <option value="{{$prod->id}}" data-weight="{{$prod->weight}}">{{$prod->name}}</option>
+                                            <option value="{{$prod->id}}" data-weight="{{$prod->weight}}">Produk {{$prod->name}}, untuk model : {{$prod->model?->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -154,21 +154,12 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-6">
-                                    <strong>Model Kerudung</strong><br>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <strong>Our Service</strong><br>
                                     <select name="product_model" class="form-control select-so w-100">
-                                        <option value="">-- Pilih Model Kerudung --</option>
-                                        @foreach ($productsmodel as $prodsmodel)
-                                        <option value="{{$prodsmodel->id}}">{{$prodsmodel->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-6">
-                                    <strong>Sepatu</strong><br>
-                                    <select name="sub_product" class="form-control select-so w-100">
-                                        <option value="">-- Pilih Product Sepatu --</option>
-                                        @foreach ($productshoes as $prodshoes)
-                                        <option value="{{$prodshoes->id}}">{{$prodshoes->name}}</option>
+                                        <option value="">-- Pilih Our Service --</option>
+                                        @foreach ($productsoptional as $prodoptional)
+                                        <option value="{{$prodoptional->id}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -222,32 +213,32 @@
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <div id="results"></div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <div id="results"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center my-5">
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center my-5">
+                    <div class="mt-3 text-right">
+                        <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="2">Prev</button>
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        <button type="submit" class="btn btn-primary">Buat Order</button>
                     </div>
-                </div>
-                <div class="mt-3 text-right">
-                    <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="2">Prev</button>
-                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                    <button type="submit" class="btn btn-primary">Buat Order</button>
-                </div>
             </section>
         </form>
     </div>
     <form action="{{ route('orders.store') }}" method="POST">
         @csrf
-        
-        
-        
-       
-       
-        </div>
-        
-    </form>
+
+
+
+
+
+</div>
+
+</form>
 
 
 </div>
@@ -256,7 +247,6 @@
 
 @push('scripts')
 <script>
-
     function buttonPriceModel(checkbox) {
         var hiddenInput = document.getElementById("priceModel" + checkbox.value);
         var hiddenInputName = document.getElementById("nameModel" + checkbox.value);
@@ -383,52 +373,52 @@
         });
     });
 
-      /**
-   * Form Multi Step
-   */
+    /**
+     * Form Multi Step
+     */
 
     const navigateToFormStep = (stepNumber) => {
-      
+
         document.querySelectorAll(".form-step").forEach((formStepElement) => {
             formStepElement.classList.add("d-none");
         });
-       
+
         document.querySelectorAll(".form-stepper-list").forEach((formStepHeader) => {
             formStepHeader.classList.add("form-stepper-unfinished");
             formStepHeader.classList.remove("form-stepper-active", "form-stepper-completed");
         });
-     
+
         document.querySelector("#step-" + stepNumber).classList.remove("d-none");
-        
+
         const formStepCircle = document.querySelector('li[step="' + stepNumber + '"]');
-        
+
         formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-completed");
         formStepCircle.classList.add("form-stepper-active");
-        
+
         for (let index = 0; index < stepNumber; index++) {
-           
+
             const formStepCircle = document.querySelector('li[step="' + index + '"]');
-            
+
             if (formStepCircle) {
-                
+
                 formStepCircle.classList.remove("form-stepper-unfinished", "form-stepper-active");
                 formStepCircle.classList.add("form-stepper-completed");
             }
         }
     };
 
-    document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {  
-        formNavigationBtn.addEventListener("click", () => { 
-            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number")); 
+    document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+        formNavigationBtn.addEventListener("click", () => {
+            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
             navigateToFormStep(stepNumber);
         });
     });
-    
+
     function checkValue1() {
-    	var name = document.getElementById("prod");
-        if(name.value === "") {
-          var att = document.createAttribute("required");
-          name.setAttributeNode(att);
+        var name = document.getElementById("prod");
+        if (name.value === "") {
+            var att = document.createAttribute("required");
+            name.setAttributeNode(att);
         }
     }
 </script>
