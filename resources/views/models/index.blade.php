@@ -21,10 +21,9 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Tipe</th>
-                            <th>Harga</th>
-                            <th>Berat (gram)</th>
-                            <th>Gambar</th>
+                            <th>Size</th>
+                            <th>Tanggal Tersedia</th>
+                            <th>Foto</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -32,10 +31,9 @@
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Tipe</th>
-                            <th>Harga</th>
-                            <th>Berat (gram)</th>
-                            <th>Gambar</th>
+                            <th>Size</th>
+                            <th>Tanggal Tersedia</th>
+                            <th>Foto</th>
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
@@ -44,7 +42,7 @@
                         <tr>
                             <td>{{ ++$no }}</td>
                             <td>{{ $model->name }}</td>
-                            <td>{{ 'Rp '.number_format($model->price, 0, ',', '.') }}</td>
+                            <td>{{ $model->size }}</td>
                             <td>{{ $model->available_date }}</td>
                             <td class="text-center"><img src="{{ asset('uploads-images/models/').'/'.$model->image }}" alt="{{ $model->name }}" width="100"></td>
                             <td>
