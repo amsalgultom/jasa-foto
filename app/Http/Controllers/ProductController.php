@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhotoModel;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::join('models', 'products.model_id','=','models.id')
+                            ->select('models.*','products.*', 'models.name as mondelname', 'products.name as prodname', 'products.image as prodimage')
+                            ->get();
+        // print_r(json_encode($products));die;
         return view('products.index',compact('products'))->with('no');
     }
 
@@ -21,7 +25,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        
+        $models = PhotoModel::all();
+        return view('products.create', compact('models'));
     }
 
     /**
@@ -31,7 +37,8 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'price' => 'required',
         ]);
 
         // Handle image upload
@@ -43,7 +50,6 @@ class ProductController extends Controller
         }
   
         Product::create($request->except('image') + ['image' => $imageName ?? null]);
-   
         return redirect()->route('products.index')->with('success','Product created successfully.');
     }
 

@@ -20,7 +20,8 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Model</th>
+                            <th>Nama Produk</th>
                             <th>Tipe</th>
                             <th>Harga</th>
                             <th>Berat (gram)</th>
@@ -31,7 +32,8 @@
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Model</th>
+                            <th>Nama Produk</th>
                             <th>Tipe</th>
                             <th>Harga</th>
                             <th>Berat (gram)</th>
@@ -43,13 +45,14 @@
                         @foreach ($products as $product)
                         <tr>
                             <td>{{ ++$no }}</td>
-                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->mondelname }}</td>
+                            <td>{{ $product->prodname }}</td>
                             <td>{{ $product->type }}</td>
                             <td>{{ 'Rp '.number_format($product->price, 0, ',', '.') }}</td>
                             <td>{{ $product->weight }}(g)</td>
                             <td class="text-center">
-                                @if ($product->image !== null)
-                                <img src="{{ asset('uploads-images/products/').'/'.$product->image }}" alt="{{ $product->name }}" width="100">
+                                @if ($product->prodimage !== null)
+                                <img src="{{ asset('uploads-images/products/').'/'.$product->prodimage }}" alt="{{ $product->prodname }}" width="100">
                                 @else
                                 Gambar tidak tersedia
                                 @endif
