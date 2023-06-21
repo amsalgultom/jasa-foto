@@ -11,7 +11,7 @@ class PhotoModel extends Model
     protected $table = 'models';
     protected $fillable = [
         'name',
-        'price',
+        'size',
         'available_date',
         'image',
     ];
