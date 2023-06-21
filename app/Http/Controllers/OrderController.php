@@ -107,9 +107,13 @@ class OrderController extends Controller
             ];
             ItemProductOrder::create($requestProductOrder);
         }
+        return redirect()->route('myorderservices', $request->user_id)->with('success', 'Order created successfully.');
+    }
 
-
-        return redirect()->route('orders')->with('success', 'Order created successfully.');
+    public function myorderservices($user_id)
+    {
+        $myorders = Order::where('user_id', $user_id)->get();
+        return view('pages.myorderservices', compact('myorders'))->with('no');
     }
 
     public function myorders($user_id)

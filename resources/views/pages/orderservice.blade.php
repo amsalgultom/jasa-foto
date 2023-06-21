@@ -76,7 +76,7 @@
                                         <img src="{{ asset('uploads-images/models/').'/'.$model->image }}" class="img-model" alt="{{ $model->name }}">
                                     </div>
                                     <h4 class="title-model mt-4"><a href="">{{ $model->name }}</a></h4>
-                                    <p class="desc-model">{{ 'Rp '.number_format($model->price, 0, ',', '.') }}</p>
+                                    <p class="desc-model">Size : <span> {{ $model->size }}</span></p>
                                     <p class="tgl-model">Tanggal tersedia : <span> {{ $model->available_date }}</span></p>
                                     <div class="mx-auto">
                                         <input type="checkbox" style="width:100%; height: 20px;" name="model[]" onclick="buttonPriceModel(this)" value="{{ $model->id }}" />
