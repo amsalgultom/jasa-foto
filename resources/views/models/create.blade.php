@@ -42,12 +42,6 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Harga:</strong>
-                    <input type="number" name="price" class="form-control" placeholder="Harga" required>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="form-group">
                     <strong>Tanggal Tersedia:</strong>
                     <input type="date" name="available_date" class="form-control" placeholder="Tanggal Tersedia" required>
                 </div>

@@ -36,8 +36,8 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="form-group">
-                    <strong>Harga:</strong>
-                    <input type="number" name="price" class="form-control" value="{{ $model->price }}" required>
+                    <strong>Size:</strong>
+                    <input type="number" name="price" class="form-control" value="{{ $model->size }}" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
