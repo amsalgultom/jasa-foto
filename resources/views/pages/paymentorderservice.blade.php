@@ -48,37 +48,57 @@
 
                                                                                     <div style="margin-bottom:40px">
                                                                                         <table cellspacing="0" cellpadding="6" border="1" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;width:100%;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" width="100%">
-                                                                                            <thead>
+                                                                                        <thead>
                                                                                                 <tr>
-                                                                                                    <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Nama Model</th>
-                                                                                                    <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Harga</th>
+                                                                                                    <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Product</th>
+                                                                                                    <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Tipe</th>
+                                                                                                    <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Note</th>
+                                                                                                    <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Price</th>
+                                                                                                    <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Qty</th>
+                                                                                                    <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Sub Total</th>
                                                                                                 </tr>
                                                                                             </thead>
                                                                                             <tbody>
-                                                                                                @foreach ($itemOrderModel as $itemmodel)
+                                                                                                @foreach ($itemOrderProduct as $itemproduct)
                                                                                                 <tr>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;word-wrap:break-word" align="left">
-                                                                                                        {{$itemmodel->name}}
+                                                                                                        {{$itemproduct->modelname}} - {{$itemproduct->name}}
                                                                                                     </td>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
-                                                                                                        {{ 'Rp '.number_format($itemmodel->price, 0, ',', '.') }}
+                                                                                                        {{$itemproduct->type}}
+                                                                                                    </td>
+                                                                                                    <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
+                                                                                                        @if ($itemproduct->note_product == null)
+                                                                                                            -
+                                                                                                        @else
+                                                                                                            {{$itemproduct->note_product}}
+                                                                                                        @endif
+                                                                                                    </td>
+                                                                                                    <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
+                                                                                                        {{ 'Rp '.number_format($itemproduct->price_product, 0, ',', '.') }}
+                                                                                                    </td>
+                                                                                                    <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
+                                                                                                        {{ $itemproduct->qty_product }}
+                                                                                                    </td>
+                                                                                                    <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
+                                                                                                        {{ 'Rp '.number_format($itemproduct->sub_total_product, 0, ',', '.') }}
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 @endforeach
-                                                                                            </tbody>
+                                                                                            </tbody>    
                                                                                             <tfoot>
                                                                                                 <tr>
-                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px;" align="left">Subtotal:</th>
+                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px;" align="left" colspan="5">Subtotal:</th>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px;" align="left"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs, 0, ',', '.') }}</span></td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Shipping:</th>
+                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left"  colspan="5">Shipping:</th>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
                                                                                                         <span>{{ 'Rp '.number_format($order->shipping_costs, 0, ',', '.') }}</span>&nbsp;<small>via JNE ({{ $order->shipping_method }})</small>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Total:</th>
+                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left"  colspan="5">Total:</th>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
                                                                                                         <span>{{ 'Rp '.number_format($order->total, 0, ',', '.') }}</span>
                                                                                                     </td>

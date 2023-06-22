@@ -17,6 +17,7 @@ class Order extends Model
         'shipping_method',
         'total',
         'status_id',
+        'image_referensi_product',
     ];
 
     public function customer()
@@ -28,5 +29,6 @@ class Order extends Model
     {
     	return $this->belongsTo('App\Models\Status');
     }
+    
 
 }

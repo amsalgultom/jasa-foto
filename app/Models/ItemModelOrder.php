@@ -13,7 +13,6 @@ class ItemModelOrder extends Model
         'order_id',
         'model_id',
         'name',
-        'price',
         'available_date',
     ];
 }
