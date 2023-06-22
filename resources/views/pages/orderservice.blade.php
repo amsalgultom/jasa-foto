@@ -257,6 +257,8 @@
 
 @push('scripts')
 <script>
+    var scriptjs = '';
+
     function buttonPriceModel(checkbox) {
         var hiddenInputName = document.getElementById("nameModel" + checkbox.value);
         var hiddenInputDate = document.getElementById("available_dateModel" + checkbox.value);
@@ -290,8 +292,9 @@
                 option.style.display = 'none';
             }
         }
+
         // Menampilkan opsi select yang sesuai dengan model yang dipilih
-        var selectOptionsOptional = document.getElementById('product_optional_model').options;
+        var selectOptionsOptional = document.getElementById('product_optional_model1').options;
 
         for (var j = 0; j < selectOptionsOptional.length; j++) {
             var option = selectOptionsOptional[j];
@@ -358,7 +361,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Catatan</strong>
-                            <textarea class="form-control" style="height:100px" id="note` + i + `" name="note[]" placeholder="Notes"></textarea>
+                            <textarea class="form-control" style="height:100px" id="note` + i + `" name="note_product[]" placeholder="Notes"></textarea>
                             <label class="text-danger">*Harap produk yang dikirim sesuai</label>
                         </div>
                     </div>
@@ -373,6 +376,29 @@
                 $("#qty_product` + i + `").change(function() {
                     var total = $("#price_product` + i + `").val() * $("#qty_product` + i + `").val();
                     $("#sub_total_product` + i + `").val(total);
+                });
+                
+                $(document).ready(function() {
+                var selectedModels = [];
+                var checkboxesadd = document.getElementsByName('model_id[]');
+
+                // Mendapatkan daftar model yang dipilih
+                for (var i = 0; i < checkboxesadd.length; i++) {
+                    if (checkboxesadd[i].checked) {
+                        selectedModels.push(checkboxesadd[i].getAttribute('data-name'));
+                    }
+                }
+                // Menampilkan opsi select yang sesuai dengan model yang dipilih
+                var selectOptions = document.getElementById('select_prod_id` + i + `').options;
+
+                for (var j = 0; j < selectOptions.length; j++) {
+                    var option = selectOptions[j];
+                        if (selectedModels.includes(option.getAttribute('class'))) {
+                            option.style.display = 'block';
+                        } else {
+                            option.style.display = 'none';
+                        }
+                    }
                 });`;
             var script = document.createElement('script');
             script.type = 'text/javascript';
@@ -397,8 +423,33 @@
                     </div>
                 </div><br>`
             $("#addOptional").append(datahtml2);
+            var scrtipJSS = `$(document).ready(function() {
+                var selectedModels = [];
+                var checkboxesadd = document.getElementsByName('model_id[]');
+
+                // Mendapatkan daftar model yang dipilih
+                for (var i = 0; i < checkboxesadd.length; i++) {
+                    if (checkboxesadd[i].checked) {
+                        selectedModels.push(checkboxesadd[i].getAttribute('data-name'));
+                    }
+                }
+                var selectOptionsOptional = document.getElementById('product_optional_model` + i + `').options;
+                for (var j = 0; j < selectOptionsOptional.length; j++) {
+                    var option = selectOptionsOptional[j];
+
+                    if (selectedModels.includes(option.getAttribute('class'))) {
+                        option.style.display = 'block';
+                    } else {
+                        option.style.display = 'none';
+                    }
+                }
+                });`;
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.innerHTML = scrtipJSS;
+                $("#script-container").append(script);
+            });
         });
-    });
 
     function buttonOngkirModel(radio) {
         var hiddenInputCosts = document.querySelectorAll('[id^="shipping_costs"]');
@@ -505,28 +556,25 @@
         }
     };
 
-    document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {  
-        formNavigationBtn.addEventListener("click", () => { 
+    document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+        formNavigationBtn.addEventListener("click", () => {
 
-            var checkBoxes = document.getElementsByClassName( 'checkbox-model' );
+            var checkBoxes = document.getElementsByClassName('checkbox-model');
             var nbChecked = 0;
 
             for (var i = 0; i < checkBoxes.length; i++) {
-                if ( checkBoxes[i].checked ) {
+                if (checkBoxes[i].checked) {
                     nbChecked++;
                 };
             };
-            if (nbChecked == 0 ){
-                alert( 'Please, check at least one Model!');
+            if (nbChecked == 0) {
+                alert('Please, check at least one Model!');
                 return false;
-            }
-            else {
-            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number")); 
+            } else {
+                const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
                 navigateToFormStep(stepNumber);
             }
         });
     });
-    
-  
 </script>
 @endpush
