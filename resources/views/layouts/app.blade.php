@@ -23,6 +23,9 @@
 
     <!-- Custom styles for this page -->
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/datetime/1.4.1/css/dataTables.dateTime.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" rel="stylesheet">
+    
 
 </head>
 
@@ -78,8 +81,9 @@
         <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
+        @if (request()->segment(1) != 'report')
         <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
-
+        @endif
 
         @stack('scripts')
 </body>

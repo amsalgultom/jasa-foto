@@ -20,9 +20,9 @@
     <div class="text-center">
         <h1 class="brown title-order">Form Pemesanan Jasa Foto</h1>
     </div>
-    <div id="multi-step-form-container">
+    <div id="multi-step-form-container ">
         <!-- Form Steps / Progress Bar -->
-        <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
+        <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0 d-mobile-none">
             <!-- Step 1 -->
             <li class="form-stepper-active text-center form-stepper-list" step="1">
                 <a class="mx-2">
@@ -79,7 +79,7 @@
                                     <p class="desc-model">{{ 'Rp '.number_format($model->price, 0, ',', '.') }}</p>
                                     <p class="tgl-model">Tanggal tersedia : <span> {{ $model->available_date }}</span></p>
                                     <div class="mx-auto">
-                                        <input type="checkbox" style="width:100%; height: 20px;" name="model[]" onclick="buttonPriceModel(this)" value="{{ $model->id }}" />
+                                        <input class="checkbox-model" type="checkbox" style="width:100%; height: 20px;" name="model[]" onclick="buttonPriceModel(this)" value="{{ $model->id }}" />
                                         <input type="hidden" name="price_model[]" id="priceModel{{ $model->id }}" value="{{ $model->price }}" disabled>
                                         <input type="hidden" name="name_model[]" id="nameModel{{ $model->id }}" value="{{ $model->name }}" disabled>
                                         <input type="hidden" name="available_date_model[]" id="available_dateModel{{ $model->id }}" value="{{ $model->available_date }}" disabled>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="mt-3 text-right">
-                        <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="2" onclick="checkValue1()">Next</button>
+                        <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="2" >Next</button>
                     </div>
                 </div>
             </section>
@@ -120,7 +120,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-4">
                                     <strong>Product</strong><br>
-                                    <select name="product_id[]" id="prod" class="form-control select-so w-100" required>
+                                    <select name="product_id[]" class="prod form-control select-so w-100" required>
                                         <option value="" hidden>-- Pilih Product --</option>
                                         @foreach ($products as $prod)
                                         <option value="{{$prod->id}}" data-weight="{{$prod->weight}}">{{$prod->name}}</option>
@@ -130,7 +130,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-8">
                                     <div class="form-group">
                                         <strong>Catatan</strong>
-                                        <textarea class="form-control" style="height:100px" id="note" name="note[]" placeholder="Notes"></textarea>
+                                        <textarea class="form-control note" style="height:100px" name="note[]" placeholder="Notes"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                 </div>
                 <div class="mt-3 text-right">
                     <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="1">Prev</button>
-                    <button class="btn btn-primary btn-navigate-form-step" type="button" onclick="checkValue1()" step_number="3">Next</button>
+                    <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="3">Next</button>
                 </div>
             </section>
             <!-- Step 3 Content, default hidden on page load. -->
@@ -231,7 +231,7 @@
                     </div>
                 </div>
                 <div class="mt-3 text-right">
-                    <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="2">Prev</button>
+                    <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="3">Prev</button>
                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                     <button type="submit" class="btn btn-primary">Buat Order</button>
                 </div>
@@ -419,17 +419,26 @@
 
     document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {  
         formNavigationBtn.addEventListener("click", () => { 
+
+            var checkBoxes = document.getElementsByClassName( 'checkbox-model' );
+            var nbChecked = 0;
+
+            for (var i = 0; i < checkBoxes.length; i++) {
+                if ( checkBoxes[i].checked ) {
+                    nbChecked++;
+                };
+            };
+            if (nbChecked == 0 ){
+                alert( 'Please, check at least one Model!');
+                return false;
+            }
+            else {
             const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number")); 
-            navigateToFormStep(stepNumber);
+                navigateToFormStep(stepNumber);
+            }
         });
     });
     
-    function checkValue1() {
-    	var name = document.getElementById("prod");
-        if(name.value === "") {
-          var att = document.createAttribute("required");
-          name.setAttributeNode(att);
-        }
-    }
+  
 </script>
 @endpush

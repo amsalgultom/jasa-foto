@@ -92,3 +92,11 @@
 .invoice-box.rtl table tr td:nth-child(2) {
   text-align: left;
 }
+
+
+.strip-date-filter{
+  margin: auto 10px;
+}
+.date-filter{
+  margin: auto;
+}
