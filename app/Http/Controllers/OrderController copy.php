@@ -136,7 +136,7 @@ class OrderController extends Controller
         $image->move(public_path('uploads-images/referensi'), $imageName);
 
         // Return the path or any relevant information about the uploaded image
-        return $imageName;
+        return '/images/' . $imageName;
     }
 
 
