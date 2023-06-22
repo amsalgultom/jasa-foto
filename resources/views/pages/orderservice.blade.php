@@ -60,7 +60,7 @@
             </li>
         </ul>
         <!-- Step Wise Form Content -->
-        <form action="{{ route('orders.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('orders.store') }}" method="POST" enctype="multipart/form-data" class="mb-5">
             @csrf
             <!-- Step 1 Content -->
             <section id="step-1" class="form-step">
@@ -68,7 +68,12 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <h2 class="font-normal">Pilih Model</h2>
-
+                            <div class="alert alert-danger d-none" id="validasiModel" role="alert">
+                                Pilih salah satu model
+                                <button id="closeValidasi" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <div class="row my-2">
                                 @foreach ($models as $model)
                                 <div class="col-lg-3 col-md-4 col-6 mb-4">
@@ -96,6 +101,12 @@
             <!-- Step 2 Content, default hidden on page load. -->
             <section id="step-2" class="form-step d-none">
                 <h2 class="font-normal">Daftarkan Produk Anda</h2>
+                <div class="alert alert-danger d-none" id="validasiProduk" role="alert">
+                    Pilih salah satu produk
+                    <button id="closeValidasiProd" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <!-- Step 2 input fields -->
                 <div class="row multiple">
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -159,7 +170,7 @@
                 </div>
                 <div class="mt-3 text-right">
                     <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="1">Prev</button>
-                    <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="3">Next</button>
+                    <button class="btn btn-primary btn-navigate-form-step" type="button" onclick="validateProduct()" step_number="3">Next</button>
                 </div>
             </section>
             <!-- Step 3 Content, default hidden on page load. -->
@@ -259,10 +270,13 @@
 <script>
     function buttonPriceModel(checkbox) {
         var hiddenInputName = document.getElementById("nameModel" + checkbox.value);
+        var element = document.getElementById("validasiModel");
+
         var hiddenInputDate = document.getElementById("available_dateModel" + checkbox.value);
         if (checkbox.checked) {
             hiddenInputName.disabled = false;
             hiddenInputDate.disabled = false;
+            element.classList.add('d-none');
         } else {
             hiddenInputName.disabled = true;
             hiddenInputDate.disabled = true;
@@ -310,10 +324,21 @@
         $("#price_product1").val($(this).find(':selected').data('harga'));
         var total = $("#price_product1").val() * $("#qty_product1").val();
         $("#sub_total_product1").val(total);
+        var element = document.getElementById("validasiProduk");
+        element.classList.add('d-none');
     });
     $("#qty_product1").change(function() {
         var total = $("#price_product1").val() * $("#qty_product1").val();
         $("#sub_total_product1").val(total);
+    });
+
+    $("#closeValidasi").click(function() {
+        var element = document.getElementById("validasiModel");
+        element.classList.add('d-none');
+    });
+    $("#closeValidasiProd").click(function() {
+        var element = document.getElementById("validasiProduk");
+        element.classList.add('d-none');
     });
 
     $(document).ready(function() {
@@ -510,22 +535,49 @@
 
             var checkBoxes = document.getElementsByClassName( 'checkbox-model' );
             var nbChecked = 0;
+            var element = document.getElementById("validasiModel");
+            var prodAlert = document.getElementById("validasiProduk");
+            var product = document.getElementById( 'select_prod_id1' ).value;
+            var note = document.getElementById( 'note1' ).value;
+            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number")); 
 
             for (var i = 0; i < checkBoxes.length; i++) {
                 if ( checkBoxes[i].checked ) {
                     nbChecked++;
                 };
             };
-            if (nbChecked == 0 ){
-                alert( 'Please, check at least one Model!');
-                return false;
+            if (stepNumber == 2){
+                if (nbChecked == 0 ){
+                    element.classList.remove("d-none");
+                    return false;
+                }
+                else {
+                    navigateToFormStep(stepNumber);
+                }
             }
-            else {
-            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number")); 
+            if (stepNumber == 3){
+                if (product === "") {
+                    prodAlert.classList.remove("d-none");
+                    return false;
+                }
+                else {
+                    navigateToFormStep(stepNumber);
+                }
+            }
+            else{
                 navigateToFormStep(stepNumber);
             }
+            
         });
     });
+
+    function validateProduct() {
+        
+
+
+        
+    }
+
     
   
 </script>

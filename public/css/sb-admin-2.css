@@ -11305,15 +11305,15 @@ body.sidebar-toggled footer.sticky-footer {
   .d-mobile-none{
     display: none;
   }
-  table {
+  .tabel-res {
     border: 0;
   }
 
-  table caption {
+  .tabel-res caption {
     font-size: 1.3em;
   }
   
-  table thead {
+  .tabel-res thead {
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -11324,53 +11324,55 @@ body.sidebar-toggled footer.sticky-footer {
     width: 1px;
   }
   
-  table tr {
+  .tabel-res tr {
     border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: .625em;
   }
   
-  table tfoot{
+  .tabel-res tfoot{
     display: none;
   }
   
-  table td {
+  .tabel-res td {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: .8em;
     text-align: right;
   }
   
-  table td::before {
+  .tabel-res td::before {
     content: attr(data-label);
     float: left;
     font-weight: bold;
     /* text-transform: uppercase; */
   }
   
-  table td:last-child {
+  .tabel-res td:last-child {
     border-bottom: 0;
   }
 
-  td:nth-of-type(1):before {
+  .tabel-res td:nth-of-type(1):before {
     content: "No";
   }
-  td:nth-of-type(2):before {
+  .tabel-res td:nth-of-type(2):before {
     content: "Customer";
   }
-  td:nth-of-type(3):before {
+  .tabel-res td:nth-of-type(3):before {
     content: "Tanggal";
   }
-  td:nth-of-type(4):before {
+  .tabel-res td:nth-of-type(4):before {
     content: "Harga Pengiriman";
   }
-  td:nth-of-type(5):before {
+  .tabel-res td:nth-of-type(5):before {
     content: "Total";
   }
-  td:nth-of-type(6):before {
+  .tabel-res td:nth-of-type(6):before {
     content: "Status";
   }
-  td:nth-of-type(7):before {
+  .tabel-res td:nth-of-type(7):before {
     content: "Aksi";
   }
+
+  
 }

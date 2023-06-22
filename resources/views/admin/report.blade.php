@@ -7,7 +7,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">List Order Client</h1>
+    <h1 class="h3 mb-2 text-gray-800">Report Order</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -21,7 +21,7 @@
                 </div>
             </div>   
             <div class="table-responsive">
-                <table class="table table-bordered table-order" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered table-order tabel-res" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
