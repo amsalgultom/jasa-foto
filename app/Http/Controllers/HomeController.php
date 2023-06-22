@@ -47,10 +47,9 @@ class HomeController extends Controller
 
         $origins = $result['rajaongkir']['results'];
         $models = PhotoModel::all();
-        $products = Product::where('type', 'Produk Utama')->get();
-        $productsmodel = Product::where('type', 'Model Kerudung')->get();
-        $productshoes = Product::where('type', 'Aksesoris Sepatu')->get();
-        return view('pages.orderservice', compact('models', 'products', 'productsmodel', 'productshoes', 'origins'));
+        $products = Product::where('type', 'Product Foto')->get();
+        $productsoptional = Product::where('type', 'Our Service')->get();
+        return view('pages.orderservice', compact('models', 'products', 'productsoptional', 'origins'));
     }
 
     public function myorderservices($user_id)
@@ -66,7 +65,8 @@ class HomeController extends Controller
     {
         $itemOrderProduct = ItemProductOrder::where('order_id', $order->id)
             ->join('products', 'item_product_orders.product_id', '=', 'products.id')
-            ->select('item_product_orders.*', 'products.*')
+            ->join('models', 'products.model_id', '=', 'models.id')
+            ->select('item_product_orders.*', 'products.*', 'models.name as modelname')
             ->get();
         $itemOrderModel = ItemModelOrder::where('order_id', $order->id)
             ->join('models', 'item_model_orders.model_id', '=', 'models.id')
@@ -124,12 +124,9 @@ class HomeController extends Controller
         $order = Order::where('id', $request->order_id)->first();
         $itemOrderProduct = ItemProductOrder::where('order_id', $request->order_id)
             ->join('products', 'item_product_orders.product_id', '=', 'products.id')
-            ->select('item_product_orders.*', 'products.*')
+            ->join('models', 'products.model_id', '=', 'models.id')
+            ->select('item_product_orders.*', 'products.*', 'models.name as modelname')
             ->get();
-        $itemOrderModel = ItemModelOrder::where('order_id', $request->order_id)
-            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
-            ->select('item_model_orders.*', 'models.*')
-            ->get();
-        return view('pages.paymentorderservice', compact('snapToken', 'order', 'itemOrderProduct', 'itemOrderModel'));
+        return view('pages.paymentorderservice', compact('snapToken', 'order', 'itemOrderProduct'));
     }
 }

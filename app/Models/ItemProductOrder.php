@@ -12,6 +12,12 @@ class ItemProductOrder extends Model
     protected $fillable = [
         'order_id',
         'product_id',
+        'name_product',
+        'price_product',
+        'qty_product',
+        'sub_total_product',
+        'note_product',
+        'image_referensi_product',
         'note'
     ];
 }

@@ -34,10 +34,10 @@
                     <input type="text" name="name" class="form-control" placeholder="Name" required>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-6">
                 <div class="form-group">
-                    <strong>Harga:</strong>
-                    <input type="number" name="price" class="form-control" placeholder="Harga" required>
+                    <strong>Size:</strong>
+                    <input type="text" name="size" class="form-control" placeholder="Size" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">

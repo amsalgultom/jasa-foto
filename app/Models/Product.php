@@ -9,10 +9,17 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'name',
         'type',
         'price',
         'weight',
         'image',
+        'model_id',
     ];
+    
+    public function model()
+    {
+    	return $this->belongsTo('App\Models\PhotoModel');
+    }
 }

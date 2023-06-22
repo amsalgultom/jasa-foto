@@ -20,9 +20,9 @@
     <div class="text-center">
         <h1 class="brown title-order">Form Pemesanan Jasa Foto</h1>
     </div>
-    <div id="multi-step-form-container ">
+    <div id="multi-step-form-container">
         <!-- Form Steps / Progress Bar -->
-        <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0 d-mobile-none">
+        <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
             <!-- Step 1 -->
             <li class="form-stepper-active text-center form-stepper-list" step="1">
                 <a class="mx-2">
@@ -60,7 +60,7 @@
             </li>
         </ul>
         <!-- Step Wise Form Content -->
-        <form action="{{ route('orders.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('orders.store') }}" method="POST" class="mb-5">
             @csrf
             <!-- Step 1 Content -->
             <section id="step-1" class="form-step">
@@ -79,7 +79,7 @@
                                     <p class="desc-model">Size : <span> {{ $model->size }}</span></p>
                                     <p class="tgl-model">Tanggal tersedia : <span> {{ $model->available_date }}</span></p>
                                     <div class="mx-auto">
-                                        <input class="checkbox-model" type="checkbox" style="width:100%; height: 20px;" name="model_id[]" onclick="buttonPriceModel(this)" data-name="{{ $model->name }}" value="{{ $model->id }}" />
+                                        <input type="checkbox" style="width:100%; height: 20px;" name="model[]" onclick="buttonPriceModel(this)" data-name="{{ $model->name }}" value="{{ $model->id }}" />
                                         <input type="hidden" name="name_model[]" id="nameModel{{ $model->id }}" value="{{ $model->name }}" disabled>
                                         <input type="hidden" name="available_date_model[]" id="available_dateModel{{ $model->id }}" value="{{ $model->available_date }}" disabled>
                                     </div>
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                     <div class="mt-3 text-right">
-                        <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="2">Next</button>
+                        <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="2" onclick="checkValue1()">Next</button>
                     </div>
                 </div>
             </section>
@@ -100,6 +100,7 @@
                 <div class="row multiple">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
+
                             <buuton id="buttunAddProduct" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>(+) Tambah Produk</buuton><br><br>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-5">
@@ -107,15 +108,9 @@
                                     <select name="product_id[]" id="select_prod_id1" class="form-control select-so w-100" required>
                                         <option value="" hidden>-- Pilih Product --</option>
                                         @foreach ($products as $prod)
-                                        <option value="{{$prod->id}}" data-weight="{{$prod->weight}}" data-harga="{{$prod->price}}" data-nameprod="{{$prod->name}}" class="{{$prod->model?->name}}">Produk {{$prod->name}}, untuk model : {{$prod->model?->name}}</option>
+                                        <option value="{{$prod->id}}" data-weight="{{$prod->weight}}" data-harga="{{$prod->price}}" class="{{$prod->model?->name}}">Produk {{$prod->name}}, untuk model : {{$prod->model?->name}}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-3 d-none">
-                                    <div class="form-group">
-                                        <strong>Nama Produk:</strong>
-                                        <input type="text" name="name_product[]" id="name_product1" class="form-control" required readonly>
-                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3">
                                     <div class="form-group">
@@ -126,7 +121,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-1">
                                     <div class="form-group">
                                         <strong>QTY:</strong>
-                                        <input type="number" name="qty_product[]" id="qty_product1" class="form-control" min="1" value="1" required>
+                                        <input type="number" name="qty_product[]" id="qty_product1" class="form-control" min="1" required>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -135,31 +130,29 @@
                                         <input type="number" name="sub_total_product[]" id="sub_total_product1" class="form-control" required readonly>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-8">
                                     <div class="form-group">
                                         <strong>Catatan</strong>
-                                        <textarea class="form-control note" style="height:100px" id="note1" name="note_product[]" placeholder="Notes"></textarea>
+                                        <textarea class="form-control" style="height:100px" id="note1" name="note[]" placeholder="Notes"></textarea>
                                         <label class="text-danger">*Harap produk yang dikirim sesuai</label>
                                     </div>
                                 </div>
-
-                            </div>
-
-                            <div id="addProduct"></div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 my-3">
-                                    <div class="form-group text-center">
-                                        <strong>Upload Beberapa Gambar Untuk Referensi Foto Produk</strong><br>
-                                        <input type="file" name="image_referensi_product[]" id="image_referensi_product1" multiple>
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <div class="form-group">
+                                        <strong>Upload Foto Referensi</strong>
+                                        <input type="file" name="image_referensi_product[]" id="image_referensi_product1">
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="addProduct"></div>
+
                         </div>
                     </div>
                 </div>
                 <div class="mt-3 text-right">
                     <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="1">Prev</button>
-                    <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="3">Next</button>
+                    <button class="btn btn-primary btn-navigate-form-step" type="button" onclick="checkValue1()" step_number="3">Next</button>
                 </div>
             </section>
             <!-- Step 3 Content, default hidden on page load. -->
@@ -169,19 +162,17 @@
                 <div class="row multiple">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <buuton id="buttunAddOptional" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>(+) Tambah Our Service</buuton><br><br>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <strong>Our Service</strong><br>
-                                    <select name="product_optional_model" id="product_optional_model1" class="form-control select-so w-100">
+                                    <select name="product_model" id="product_model" class="form-control select-so w-100">
                                         <option value="">-- Pilih Our Service --</option>
                                         @foreach ($productsoptional as $prodoptional)
                                         <option value="{{$prodoptional->id}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div><br>
-                            <div id="addOptional"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,7 +208,6 @@
                             @endforeach
                         </select>
                         <input type="hidden" name="destination" id="destination" value="151">
-                        <input type="hidden" name="weight" id="weight" value="1500">
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
@@ -241,7 +231,7 @@
                         </div>
                     </div>
                     <div class="mt-3 text-right">
-                        <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="3">Prev</button>
+                        <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="2">Prev</button>
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         <button type="submit" class="btn btn-primary">Buat Order</button>
                     </div>
@@ -258,18 +248,21 @@
 @push('scripts')
 <script>
     function buttonPriceModel(checkbox) {
+        var hiddenInput = document.getElementById("priceModel" + checkbox.value);
         var hiddenInputName = document.getElementById("nameModel" + checkbox.value);
         var hiddenInputDate = document.getElementById("available_dateModel" + checkbox.value);
         if (checkbox.checked) {
+            hiddenInput.disabled = false;
             hiddenInputName.disabled = false;
             hiddenInputDate.disabled = false;
         } else {
+            hiddenInput.disabled = true;
             hiddenInputName.disabled = true;
             hiddenInputDate.disabled = true;
         }
 
         var selectedModels = [];
-        var checkboxes = document.getElementsByName('model_id[]');
+        var checkboxes = document.getElementsByName('model[]');
 
         // Mendapatkan daftar model yang dipilih
         for (var i = 0; i < checkboxes.length; i++) {
@@ -279,7 +272,7 @@
         }
 
         // Menampilkan opsi select yang sesuai dengan model yang dipilih
-        var selectOptions = document.getElementById('select_prod_id1').options;
+        var selectOptions = document.getElementById('prod').options;
 
         for (var j = 0; j < selectOptions.length; j++) {
             var option = selectOptions[j];
@@ -291,7 +284,7 @@
             }
         }
         // Menampilkan opsi select yang sesuai dengan model yang dipilih
-        var selectOptionsOptional = document.getElementById('product_optional_model').options;
+        var selectOptionsOptional = document.getElementById('product_model').options;
 
         for (var j = 0; j < selectOptionsOptional.length; j++) {
             var option = selectOptionsOptional[j];
@@ -306,7 +299,6 @@
     }
 
     $("#select_prod_id1").change(function() {
-        $("#name_product1").val($(this).find(':selected').data('nameprod'));
         $("#price_product1").val($(this).find(':selected').data('harga'));
         var total = $("#price_product1").val() * $("#qty_product1").val();
         $("#sub_total_product1").val(total);
@@ -320,6 +312,7 @@
         var i = 1;
         $("#buttunAddProduct").click(function() {
             i++;
+
             var datahtml1 = `
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-5">
@@ -327,15 +320,9 @@
                         <select name="product_id[]" id="select_prod_id` + i + `" class="form-control select-so w-100" required>
                             <option value="" hidden>-- Pilih Product --</option>
                             @foreach ($products as $prod)
-                            <option value="{{$prod->id}}" data-weight="{{$prod->weight}}" data-harga="{{$prod->price}}" data-nameprod="{{$prod->name}}" class="{{$prod->model?->name}}">Produk {{$prod->name}}, untuk model : {{$prod->model?->name}}</option>
+                            <option value="{{$prod->id}}" data-weight="{{$prod->weight}}" data-harga="{{$prod->price}}" class="{{$prod->model?->name}}">Produk {{$prod->name}}, untuk model : {{$prod->model?->name}}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3 d-none">
-                        <div class="form-group">
-                            <strong>Nama Produk:</strong>
-                            <input type="text" name="name_product[]" id="name_product` + i + `" class="form-control" required readonly>
-                        </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="form-group">
@@ -346,7 +333,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-1">
                         <div class="form-group">
                             <strong>QTY:</strong>
-                            <input type="number" name="qty_product[]" id="qty_product` + i + `" class="form-control" min="1" value="1" required>
+                            <input type="number" name="qty_product[]" id="qty_product` + i + `" class="form-control" min="1" required>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3">
@@ -355,17 +342,22 @@
                             <input type="number" name="sub_total_product[]" id="sub_total_product` + i + `" class="form-control" required readonly>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-xs-12 col-sm-12 col-md-8">
                         <div class="form-group">
                             <strong>Catatan</strong>
                             <textarea class="form-control" style="height:100px" id="note` + i + `" name="note[]" placeholder="Notes"></textarea>
                             <label class="text-danger">*Harap produk yang dikirim sesuai</label>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <div class="form-group">
+                            <strong>Upload Foto Referensi</strong>
+                            <input type="file" name="image_referensi_product[]" id="image_referensi_product` + i + `">
+                        </div>
+                    </div>
                 </div>`
             $("#addProduct").append(datahtml1);
             var scrtipJS = `$("#select_prod_id` + i + `").change(function() {
-                    $("#name_product` + i + `").val($(this).find(':selected').data('nameprod'));
                     $("#price_product` + i + `").val($(this).find(':selected').data('harga'));
                     var total = $("#price_product` + i + `").val() * $("#qty_product` + i + `").val();
                     $("#sub_total_product` + i + `").val(total);
@@ -377,26 +369,7 @@
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.innerHTML = scrtipJS;
-            $("#script-container").append(script);
-        });
-    });
-    $(document).ready(function() {
-        var i = 1;
-        $("#buttunAddOptional").click(function() {
-            i++;
-            var datahtml2 = `
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <strong>Our Service</strong><br>
-                        <select name="product_optional_model[]" id="product_optional_model` + i + `" class="form-control select-so w-100">
-                            <option value="">-- Pilih Our Service --</option>
-                            @foreach ($productsoptional as $prodoptional)
-                            <option value="{{$prodoptional->id}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div><br>`
-            $("#addOptional").append(datahtml2);
+            $("#script-containers").append(script);
         });
     });
 
@@ -414,6 +387,20 @@
             hiddenInputCost.disabled = false;
         }
     }
+
+    $('select[name="product_id[]"]').change(function() {
+        var totalWeight = 0;
+
+        $('select[name="product_id[]"] option:selected').each(function() {
+            var weight = parseInt($(this).data('weight'));
+
+            if (!isNaN(weight)) {
+                totalWeight += weight;
+            }
+        });
+
+        $('#weight').val(totalWeight);
+    });
 
 
     $(document).ready(function() {
@@ -505,28 +492,19 @@
         }
     };
 
-    document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {  
-        formNavigationBtn.addEventListener("click", () => { 
-
-            var checkBoxes = document.getElementsByClassName( 'checkbox-model' );
-            var nbChecked = 0;
-
-            for (var i = 0; i < checkBoxes.length; i++) {
-                if ( checkBoxes[i].checked ) {
-                    nbChecked++;
-                };
-            };
-            if (nbChecked == 0 ){
-                alert( 'Please, check at least one Model!');
-                return false;
-            }
-            else {
-            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number")); 
-                navigateToFormStep(stepNumber);
-            }
+    document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
+        formNavigationBtn.addEventListener("click", () => {
+            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
+            navigateToFormStep(stepNumber);
         });
     });
-    
-  
+
+    function checkValue1() {
+        var name = document.getElementById("prod");
+        if (name.value === "") {
+            var att = document.createAttribute("required");
+            name.setAttributeNode(att);
+        }
+    }
 </script>
 @endpush

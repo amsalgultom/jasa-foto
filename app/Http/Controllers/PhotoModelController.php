@@ -31,7 +31,7 @@ class PhotoModelController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'price' => 'required',
+            'size' => 'required',
             'available_date' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:5120'
         ]);
@@ -72,7 +72,7 @@ class PhotoModelController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'price' => 'required',
+            'size' => 'required',
             'available_date' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:5120'
         ]);
