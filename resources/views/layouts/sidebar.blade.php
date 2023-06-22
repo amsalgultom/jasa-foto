@@ -48,6 +48,11 @@
             <i class="fa fa-cart-plus" aria-hidden="true"></i>
             <span>List Order</span></a>
     </li>
+    <li class="nav-item {{ (request()->segment(1) == 'report') ? 'active' : '' }}">
+        <a class="nav-link" href="/report">
+            <i class="fa fa-file" aria-hidden="true"></i>
+            <span>Report</span></a>
+    </li>
     @elseif (Auth::user()->role == 'client')
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{ (request()->segment(1) == 'orders') ? 'active' : '' }}">

@@ -8,6 +8,7 @@ use App\Http\Controllers\PhotoModelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\AdminController;
 
 /*
@@ -25,8 +26,11 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/ourservices', [HomeController::class, 'ourservices'])->name('ourservices');
+Route::get('/procedur', [HomeController::class, 'procedure'])->name('procedure');
 Route::get('/orderservices', [HomeController::class, 'userOrder'])->name('order.service');
 Route::get('/myorderservices/{user_id}', [HomeController::class, 'myorderservices'])->name('myorderservices');
 Route::get('/myorderservices/show/{order}', [HomeController::class, 'myorderservicesShow'])->name('myorderservices.show');
@@ -58,6 +62,12 @@ Route::get('/calculate-shipping', [App\Http\Controllers\ShippingController::clas
 
 Route::get('/clients', [CustomerController::class, 'index'])->name('clients');
 Route::get('/orderupload/show/{order}', [AdminController::class, 'orderUpload'])->name('orderupload.show');
+
 Route::get('/listorders', [AdminController::class, 'listOrders'])->name('listorders');
+Route::get('/listorders/{id}', [PDFController::class, 'generatePDF']);
+// Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+
+Route::get('/report', [AdminController::class, 'report'])->name('report');
+
 
 Route::post('/orderupload/store', [AdminController::class, 'store'])->name('orderupload.store');

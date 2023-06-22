@@ -2,43 +2,12 @@
 @section('title', 'ArtSpace Photoshoot')
 
 @section('content')
-<!-- ======= Hero Section ======= -->
-<section id="hero">
-    <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
-        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
-
-        <div class="carousel-inner" role="listbox">
-
-            <!-- Slide 1 -->
-            <div class="carousel-item active" style="background-image: url({{ asset('img/slide/slide-1.jpg') }})">
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url({{ asset('img/slide/slide1.jpg') }})">
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="carousel-item" style="background-image: url({{ asset('img/slide/slide2.jpg') }})">
-            </div>
-
-        </div>
-
-        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
-        </a>
-
-        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
-        </a>
-
-    </div>
-</section><!-- End Hero -->
 
 <main id="main">
     
     <!-- ======= Recent Photos Section ======= -->
-    <section id="recent-photos" class="recent-photos">
+    <section id="recent-photos" class="recent-photos mt-4">
         <div class="container">
 
             <div class="section-title brown">
@@ -212,37 +181,37 @@
             <div class="row justify-content-center">
                 <div class="col-lg-3 col-md-3 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/private-shoot/PS-1.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/private-shoot/PS-1.jpg') }}" class="img-ps" alt="">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/private-shoot/PS-2.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/private-shoot/PS-2.jpg') }}" class="img-ps" alt="">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/private-shoot/PS-7.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/private-shoot/PS-7.jpg') }}" class="img-ps" alt="">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/private-shoot/PS-3.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/private-shoot/PS-3.jpg') }}" class="img-ps" alt="">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/private-shoot/PS-4.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/private-shoot/PS-4.jpg') }}" class="img-ps" alt="">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/private-shoot/PS-5.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/private-shoot/PS-5.jpg') }}" class="img-ps" alt="">
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/private-shoot/PS-6.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/private-shoot/PS-6.jpg') }}" class="img-ps" alt="">
                     </div>
                 </div>
             </div>
@@ -314,9 +283,6 @@
         </div>
     </section><!-- End Recent Photos Section -->
 
-        <div class="banner">
-            <img src="{{ asset('img/banner/banner-1.webp') }}" class="img-banner" alt="">
-        </div>
 
 </main><!-- End #main -->
 

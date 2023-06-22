@@ -25,6 +25,11 @@ class HomeController extends Controller
         return view('pages.ourservices');
     }
 
+    public function procedure()
+    {
+        return view('pages.procedure');
+    }
+
     /**
      * Display a listing of the resource.
      */

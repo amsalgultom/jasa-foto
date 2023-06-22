@@ -20,9 +20,9 @@
     <div class="text-center">
         <h1 class="brown title-order">Form Pemesanan Jasa Foto</h1>
     </div>
-    <div id="multi-step-form-container">
+    <div id="multi-step-form-container ">
         <!-- Form Steps / Progress Bar -->
-        <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
+        <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0 d-mobile-none">
             <!-- Step 1 -->
             <li class="form-stepper-active text-center form-stepper-list" step="1">
                 <a class="mx-2">
@@ -79,7 +79,7 @@
                                     <p class="desc-model">Size : <span> {{ $model->size }}</span></p>
                                     <p class="tgl-model">Tanggal tersedia : <span> {{ $model->available_date }}</span></p>
                                     <div class="mx-auto">
-                                        <input type="checkbox" style="width:100%; height: 20px;" name="model_id[]" onclick="buttonPriceModel(this)" data-name="{{ $model->name }}" value="{{ $model->id }}" />
+                                        <input class="checkbox-model" type="checkbox" style="width:100%; height: 20px;" name="model_id[]" onclick="buttonPriceModel(this)" data-name="{{ $model->name }}" value="{{ $model->id }}" />
                                         <input type="hidden" name="name_model[]" id="nameModel{{ $model->id }}" value="{{ $model->name }}" disabled>
                                         <input type="hidden" name="available_date_model[]" id="available_dateModel{{ $model->id }}" value="{{ $model->available_date }}" disabled>
                                     </div>
@@ -138,7 +138,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>Catatan</strong>
-                                        <textarea class="form-control" style="height:100px" id="note1" name="note_product[]" placeholder="Notes"></textarea>
+                                        <textarea class="form-control note" style="height:100px" id="note1" name="note_product[]" placeholder="Notes"></textarea>
                                         <label class="text-danger">*Harap produk yang dikirim sesuai</label>
                                     </div>
                                 </div>
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                     <div class="mt-3 text-right">
-                        <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="2">Prev</button>
+                        <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="3">Prev</button>
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         <button type="submit" class="btn btn-primary">Buat Order</button>
                     </div>
@@ -505,11 +505,28 @@
         }
     };
 
-    document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {
-        formNavigationBtn.addEventListener("click", () => {
-            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
-            navigateToFormStep(stepNumber);
+    document.querySelectorAll(".btn-navigate-form-step").forEach((formNavigationBtn) => {  
+        formNavigationBtn.addEventListener("click", () => { 
+
+            var checkBoxes = document.getElementsByClassName( 'checkbox-model' );
+            var nbChecked = 0;
+
+            for (var i = 0; i < checkBoxes.length; i++) {
+                if ( checkBoxes[i].checked ) {
+                    nbChecked++;
+                };
+            };
+            if (nbChecked == 0 ){
+                alert( 'Please, check at least one Model!');
+                return false;
+            }
+            else {
+            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number")); 
+                navigateToFormStep(stepNumber);
+            }
         });
     });
+    
+  
 </script>
 @endpush
