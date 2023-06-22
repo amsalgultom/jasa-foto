@@ -7,7 +7,7 @@ use App\Models\ItemProductOrder;
 use App\Models\UploadResultImage;
 use App\Models\Order;
 use Illuminate\Http\Request;
-
+use DataTables;
 class AdminController extends Controller
 {
     public function store(Request $request)
@@ -60,4 +60,31 @@ class AdminController extends Controller
         // print_r(json_encode($itemOrderModel));die;
         return view('admin.orderupload', compact('order', 'itemOrderProduct', 'itemOrderModel','itemResultImages'));
     }
+
+    public function report(Request $request)
+    {
+        $myorders = Order::all();
+
+        if ($request->ajax()) {
+            $data = Order::select('*');
+  
+            if ($request->filled('from_date') && $request->filled('to_date')) {
+                $data = $data->whereBetween('created_at', [$request->from_date, $request->to_date]);
+            }
+  
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+       
+                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+      
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view('admin.report', compact('myorders'))->with('no');
+            
+    }
+
 }

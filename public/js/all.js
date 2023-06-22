@@ -138,8 +138,8 @@
         responsive: [{
             breakpoint: 768,
             settings: {
-                slidesToScroll: 4,
-                slidesToShow: 1
+                slidesToScroll: 1,
+                slidesToShow: 3
             }
         }, {
             breakpoint: 520,
@@ -150,6 +150,7 @@
         }]
     });
 
+   
     
 })()
 

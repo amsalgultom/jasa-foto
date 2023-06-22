@@ -7,8 +7,7 @@
     <nav id="navbar-user" class="navbar-user">
       <ul>
         <li><a class="active" href="{{ route('home') }}">Home</a></li>
-        <li><a href="{{ route('home') }}">Photo Model</a></li>
-        <li><a href="{{ route('home') }}">Product</a></li>
+        <li><a href="{{ route('procedure') }}">Prosedur</a></li>
         <li><a href="{{ route('ourservices') }}">Our Services</a></li>
         <hr>
         @if (Auth::user() && Auth::user()->role == 'client')
