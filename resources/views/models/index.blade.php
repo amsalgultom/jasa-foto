@@ -48,14 +48,14 @@
                             <td>
                                 <form action="{{ route('models.destroy',$model->id) }}" method="POST">
 
-                                    <a class="btn btn-info btn-circle btn-lg" href="{{ route('models.show',$model->id) }}"><i class="fas fa-info-circle"></i></a>
+                                    <!-- <a class="btn btn-info btn-circle btn-lg" href="{{ route('models.show',$model->id) }}"><i class="fas fa-info-circle"></i></a> -->
 
-                                    <a class="btn btn-warning btn-circle btn-lg" href="{{ route('models.edit',$model->id) }}"><i class="fas fa-exclamation-triangle"></i></a>
+                                    <a class="btn btn-warning btn-circle btn-lg" href="{{ route('models.edit',$model->id) }}" title="Edit Model"><i class="fas fa-exclamation-triangle"></i></a>
 
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" class="btn btn-danger btn-circle btn-lg"><i class="fas fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-circle btn-lg" title="Hapus Model"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

@@ -24,7 +24,7 @@
 
         </ul>
       
-        @elseif(Auth::user() && Auth::user()->role == 'admin')
+        @elseif(Auth::user() && Auth::user()->role == 'admin' || Auth::user() && Auth::user()->role == 'owner')
         <div class="d-flex w-100 justify-content-right none-dflex-mobile">
 
           <li><a href="{{ route('dashboard') }}">My Admin</a></li>

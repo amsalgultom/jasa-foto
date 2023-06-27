@@ -122,12 +122,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-xs-12 col-sm-6 col-md-3 d-none">
-                                    <div class="form-group">
-                                        <strong>Nama Produk:</strong>
-                                        <input type="text" name="name_product[]" id="name_product1" class="form-control" required readonly>
-                                    </div>
-                                </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3">
                                     <div class="form-group">
                                         <strong>Price:</strong>
@@ -153,9 +147,14 @@
                                         <label class="text-danger">*Harap produk yang dikirim sesuai</label>
                                     </div>
                                 </div>
-
+                                <div class="col-xs-12 col-sm-6 col-md-12 d-none">
+                                    <div class="form-group">
+                                        <input type="text" name="name_product[]" id="name_product1" class="form-control" required readonly>
+                                        <input type="number" id="weight_product1" class="form-control" required readonly>
+                                        <input type="number" name="sub_weight_product[]" id="sub_weight_product1" class="form-control" required readonly>
+                                    </div>
+                                </div>
                             </div>
-
                             <div id="addProduct"></div>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 my-3">
@@ -170,7 +169,7 @@
                 </div>
                 <div class="mt-3 text-right">
                     <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="1">Prev</button>
-                    <button class="btn btn-primary btn-navigate-form-step" type="button" onclick="validateProduct()" step_number="3">Next</button>
+                    <button class="btn btn-primary btn-navigate-form-step" id="calculateSum" type="button" onclick="validateProduct()" step_number="3">Next</button>
                 </div>
             </section>
             <!-- Step 3 Content, default hidden on page load. -->
@@ -182,14 +181,44 @@
                         <div class="form-group">
                             <buuton id="buttunAddOptional" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>(+) Tambah Our Service</buuton><br><br>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-5">
                                     <strong>Our Service</strong><br>
-                                    <select name="product_optional_model" id="product_optional_model1" class="form-control select-so w-100">
+                                    <select name="product_id[]" id="select_prod_optional1" class="form-control select-so w-100">
                                         <option value="">-- Pilih Our Service --</option>
                                         @foreach ($productsoptional as $prodoptional)
-                                        <option value="{{$prodoptional->id}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
+                                        <option value="{{$prodoptional->id}}" data-harga="{{$prod->price}}" data-nameprod="{{$prodoptional->name}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <strong>Price:</strong>
+                                        <input type="number" name="price_product[]" id="price_product_optional1" class="form-control" required readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-1">
+                                    <div class="form-group">
+                                        <strong>QTY:</strong>
+                                        <input type="number" name="qty_product[]" id="qty_product_optional1" class="form-control" min="1" value="1" required>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="form-group">
+                                        <strong>Sub Total:</strong>
+                                        <input type="number" name="sub_total_product[]" id="sub_total_product_optional1" class="form-control" required readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>Catatan</strong>
+                                        <textarea class="form-control note" style="height:100px" id="note_optional1" name="note_product[]" placeholder="Notes"></textarea>
+                                        <!-- <label class="text-danger">*Harap produk yang dikirim sesuai</label> -->
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-12 d-none">
+                                    <div class="form-group">
+                                        <input type="text" name="name_product[]" id="name_product_optional1" class="form-control" required readonly>
+                                    </div>
                                 </div>
                             </div><br>
                             <div id="addOptional"></div>
@@ -228,7 +257,7 @@
                             @endforeach
                         </select>
                         <input type="hidden" name="destination" id="destination" value="151">
-                        <input type="hidden" name="weight" id="weight" value="1500">
+                        <input type="hidden" name="weight" id="weight">
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
@@ -308,7 +337,7 @@
         }
 
         // Menampilkan opsi select yang sesuai dengan model yang dipilih
-        var selectOptionsOptional = document.getElementById('product_optional_model1').options;
+        var selectOptionsOptional = document.getElementById('select_prod_optional1').options;
 
         for (var j = 0; j < selectOptionsOptional.length; j++) {
             var option = selectOptionsOptional[j];
@@ -324,15 +353,39 @@
 
     $("#select_prod_id1").change(function() {
         $("#name_product1").val($(this).find(':selected').data('nameprod'));
+        $("#weight_product1").val($(this).find(':selected').data('weight'));
         $("#price_product1").val($(this).find(':selected').data('harga'));
         var total = $("#price_product1").val() * $("#qty_product1").val();
         $("#sub_total_product1").val(total);
+        var totalweight = $("#weight_product1").val() * $("#qty_product1").val();
+        $("#sub_weight_product1").val(totalweight);
         var element = document.getElementById("validasiProduk");
         element.classList.add('d-none');
     });
     $("#qty_product1").change(function() {
         var total = $("#price_product1").val() * $("#qty_product1").val();
         $("#sub_total_product1").val(total);
+        var totalweight = $("#weight_product1").val() * $("#qty_product1").val();
+        $("#sub_weight_product1").val(totalweight);
+    });
+    $("#select_prod_optional1").change(function() {
+        $("#name_product_optional1").val($(this).find(':selected').data('nameprod'));
+        $("#price_product_optional1").val($(this).find(':selected').data('harga'));
+        var total = $("#price_product_optional1").val() * $("#qty_product_optional1").val();
+        $("#sub_total_product_optional1").val(total);
+    });
+    $("#qty_product_optional1").change(function() {
+        var total = $("#price_product_optional1").val() * $("#qty_product_optional1").val();
+        $("#sub_total_product_optional1").val(total);
+    });
+
+    $("#closeValidasi").click(function() {
+        var element = document.getElementById("validasiModel");
+        element.classList.add('d-none');
+    });
+    $("#closeValidasiProd").click(function() {
+        var element = document.getElementById("validasiProduk");
+        element.classList.add('d-none');
     });
 
     $("#closeValidasi").click(function() {
@@ -359,12 +412,6 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3 d-none">
-                        <div class="form-group">
-                            <strong>Nama Produk:</strong>
-                            <input type="text" name="name_product[]" id="name_product` + i + `" class="form-control" required readonly>
-                        </div>
-                    </div>
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="form-group">
                             <strong>Price:</strong>
@@ -390,17 +437,29 @@
                             <label class="text-danger">*Harap produk yang dikirim sesuai</label>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-6 col-md-12 d-none">
+                        <div class="form-group">
+                            <input type="text" name="name_product[]" id="name_product` + i + `" class="form-control" required readonly>
+                            <input type="number" id="weight_product` + i + `" class="form-control" required readonly>
+                            <input type="number" name="sub_weight_product[]" id="sub_weight_product` + i + `" class="form-control" required readonly>
+                        </div>
+                    </div>
                 </div>`
             $("#addProduct").append(datahtml1);
             var scrtipJS = `$("#select_prod_id` + i + `").change(function() {
                     $("#name_product` + i + `").val($(this).find(':selected').data('nameprod'));
+                    $("#weight_product` + i + `").val($(this).find(':selected').data('weight'));
                     $("#price_product` + i + `").val($(this).find(':selected').data('harga'));
                     var total = $("#price_product` + i + `").val() * $("#qty_product` + i + `").val();
                     $("#sub_total_product` + i + `").val(total);
+                    var totalweight = $("#weight_product` + i + `").val() * $("#qty_product` + i + `").val();
+                    $("#sub_weight_product` + i + `").val(totalweight);
                 });
                 $("#qty_product` + i + `").change(function() {
                     var total = $("#price_product` + i + `").val() * $("#qty_product` + i + `").val();
                     $("#sub_total_product` + i + `").val(total);
+                    var totalweight = $("#weight_product` + i + `").val() * $("#qty_product` + i + `").val();
+                    $("#sub_weight_product` + i + `").val(totalweight);
                 });
                 
                 $(document).ready(function() {
@@ -436,17 +495,47 @@
         $("#buttunAddOptional").click(function() {
             i++;
             var datahtml2 = `
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <strong>Our Service</strong><br>
-                        <select name="product_optional_model[]" id="product_optional_model` + i + `" class="form-control select-so w-100">
-                            <option value="">-- Pilih Our Service --</option>
-                            @foreach ($productsoptional as $prodoptional)
-                            <option value="{{$prodoptional->id}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
-                            @endforeach
-                        </select>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-5">
+                    <strong>Our Service</strong><br>
+                    <select name="product_id[]" id="select_prod_optional` + i + `" class="form-control select-so w-100">
+                        <option value="">-- Pilih Our Service --</option>
+                        @foreach ($productsoptional as $prodoptional)
+                        <option value="{{$prodoptional->id}}" data-harga="{{$prod->price}}" data-nameprod="{{$prodoptional->name}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <strong>Price:</strong>
+                        <input type="number" name="price_product[]" id="price_product_optional` + i + `" class="form-control" required readonly>
                     </div>
-                </div><br>`
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-1">
+                    <div class="form-group">
+                        <strong>QTY:</strong>
+                        <input type="number" name="qty_product[]" id="qty_product_optional` + i + `" class="form-control" min="1" value="1" required>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <strong>Sub Total:</strong>
+                        <input type="number" name="sub_total_product[]" id="sub_total_product_optional` + i + `" class="form-control" required readonly>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Catatan</strong>
+                        <textarea class="form-control note" style="height:100px" id="note_optional` + i + `" name="note_product[]" placeholder="Notes"></textarea>
+                        <!-- <label class="text-danger">*Harap produk yang dikirim sesuai</label> -->
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-12 d-none">
+                    <div class="form-group">
+                        <input type="text" name="name_product[]" id="name_product_optional` + i + `" class="form-control" required readonly>
+                    </div>
+                </div>
+            </div><br>`
             $("#addOptional").append(datahtml2);
             var scrtipJSS = `$(document).ready(function() {
                 var selectedModels = [];
@@ -458,7 +547,7 @@
                         selectedModels.push(checkboxesadd[i].getAttribute('data-name'));
                     }
                 }
-                var selectOptionsOptional = document.getElementById('product_optional_model` + i + `').options;
+                var selectOptionsOptional = document.getElementById('select_prod_optional` + i + `').options;
                 for (var j = 0; j < selectOptionsOptional.length; j++) {
                     var option = selectOptionsOptional[j];
 
@@ -468,13 +557,23 @@
                         option.style.display = 'none';
                     }
                 }
+                $("#select_prod_optional` + i + `").change(function() {
+                    $("#name_product_optional` + i + `").val($(this).find(':selected').data('nameprod'));
+                    $("#price_product_optional` + i + `").val($(this).find(':selected').data('harga'));
+                    var total = $("#price_product_optional` + i + `").val() * $("#qty_product_optional` + i + `").val();
+                    $("#sub_total_product_optional` + i + `").val(total);
+                });
+                $("#qty_product_optional` + i + `").change(function() {
+                    var total = $("#price_product_optional` + i + `").val() * $("#qty_product_optional` + i + `").val();
+                    $("#sub_total_product_optional` + i + `").val(total);
+                });
                 });`;
-                var script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.innerHTML = scrtipJSS;
-                $("#script-container").append(script);
-            });
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.innerHTML = scrtipJSS;
+            $("#script-container").append(script);
         });
+    });
 
     function buttonOngkirModel(radio) {
         var hiddenInputCosts = document.querySelectorAll('[id^="shipping_costs"]');
@@ -490,6 +589,20 @@
             hiddenInputCost.disabled = false;
         }
     }
+    // JavaScript/jQuery
+    $(document).ready(function() {
+        $("#calculateSum").click(function() {
+            var sum = 0;
+            $('input[name="sub_weight_product[]"]').each(function() {
+                var value = parseFloat($(this).val());
+                if (!isNaN(value)) {
+                    sum += value;
+                }
+            });
+            $("#weight").val(sum);
+            console.log(sum)
+        });
+    });
 
 
     $(document).ready(function() {
