@@ -60,14 +60,14 @@
                             <td>
                                 <form action="{{ route('products.destroy',$product->id) }}" method="POST">
 
-                                    <a class="btn btn-info btn-circle btn-lg" href="{{ route('products.show',$product->id) }}"><i class="fas fa-info-circle"></i></a>
+                                    <!-- <a class="btn btn-info btn-circle btn-lg" href="{{ route('products.show',$product->id) }}"><i class="fas fa-info-circle"></i></a> -->
 
-                                    <a class="btn btn-warning btn-circle btn-lg" href="{{ route('products.edit',$product->id) }}"><i class="fas fa-exclamation-triangle"></i></a>
+                                    <a class="btn btn-warning btn-circle btn-lg" href="{{ route('products.edit',$product->id) }}" title="Edit Produk"><i class="fas fa-exclamation-triangle"></i></a>
 
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" class="btn btn-danger btn-circle btn-lg"><i class="fas fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-circle btn-lg" title="Hapus Produk"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

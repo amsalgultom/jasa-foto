@@ -16,7 +16,7 @@
             <span>Dashboard</span></a>
     </li>
     
-    @if(Auth::user()->role == 'admin')
+    @if(Auth::user()->role == 'admin' || Auth::user()->role == 'owner')
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{ (request()->segment(1) == 'products') ? 'active' : '' }}">
@@ -48,11 +48,6 @@
             <i class="fa fa-cart-plus" aria-hidden="true"></i>
             <span>List Order</span></a>
     </li>
-    <li class="nav-item {{ (request()->segment(1) == 'report') ? 'active' : '' }}">
-        <a class="nav-link" href="/report">
-            <i class="fa fa-file" aria-hidden="true"></i>
-            <span>Report</span></a>
-    </li>
     @elseif (Auth::user()->role == 'client')
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{ (request()->segment(1) == 'orders') ? 'active' : '' }}">
@@ -64,6 +59,14 @@
         <a class="nav-link" href="/myorders/{{ Auth::user()->id }}">
             <i class="fa fa-list-alt" aria-hidden="true"></i>
             <span>My Order</span></a>
+    </li>
+    @endif
+    
+    @if (Auth::user()->role == 'owner')
+    <li class="nav-item {{ (request()->segment(1) == 'report') ? 'active' : '' }}">
+        <a class="nav-link" href="/report">
+            <i class="fa fa-file" aria-hidden="true"></i>
+            <span>Report</span></a>
     </li>
     @endif
 

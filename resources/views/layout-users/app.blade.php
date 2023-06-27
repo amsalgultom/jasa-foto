@@ -6,12 +6,12 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>ArtSpace Photoshoot</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta content="Jasa Foto Produk" name="keywords">
+    <meta content="Art Space adalah sebuah layanan visual atau jasa foto produk yang berdiri sejak tahun 2016 dan berfokus pada konten digital marketing." name="description">
 
     <!-- Favicons -->
-    <link href="{{ asset('img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('img/logo.png') }}" rel="icon">
+    <link href="{{ asset('img/logo.png') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">

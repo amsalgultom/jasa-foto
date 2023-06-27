@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Outer Row -->
-<section class="mt-5 mb-3">
+<section class="my-5">
 <div class="container">
 
     <div class="card o-hidden border-0 shadow-lg my-5">
