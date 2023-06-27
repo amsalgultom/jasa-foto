@@ -48,7 +48,7 @@
 
                                                                                     <div style="margin-bottom:40px">
                                                                                         <table cellspacing="0" cellpadding="6" border="1" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;width:100%;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" width="100%">
-                                                                                        <thead>
+                                                                                            <thead>
                                                                                                 <tr>
                                                                                                     <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Product</th>
                                                                                                     <th scope="col" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Tipe</th>
@@ -69,9 +69,9 @@
                                                                                                     </td>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
                                                                                                         @if ($itemproduct->note_product == null)
-                                                                                                            -
+                                                                                                        -
                                                                                                         @else
-                                                                                                            {{$itemproduct->note_product}}
+                                                                                                        {{$itemproduct->note_product}}
                                                                                                         @endif
                                                                                                     </td>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
@@ -85,27 +85,34 @@
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 @endforeach
-                                                                                            </tbody>    
+                                                                                            </tbody>
                                                                                             <tfoot>
                                                                                                 <tr>
                                                                                                     <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px;" align="left" colspan="5">Subtotal:</th>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px;" align="left"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs, 0, ',', '.') }}</span></td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left"  colspan="5">Shipping:</th>
+                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left" colspan="5">Shipping:</th>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
                                                                                                         <span>{{ 'Rp '.number_format($order->shipping_costs, 0, ',', '.') }}</span>&nbsp;<small>via JNE ({{ $order->shipping_method }})</small>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>
-                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left"  colspan="5">Total:</th>
+                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left" colspan="5">Total:</th>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
                                                                                                         <span>{{ 'Rp '.number_format($order->total, 0, ',', '.') }}</span>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tfoot>
                                                                                         </table>
-                                                                                        <div class="my-5 text-center">
+                                                                                        <div class="form-group mt-3">
+                                                                                            <div class="custom-control custom-checkbox small">
+                                                                                                <input type="checkbox" class="custom-control-input" id="confirmprosedur">
+                                                                                                <label class="custom-control-label h6" for="confirmprosedur">Setuju terkait <a href="{{ route('procedure') }}">prosedur</a> yang diberikan</label>
+                                                                                                <div class="text-danger d-none" id="requiredcheck">Setujui prosedur diperlukan untuk lakukan pembayaran</div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="my-1 text-center">
                                                                                             <button id="pay-button" class="btn btn-primary">Bayar Sekarang</button>
                                                                                         </div>
                                                                                     </div>
@@ -136,8 +143,23 @@
 
 <script type="text/javascript">
     // For example trigger on button clicked, or any time you need
+    var check = document.getElementById('confirmprosedur');
+    var labelrequiredcheck = document.getElementById('requiredcheck');
+    $("#confirmprosedur").on('change', function() {
+        if (this.checked == true) {
+            labelrequiredcheck.classList.add('d-none')
+        }else{
+            labelrequiredcheck.classList.add('d-none')
+        }
+    })
     var payButton = document.getElementById('pay-button');
     payButton.addEventListener('click', function() {
+        if (check.checked == false) {
+            labelrequiredcheck.classList.remove('d-none')
+            return false
+        } else {
+            labelrequiredcheck.classList.add('d-none')
+        }
         // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
         window.snap.pay('{{$snapToken}}', {
             onSuccess: function(result) {

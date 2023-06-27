@@ -80,8 +80,8 @@
                     <div class="image-models">
                         <img src="{{ asset('uploads-images/models/').'/'.$model->image }}" class="img-model" alt="{{ $model->name }}">
                     </div>
-                    <h4 class="title-model mt-4"><a href="">{{ $model->name }}</a></h4>
-                    <p class="desc-model">{{ 'Rp '.number_format($model->price, 0, ',', '.') }}</p>
+                    <h4 class="title-model mt-4">{{ $model->name }}</h4>
+                    <h4 class="title-model">({{ $model->size }})</h4>
                 </div>
                 @endforeach
             </div>
