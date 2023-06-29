@@ -67,12 +67,12 @@
                     <input type="number" name="weight" class="form-control" placeholder="Berat (gram)" required>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <!-- <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="form-group">
                     <strong>Upload Gambar:</strong>
                     <input type="file" name="image" class="form-control" placeholder="Gambar">
                 </div>
-            </div>
+            </div> -->
             <div class="col-xs-12 col-sm-12 col-md-12 text-center my-2">
                 <a class="btn btn-secondary" href="{{ route('products.index') }}">Cancel</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
