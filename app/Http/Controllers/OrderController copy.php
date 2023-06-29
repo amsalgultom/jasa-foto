@@ -30,7 +30,7 @@ class OrderController extends Controller
         $result = json_decode($response->getBody(), true);
 
         $origins = $result['rajaongkir']['results'];
-        $models = PhotoModel::all();
+        $models = PhotoModel::orderBy('id', 'desc')->get();
         $products = Product::where('type', 'Produk Utama')->get();
         $productsmodel = Product::where('type', 'Model Kerudung')->get();
         $productshoes = Product::where('type', 'Aksesoris Sepatu')->get();
@@ -42,7 +42,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $rq = $request->all();
+        $rq = $request->orderBy('id', 'desc')->get();
 
         // Create Customer
         $createCustomer = [

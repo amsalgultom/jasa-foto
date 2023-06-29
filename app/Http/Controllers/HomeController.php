@@ -17,7 +17,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $models = PhotoModel::all();
+        $models = PhotoModel::orderBy('id', 'desc')->get();
         return view('pages.home', compact('models'));
     }
     public function ourservices()
@@ -46,7 +46,7 @@ class HomeController extends Controller
         $result = json_decode($response->getBody(), true);
 
         $origins = $result['rajaongkir']['results'];
-        $models = PhotoModel::all();
+        $models = PhotoModel::orderBy('id', 'desc')->get();
         $products = Product::where('type', 'Product Foto')->get();
         $productsoptional = Product::where('type', 'Our Service')->get();
         return view('pages.orderservice', compact('models', 'products', 'productsoptional', 'origins'));

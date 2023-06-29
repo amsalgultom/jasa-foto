@@ -28,6 +28,17 @@
         @method('PUT')
 
         <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    <strong>Model:</strong>
+                    <select class="form-control w-100 select-form" name="model_id" required>
+                        <option value="" hidden selected>-- Pilih Model --</option>
+                        @foreach ($models as $model)
+                        <option value="{{$model->id}}" @if($model->id == $product->model_id) selected @endif>{{$model->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-4">
                 <div class="form-group">
                     <strong>Name:</strong>
@@ -39,8 +50,7 @@
                     <strong>Tipe:</strong>
                     <select class="form-control w-100 select-product" name="type" required>
                         <option value="Produk Utama" {{ $product->type == 'Produk Utama' ? 'selected' : '' }}>Produk Utama</option>
-                        <option value="Aksesoris Sepatu" {{ $product->type == 'Aksesoris Sepatu' ? 'selected' : '' }}>Aksesoris Sepatu</option>
-                        <option value="Model Kerudung" {{ $product->type == 'Model Kerudung' ? 'selected' : '' }}>Model Kerudung</option>
+                        <option value="Our Service" {{ $product->type == 'Our Service' ? 'selected' : '' }}>Our Service</option>
                     </select>
                 </div>
             </div>
@@ -56,7 +66,7 @@
                     <input type="number" name="weight" class="form-control" value="{{ $product->weight }}" required>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <!-- <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="form-group">
                     <strong>Upload Gambar:</strong><br>
                     @if ($product->image !== null)
@@ -64,7 +74,7 @@
                     @endif
                     <input type="file" name="image" class="form-control" placeholder="Gambar">
                 </div>
-            </div>
+            </div> -->
             <div class="col-xs-12 col-sm-12 col-md-12 text-center my-2">
                 <a class="btn btn-secondary" href="{{ route('products.index') }}">Cancel</a>
                 <button type="submit" class="btn btn-primary">Submit</button>

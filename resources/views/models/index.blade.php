@@ -43,7 +43,7 @@
                             <td>{{ ++$no }}</td>
                             <td>{{ $model->name }}</td>
                             <td>{{ $model->size }}</td>
-                            <td>{{ $model->available_date }}</td>
+                            <td>{{ \Carbon\Carbon::parse($model->available_date)->format('d-m-Y') }}</td>
                             <td class="text-center"><img src="{{ asset('uploads-images/models/').'/'.$model->image }}" alt="{{ $model->name }}" width="100"></td>
                             <td>
                                 <form action="{{ route('models.destroy',$model->id) }}" method="POST">

@@ -4,11 +4,11 @@
 @section('content')
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Add New Product</h2>
+                <h2>Add New Model</h2>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
             <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Upload Gambar:</strong>
-                    <input type="file" name="image" class="form-control" placeholder="Gambar">
+                    <input type="file" name="image" class="form-control" placeholder="Gambar" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center my-2">

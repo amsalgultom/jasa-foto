@@ -105,7 +105,7 @@ class LoginRegisterController extends Controller
     {
         if (Auth::check()) {
 
-            $models = PhotoModel::all();
+            $models = PhotoModel::orderBy('id', 'desc')->get();
             return view('pages.dashboard', compact('models'));
         }
 
