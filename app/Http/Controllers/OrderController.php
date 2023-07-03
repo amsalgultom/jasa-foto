@@ -42,7 +42,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $rq = $request->orderBy('id', 'desc')->get();
+        $rq = $request->all();
 
         // Create Customer
         $createCustomer = [
