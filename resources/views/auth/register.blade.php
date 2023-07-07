@@ -6,7 +6,7 @@
 <section class="my-5">
 <div class="container">
 
-    <div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card card-auth o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
@@ -20,13 +20,13 @@
                             @csrf
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Username ...">
+                                    <input type="text" class="form-control color-form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Username ...">
                                     @if ($errors->has('name'))
                                     <span class="text-danger">{{ $errors->first('name') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="Email ...">
+                                    <input type="email" class="form-control color-form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="Email ...">
                                     @if ($errors->has('email'))
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
@@ -34,13 +34,13 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control  form-control-user @error('password') is-invalid @enderror" id="exampleInputPassword" name="password" placeholder="Password ...">
+                                    <input type="password" class="form-control  color-form-control form-control-user @error('password') is-invalid @enderror" id="exampleInputPassword" name="password" placeholder="Password ...">
                                     @if ($errors->has('password'))
                                     <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirmation Password ...">
+                                    <input type="password" class="form-control color-form-control " id="password_confirmation" name="password_confirmation" placeholder="Confirmation Password ...">
                                 </div>
                             </div>
                             <input type="hidden" name="role" value="client">
