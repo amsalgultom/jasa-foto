@@ -11309,15 +11309,15 @@ body.sidebar-toggled footer.sticky-footer {
   .d-mobile-none{
     display: none;
   }
-  .tabel-order, .tabel-client, .tabel-model, .tabel-produk, .tabel-report {
+  .tabel-order, .tabel-client, .tabel-model, .tabel-produk, .tabel-report, .tabel-top-order, .tabel-mid-order, .tabel-bottom-order {
     border: 0;
   }
 
-  .tabel-order caption, .tabel-client caption, .tabel-model caption, .tabel-produk caption , .tabel-report caption{
+  .tabel-order caption, .tabel-client caption, .tabel-model caption, .tabel-produk caption , .tabel-report caption , .tabel-top-order caption , .tabel-mid-order caption , .tabel-bottom-order caption{
     font-size: 1.3em;
   }
   
-  .tabel-order thead, .tabel-client thead, .tabel-model thead, .tabel-produk thead, .tabel-report thead{
+  .tabel-order thead, .tabel-client thead, .tabel-model thead, .tabel-produk thead, .tabel-report thead , .tabel-top-order thead , .tabel-mid-order thead , .tabel-bottom-order thead{
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -11328,31 +11328,38 @@ body.sidebar-toggled footer.sticky-footer {
     width: 1px;
   }
   
-  .tabel-order tr, .tabel-client tr, .tabel-model tr, .tabel-produk tr, .tabel-report tr {
+  .tabel-order tr, .tabel-client tr, .tabel-model tr, .tabel-produk tr, .tabel-report tr , .tabel-top-order tr , .tabel-mid-order tr , .tabel-bottom-order tr{
     border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: .625em;
   }
   
-  .tabel-order tfoot, .tabel-client tfoot, .tabel-model tfoot, .tabel-produk tfoot, .tabel-report tfoot{
+  .tabel-order tfoot, .tabel-client tfoot, .tabel-model tfoot, .tabel-produk tfoot, .tabel-report tfoot , .tabel-top-order tfoot , .tabel-mid-order tfoot , .tabel-bottom-order tfoot{
     display: none;
   }
   
-  .tabel-order td, .tabel-client td, .tabel-model td, .tabel-produk td, .tabel-report td{
+  .tabel-order td, .tabel-client td, .tabel-model td, .tabel-produk td, .tabel-report td , .tabel-top-order td , .tabel-mid-order td {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: .8em;
     text-align: right;
   }
+
+  .tabel-bottom-order td{
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: left;
+  }
   
-  .tabel-order td::before, .tabel-client td::before, .tabel-model td::before, .tabel-produk td::before, .tabel-report td::before{
+  .tabel-order td::before, .tabel-client td::before, .tabel-model td::before, .tabel-produk td::before, .tabel-report td::before, .tabel-top-order td::before , .tabel-mid-order td::before , .tabel-bottom-order td::before{
     content: attr(data-label);
     float: left;
     font-weight: bold;
     /* text-transform: uppercase; */
   }
   
-  .tabel-order td:last-child, .tabel-client td:last-child, .tabel-model td:last-child, .tabel-produk td:last-child, .tabel-report td:last-child{
+  .tabel-order td:last-child, .tabel-client td:last-child, .tabel-model td:last-child, .tabel-produk td:last-child, .tabel-report td:last-child , .tabel-top-order td:last-child , .tabel-mid-order td:last-child , .tabel-bottom-order td:last-child{
     border-bottom: 0;
   }
 
@@ -11453,4 +11460,83 @@ body.sidebar-toggled footer.sticky-footer {
   .tabel-report td:nth-of-type(6):before {
     content: "Status";
   }
+
+  
+  .tabel-top-order td:nth-of-type(1):before {
+    content: "Nama Model";
+  }
+  .tabel-top-order td:nth-of-type(2):before {
+    content: "Foto Model";
+  }
+  .tabel-top-order td:nth-of-type(3):before {
+    content: "Tanggal Foto";
+  }
+
+  
+  .tabel-mid-order td:nth-of-type(1):before {
+    content: "Produk";
+  }
+  .tabel-mid-order td:nth-of-type(2):before {
+    content: "Tipe";
+  }
+  .tabel-mid-order td:nth-of-type(3):before {
+    content: "Catatan";
+  }
+  .tabel-mid-order td:nth-of-type(4):before {
+    content: "Harga";
+  }
+  .tabel-mid-order td:nth-of-type(5):before {
+    content: "Qty";
+  }
+  .tabel-mid-order td:nth-of-type(6):before {
+    content: "Subtotal";
+  }
+
+  
+}
+
+.id-order{
+  background-color: #e7d7c9; 
+  color: #fff;
+
+}
+
+.status{
+  color:#7a6429;
+  display:block;
+  font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;
+  font-size:18px;
+  font-weight:bold;
+  line-height:130%;
+  margin:0 0 18px;
+  text-align:left
+}
+
+.table-model-order{
+  color:#636363;
+  border:1px solid #e5e5e5;
+  vertical-align:middle;
+  width:90%;
+  font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;
+}
+
+.mb-table{
+  margin-bottom:40px;
+}
+
+.text-table{
+  color:#636363;
+  border:1px solid #e5e5e5;
+  vertical-align:middle;
+  padding:12px;
+  font-size: 14px;
+}
+
+.text-table-1{
+  color:#636363;
+  border:1px solid #e5e5e5;
+  padding:12px;
+  vertical-align:middle;
+  font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;
+  word-wrap:break-word;
 }

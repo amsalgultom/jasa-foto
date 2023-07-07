@@ -56,8 +56,8 @@ class OrderController extends Controller
 
         // Create Order
 
+        $uploadedImages = [];
         if ($request->hasFile('image_referensi_product')) {
-            $uploadedImages = [];
             foreach ($request->file('image_referensi_product') as $image) {
                 $uploadedImages[] = $this->uploadImage($image);
             }
