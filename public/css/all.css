@@ -7,20 +7,20 @@
 */
 
 /*--------------------------------------------------------------
-# General
+# General all.css
 --------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #444444;
 }
 
 a {
-  color: #A08336;
+  color: #a38f85;
   text-decoration: none;
 }
 
 a:hover {
-  color: #A08336;
+  color: #a38f85;
   text-decoration: none;
 }
 
@@ -30,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 @media (min-width: 1200px) {
@@ -49,7 +49,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #A08336;
+  background: #a38f85;
   width: 40px;
   height: 40px;
   border-radius: 50px;
@@ -63,7 +63,7 @@ h6 {
 }
 
 .back-to-top:hover {
-  background: #A08336;
+  background: #a38f85;
   color: #fff;
 }
 
@@ -76,7 +76,7 @@ h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: #fff;
+  background:  #e7d7c9;
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
@@ -93,7 +93,7 @@ h6 {
 }
 
 #header .logo a {
-  color: #A08336;
+  color: #a38f85;
 }
 
 #header .logo img {
@@ -129,10 +129,10 @@ h6 {
   align-items: center;
   justify-content: space-between;
   padding: 10px 30px 10px 0;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 15px;
   font-weight: 500;
-  color: #A08336;
+  color: #a38f85;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -148,7 +148,7 @@ h6 {
 .navbar-user .active,
 .navbar-user .active:focus,
 .navbar-user li:hover>a {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .navbar-user .dropdown ul {
@@ -220,7 +220,7 @@ h6 {
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #A08336;
+  color: #a38f85;
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -229,7 +229,7 @@ h6 {
 }
 
 .mobile-nav-auth-toggle {
-  color: #A08336;
+  color: #a38f85;
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -303,13 +303,13 @@ h6 {
 .navbar-mobile-auth a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #A08336;
+  color: #a38f85;
 }
 
 .navbar-mobile-auth a:hover,
 .navbar-mobile-auth .active,
 .navbar-mobile-auth li:hover>a {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .navbar-mobile-auth .getstarted,
@@ -344,7 +344,7 @@ h6 {
 .navbar-mobile-auth .dropdown ul a:hover,
 .navbar-mobile-auth .dropdown ul .active:hover,
 .navbar-mobile-auth .dropdown ul li:hover>a {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .navbar-mobile-auth .dropdown>.dropdown-active {
@@ -387,13 +387,13 @@ h6 {
 .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #A08336;
+  color: #a38f85;
 }
 
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .navbar-mobile .getstarted,
@@ -428,7 +428,7 @@ h6 {
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover>a {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .navbar-mobile .dropdown>.dropdown-active {
@@ -548,11 +548,11 @@ h6 {
 
 #hero .carousel-indicators li.active {
   opacity: 1;
-  background: #A08336;
+  background: #a38f85;
 }
 
 #hero .btn-get-started {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   font-size: 14px;
   letter-spacing: 1px;
@@ -563,11 +563,11 @@ h6 {
   line-height: 1;
   color: #fff;
   animation-delay: 0.8s;
-  background: #A08336;
+  background: #a38f85;
 }
 
 #hero .btn-get-started:hover {
-  background: #A08336;
+  background: #a38f85;
 }
 
 @media (max-width: 992px) {
@@ -643,7 +643,7 @@ section {
   display: block;
   width: 40px;
   height: 3px;
-  background: #A08336;
+  background: #a38f85;
   bottom: 0;
   left: calc(50% - 20px);
 }
@@ -679,7 +679,7 @@ section {
   left: 0;
   top: 2px;
   font-size: 20px;
-  color: #A08336;
+  color: #a38f85;
   line-height: 1;
 }
 
@@ -688,7 +688,7 @@ section {
 }
 
 .about .content .btn-learn-more {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 1px;
@@ -697,14 +697,14 @@ section {
   border-radius: 5px;
   transition: 0.3s;
   line-height: 1;
-  color: #A08336;
+  color: #a38f85;
   animation-delay: 0.8s;
   margin-top: 6px;
-  border: 2px solid #A08336;
+  border: 2px solid #a38f85;
 }
 
 .about .content .btn-learn-more:hover {
-  background: #A08336;
+  background: #a38f85;
   color: #fff;
   text-decoration: none;
 }
@@ -733,7 +733,7 @@ section {
 
 .features .icon i {
   line-height: 0;
-  color: #A08336;
+  color: #a38f85;
   font-size: 34px;
 }
 
@@ -755,7 +755,7 @@ section {
 }
 
 .features .title a:hover {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .features .title::after {
@@ -764,7 +764,7 @@ section {
   display: block;
   width: 50px;
   height: 2px;
-  background: #A08336;
+  background: #a38f85;
   bottom: 0;
   left: calc(50% - 25px);
 }
@@ -791,11 +791,11 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #A08336;
+  border: 1px solid #a38f85;
 }
 
 .recent-photos .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #A08336;
+  background-color: #a38f85;
 }
 
 .recent-photos .owl-nav,
@@ -819,7 +819,7 @@ section {
 }
 
 .recent-photos .owl-dot.active {
-  background-color: #A08336 !important;
+  background-color: #a38f85 !important;
 }
 
 .recent-photos .gallery-carousel .owl-stage-outer {
@@ -827,7 +827,7 @@ section {
 }
 
 .recent-photos .gallery-carousel .center {
-  border: 6px solid #A08336;
+  border: 6px solid #a38f85;
   margin: -10px;
   box-sizing: content-box;
   padding: 4px;
@@ -911,7 +911,7 @@ section {
 .story-intro .content ul i {
   font-size: 20px;
   padding-right: 4px;
-  color: #A08336;
+  color: #a38f85;
 }
 
 .story-intro .content p:last-child {
@@ -942,7 +942,7 @@ section {
 .featured-members .content ul i {
   font-size: 20px;
   padding-right: 4px;
-  color: #A08336;
+  color: #a38f85;
 }
 
 .featured-members .content p:last-child {
@@ -988,7 +988,7 @@ section {
 }
 
 .members .member .social a:hover {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .members .member .social i {
@@ -1008,7 +1008,7 @@ section {
   text-transform: uppercase;
   font-weight: 400;
   margin-bottom: 15px;
-  color: #A08336;
+  color: #a38f85;
 }
 
 .members .member .member-info p {
@@ -1061,11 +1061,11 @@ section {
   font-weight: 700;
   text-align: center;
   margin-bottom: 20px;
-  color: #A08336;
+  color: #a38f85;
 }
 
 .event-list .card-title a {
-  color: #A08336;
+  color: #a38f85;
   transition: 0.3s;
 }
 
@@ -1082,7 +1082,7 @@ section {
 }
 
 .event-list .read-more a:hover {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .event-list .card:hover img {
@@ -1090,11 +1090,11 @@ section {
 }
 
 .event-list .card:hover .card-body {
-  border-color: #A08336;
+  border-color: #a38f85;
 }
 
 .event-list .card:hover .card-body .card-title a {
-  color: #A08336;
+  color: #a38f85;
 }
 
 /*--------------------------------------------------------------
@@ -1127,7 +1127,7 @@ section {
 
 .gallery #gallery-flters li:hover,
 .gallery #gallery-flters li.filter-active {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .gallery #gallery-flters li:last-child {
@@ -1262,7 +1262,7 @@ section {
 
 .contact-us .info i {
   font-size: 20px;
-  color: #A08336;
+  color: #a38f85;
   float: left;
   width: 44px;
   height: 44px;
@@ -1279,7 +1279,7 @@ section {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #A08336;
+  color: #a38f85;
 }
 
 .contact-us .info p {
@@ -1297,7 +1297,7 @@ section {
 .contact-us .info .email:hover i,
 .contact-us .info .address:hover i,
 .contact-us .info .phone:hover i {
-  background: #A08336;
+  background: #a38f85;
   color: #fff;
 }
 
@@ -1368,7 +1368,7 @@ section {
 
 .contact-us .php-email-form input:focus,
 .contact-us .php-email-form textarea:focus {
-  border-color: #A08336;
+  border-color: #a38f85;
 }
 
 .contact-us .php-email-form input {
@@ -1380,7 +1380,7 @@ section {
 }
 
 .contact-us .php-email-form button[type=submit] {
-  background: #A08336;
+  background: #a38f85;
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -1389,7 +1389,7 @@ section {
 }
 
 .contact-us .php-email-form button[type=submit]:hover {
-  background: #A08336;
+  background: #a38f85;
 }
 
 @keyframes animate-loading {
@@ -1406,8 +1406,8 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #7a6429;
-  color: #fff;
+  background: #e7d7c9;
+  color: #a38f85;
   font-size: 14px;
   padding: 30px 0;
   text-align: center;
@@ -1416,9 +1416,9 @@ section {
 #footer h3 {
   font-size: 36px;
   font-weight: 700;
-  color: #fff;
+  color: #a38f85;
   position: relative;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 0;
   margin: 0 0 15px 0;
 }
@@ -1438,7 +1438,7 @@ section {
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #A08336;
+  background: #a38f85;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -1451,7 +1451,7 @@ section {
 }
 
 #footer .social-links a:hover {
-  background: #A08336;
+  background: #a38f85;
   color: #fff;
   text-decoration: none;
 }
@@ -1465,12 +1465,12 @@ section {
 }
 
 #footer .credits a {
-  color: #A08336;
+  color: #a38f85;
   transition: 0.3s;
 }
 
 #footer .credits a:hover {
-  color: #A08336;
+  color: #a38f85;
 }
 
 .image-models{
@@ -1491,10 +1491,10 @@ section {
 .title{
   text-align: center;
   padding-top: 15px;
-  color: #A08336;
+  color: #a38f85;
   line-height: 11px;
   font-size: 16px;
-  font-family: Almarai;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .img-model{
@@ -1537,7 +1537,7 @@ section {
   margin-top: 0;
   margin-bottom: 10px;
   text-transform: uppercase;
-  color: #A08336;
+  color: #a38f85;
   font-size: 11px;
   letter-spacing: 2px;
   font-weight: bold;
@@ -1547,9 +1547,9 @@ section {
   text-align: center;
   margin-bottom: 10px;
   flex: 1 1 0%;
-  font-family: Almarai;
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
-  color: #A08336;
+  color: #a38f85;
   letter-spacing: 4px;
 }
 
@@ -1557,18 +1557,18 @@ section {
   text-align: center;
   margin-bottom: 10px;
   flex: 1 1 0%;
-  font-family: Almarai;
+  font-family: 'Montserrat', sans-serif;
   font-size: 12px;
-  color: #A08336;
+  color: #a38f85;
   letter-spacing: 1px;
 }
 
 .btn-model{
   background-color: #fff;
-  color: #A08336;
+  color: #a38f85;
   width: 100%;
-  font-family: Almarai;
-  border: 1px solid #A08336;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #a38f85;
   border-radius: 2px;
   padding: 12px;
   display: table;
@@ -1581,10 +1581,10 @@ section {
 
 .btn-model:hover{
   background-color: #fff;
-  color: #A08336;
+  color: #a38f85;
   width: 100%;
-  font-family: Almarai;
-  border: 1px solid #A08336;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #a38f85;
   border-radius: 2px;
   padding: 12px;
   display: table;
@@ -1754,7 +1754,7 @@ h2{
   margin-top: 15px;
   margin-bottom: 15px;
   text-transform: uppercase;
-  color: #A08336;
+  color: #a38f85;
   font-size: 11px;
   letter-spacing: 2px;
   font-weight: bold
@@ -1764,7 +1764,7 @@ h2{
   text-align: center;
   margin-bottom: 15px;
   text-transform: uppercase;
-  color: #A08336;
+  color: #a38f85;
   font-size: 11px;
   letter-spacing: 2px;
   font-weight: bold
@@ -1776,7 +1776,7 @@ h2{
 }
 
 .line{
-  border-top: 1px solid #A08336 !important;
+  border-top: 1px solid #a38f85 !important;
 }
 
 .box-about{
@@ -1992,7 +1992,7 @@ ul.form-stepper > li:not(:last-of-type) {
   background-color: #dee2e6;
 }
 .form-stepper-horizontal li.form-stepper-completed:after {
-  background-color: #A08336;
+  background-color: #a38f85;
 }
 .form-stepper-horizontal li:last-child {
   flex: unset;
@@ -2022,14 +2022,14 @@ ul.form-stepper li a .form-stepper-circle {
   background-color: #f8f7ff;
 }
 .form-stepper .form-stepper-completed .form-stepper-circle {
-  background-color: #A08336 !important;
+  background-color: #a38f85 !important;
   color: #fff;
 }
 .form-stepper .form-stepper-completed .label {
-  color: #A08336 !important;
+  color: #a38f85 !important;
 }
 .form-stepper .form-stepper-completed .form-stepper-circle:hover {
-  background-color: #A08336 !important;
+  background-color: #a38f85 !important;
   color: #fff !important;
 }
 .form-stepper .form-stepper-active span.text-muted {
@@ -2076,7 +2076,7 @@ ul.form-stepper li a .form-stepper-circle {
   border-radius: 50%;
   height: 25px;
   width: 25px;
-  background-color: #A08336;
+  background-color: #a38f85;
   text-align:center;
   color: white;
   font-size: 110%;
@@ -2091,7 +2091,7 @@ ul.form-stepper li a .form-stepper-circle {
   border-radius: 50%;
   height: 25px;
   width: 25px;
-  background-color: #A08336;
+  background-color: #a38f85;
   text-align:center;
   color: white;
   font-size: 110%;
