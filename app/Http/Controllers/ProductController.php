@@ -15,6 +15,7 @@ class ProductController extends Controller
     {
         $products = Product::join('models', 'products.model_id','=','models.id')
                             ->select('models.*','products.*', 'models.name as mondelname', 'products.name as prodname', 'products.image as prodimage')
+                            ->orderBy('products.id', 'desc')
                             ->get();
         // print_r(json_encode($products));die;
         return view('products.index',compact('products'))->with('no');
@@ -26,7 +27,7 @@ class ProductController extends Controller
     public function create()
     {
         
-        $models = PhotoModel::all();
+        $models = PhotoModel::orderBy('id', 'desc')->get();
         return view('products.create', compact('models'));
     }
 
@@ -36,6 +37,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'model_id' => 'required',
             'name' => 'required',
             'type' => 'required',
             'price' => 'required',
@@ -66,7 +68,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit',compact('product'));
+        $models = PhotoModel::orderBy('id', 'desc')->get();
+        return view('products.edit',compact('product', 'models'));
     }
 
     /**
@@ -75,8 +78,10 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
+            'model_id' => 'required',
             'name' => 'required',
             'type' => 'required',
+            'price' => 'required',
         ]);
         // Handle image upload
         if ($request->hasFile('image')) {

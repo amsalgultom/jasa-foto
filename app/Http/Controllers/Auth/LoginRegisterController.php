@@ -58,7 +58,7 @@ class LoginRegisterController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('dashboard')
+        return redirect()->route('home')
             ->withSuccess('You have successfully registered & logged in!');
     }
 
@@ -105,7 +105,7 @@ class LoginRegisterController extends Controller
     {
         if (Auth::check()) {
 
-            $models = PhotoModel::all();
+            $models = PhotoModel::orderBy('id', 'desc')->get();
             return view('pages.dashboard', compact('models'));
         }
 

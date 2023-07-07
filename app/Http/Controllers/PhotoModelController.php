@@ -12,7 +12,7 @@ class PhotoModelController extends Controller
      */
     public function index()
     {
-        $models = PhotoModel::all();
+        $models = PhotoModel::orderBy('id', 'desc')->get();
         return view('models.index',compact('models'))->with('no');
     }
 
@@ -73,8 +73,7 @@ class PhotoModelController extends Controller
         $request->validate([
             'name' => 'required',
             'size' => 'required',
-            'available_date' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:5120'
+            'available_date' => 'required'
         ]);
         // Handle image upload
         if ($request->hasFile('image')) {

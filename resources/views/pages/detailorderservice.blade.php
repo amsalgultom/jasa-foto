@@ -40,13 +40,13 @@
                                                                         <tr>
                                                                             <td valign="top" style="padding:48px 48px 0px">
                                                                                 <div id="m_7158390659536495837body_content_inner" style="color:#636363;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:14px;line-height:150%;text-align:left" align="left">
-                                                                                <div class="d-flex justify-content-between">
-                                                                                    <h2 style="color:#7a6429;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left">
-                                                                                        [<span class="il">Order</span> #{{ $order->id }}] | {{ \Carbon\Carbon::parse($order->date)->format('d M Y') }}
-                                                                                    </h2>
-                                                                                    <h2 style="color:#7a6429;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left">
-                                                                                        <span class="il">Status : </span> {{$order->status?->name}}
-                                                                                    </h2>
+                                                                                    <div class="d-flex justify-content-between">
+                                                                                        <h2 style="color:#7a6429;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left">
+                                                                                            [<span class="il">Order</span> #{{ $order->id }}] | {{ \Carbon\Carbon::parse($order->date)->format('d M Y') }}
+                                                                                        </h2>
+                                                                                        <h2 style="color:#7a6429;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left">
+                                                                                            <span class="il">Status : </span> {{$order->status?->name}}
+                                                                                        </h2>
 
                                                                                     </div>
 
@@ -190,6 +190,19 @@
                                                                                             </tr>
                                                                                             </tfoot>
                                                                                         </table>
+                                                                                        @if($order->status?->name == 'UnPaid')
+                                                                                        <div class="text-center my-5">
+                                                                                            <form action="{{ route('myorderservices.payment') }}" method="POST">
+                                                                                                @csrf
+                                                                                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                                                                                <input type="hidden" name="gross_amount" value="{{ $order->total }}">
+                                                                                                <input type="hidden" name="first_name" value="{{ $order->customer?->name }}">
+                                                                                                <input type="hidden" name="email" value="{{ Auth::user()->email }}">
+                                                                                                <input type="hidden" name="phone" value="{{ $order->customer?->phone }}">
+                                                                                                <button type="submit" class="btn btn-primary">Lakukan Pembayaran</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                        @endif
                                                                                     </div>
                                                                                 </div>
                                                                             </td>

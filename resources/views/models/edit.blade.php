@@ -3,7 +3,7 @@
 
 @section('content')
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -28,25 +28,25 @@
         @method('PUT')
    
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="col-xs-12 col-sm-12 col-md-6">
                 <div class="form-group">
                     <strong>Name:</strong>
                     <input type="text" name="name" class="form-control" value="{{ $model->name }}" required>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Size:</strong>
-                    <input type="number" name="price" class="form-control" value="{{ $model->size }}" required>
+                    <input type="text" name="size" class="form-control" value="{{ $model->size }}" required>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Tanggal Tersedia:</strong>
                     <input type="date" name="available_date" class="form-control" value="{{ $model->available_date }}" required>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Upload Gambar:</strong><br>
                     <img src="{{ asset('uploads-images/models/').'/'.$model->image }}" alt="{{ $model->name }}" width="100" class="mb-2">
