@@ -6,7 +6,7 @@
 <section class="mt-5 mb-5">
 <div class="container">
 
-<div class="card o-hidden border-0 shadow-lg my-5">
+<div class="card card-auth o-hidden border-0 shadow-lg my-5">
     <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
@@ -19,13 +19,13 @@
                             <form action="{{ route('authenticate') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="Email">
+                                    <input type="email" class="form-control color-form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="Email">
                                     @if ($errors->has('email'))
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                                    <input type="password" class="form-control color-form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
                                     @if ($errors->has('password'))
                                     <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
