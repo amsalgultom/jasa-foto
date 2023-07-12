@@ -244,6 +244,7 @@ class OrderController extends Controller
     public function printShipping($order)
 {
     // Mendapatkan data invoice berdasarkan ID  
+    
     $orders = Order::find($order);
     $no = 1;
     $itemOrderProduct = ItemProductOrder::where('order_id', $orders->id)
