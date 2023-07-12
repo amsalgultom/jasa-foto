@@ -62,12 +62,12 @@
                                 </a>
                                 @endif
 
-                                @if($myorder->status?->name == 'Product Returned')
+                                @if($myorder->status?->name == 'Uploaded Image')
                                 <a href="{{ route('admin.print-shipping',$myorder->id) }}" class="btn btn-secondary btn-icon-split mt-2">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-print"></i>
                                     </span>
-                                    <span class="text">Print Resi</span>
+                                    <span class="text">Cetak Resi Pengiriman</span>
                                 </a>
                                 @endif
                             </td>
