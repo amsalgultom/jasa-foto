@@ -59,7 +59,7 @@
                                         <i class="fas fa-arrow-right"></i>
                                     </span>
                                     <span class="text">Upload Foto</span>
-                                </a>
+                                </a><br>
                                 @endif
 
                                 @if($myorder->status?->name == 'Uploaded Image')
@@ -68,7 +68,7 @@
                                         <i class="fas fa-print"></i>
                                     </span>
                                     <span class="text">Cetak Resi Pengiriman</span>
-                                </a>
+                                </a><br>
                                 @endif
                             </td>
                         </tr>
