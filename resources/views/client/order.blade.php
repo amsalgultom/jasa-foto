@@ -34,7 +34,8 @@
                             <div class="d-flex align-items-center" style="justify-content: space-evenly;">
                                 <p>Nama : <br> {{ $model->name }}</p>
                                 <img src="{{ asset('uploads-images/models/').'/'.$model->image }}" alt="{{ $model->name }}" width="200">
-                                <p>Tanggal tersedia : <br> {{ $model->available_date }}</p>
+                                <p>Catalog Shoot</p>
+                                <p>{{ $model->available_date }}</p>
                             </div>
                         </div>
                         <div class="col-md-2 m-auto">

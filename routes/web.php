@@ -68,6 +68,6 @@ Route::get('/listorders/{id}', [PDFController::class, 'generatePDF']);
 // Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 
 Route::get('/report', [AdminController::class, 'report'])->name('report');
-
+Route::get('/myorders/print-shippping/{order}', [OrderController::class, 'printShipping'])->name('admin.print-shipping');
 
 Route::post('/orderupload/store', [AdminController::class, 'store'])->name('orderupload.store');

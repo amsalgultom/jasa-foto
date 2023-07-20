@@ -82,6 +82,7 @@
                                     </div>
                                     <h4 class="title-model mt-4"><a href="">{{ $model->name }}</a></h4>
                                     <p class="desc-model">Size : <span> {{ $model->size }}</span></p>
+                                    <p class="tgl-model">Catalog Shoot</p>
                                     <p class="tgl-model">Tanggal tersedia : <span> {{ date('d-m-Y', strtotime($model->available_date ))}}</span></p>
                                     <div class="mx-auto">
                                         <input class="checkbox-model" type="checkbox" style="width:100%; height: 20px;" name="model_id[]" onclick="buttonPriceModel(this)" data-name="{{ $model->name }}" value="{{ $model->id }}" />

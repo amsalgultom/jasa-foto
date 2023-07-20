@@ -11,15 +11,11 @@
         <div class="carousel-inner" role="listbox">
 
             <!-- Slide 1 -->
-            <div class="carousel-item active" style="background-image: url({{ asset('img/slide/slide-1.jpg') }})">
+            <div class="carousel-item active" style="background-image: url({{ asset('img/slide/bg-slide-1.jpg') }})">
             </div>
 
             <!-- Slide 2 -->
-            <div class="carousel-item" style="background-image: url({{ asset('img/slide/slide1.jpg') }})">
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="carousel-item" style="background-image: url({{ asset('img/slide/slide2.jpg') }})">
+            <div class="carousel-item" style="background-image: url({{ asset('img/slide/bg-slide-2.jpg') }})">
             </div>
 
         </div>

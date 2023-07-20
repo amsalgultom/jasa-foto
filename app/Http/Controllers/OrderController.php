@@ -11,6 +11,10 @@ use App\Models\ItemProductOrder;
 use App\Models\UploadResultImage;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\View;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -236,4 +240,41 @@ class OrderController extends Controller
         // print_r(json_encode($itemOrderModel));die;
         return view('client.result', compact('order', 'itemOrderProduct', 'itemOrderModel', 'itemResultImages'));
     }
+
+    public function printShipping($order)
+{
+    // Mendapatkan data invoice berdasarkan ID  
+    
+    $orders = Order::find($order);
+    $no = 1;
+    $itemOrderProduct = ItemProductOrder::where('order_id', $orders->id)
+        ->join('products', 'item_product_orders.product_id', '=', 'products.id')
+        ->select('item_product_orders.*', 'products.*')
+        ->get();
+    $itemOrderModel = ItemModelOrder::where('order_id', $orders->id)
+        ->join('models', 'item_model_orders.model_id', '=', 'models.id')
+        ->select('item_model_orders.*', 'models.*')
+        ->get();
+
+    $customers = Customer::where('id', $orders->customer_id)->first();
+
+    // Memuat view cetak dengan data invoice
+    $html = View::make('admin.print-shipping', compact('orders', 'customers','itemOrderProduct', 'itemOrderModel', 'no'))->render();
+
+    // Konfigurasi Dompdf
+    $options = new Options();
+    $options->setIsRemoteEnabled(true); // Mengizinkan gambar atau sumber daya eksternal
+
+    $dompdf = new Dompdf($options);
+    
+    $dompdf->setPaper('A6', 'potrait');
+    // Memuat konten HTML ke Dompdf
+    $dompdf->loadHtml($html);
+
+    // Render konten HTML menjadi PDF
+    $dompdf->render();
+
+    // Mengirimkan file PDF sebagai respons
+    return $dompdf->stream('Resi-Order-'.$orders->id.'.pdf');
+}
 }

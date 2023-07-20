@@ -52,13 +52,23 @@
                                     </span>
                                     <span class="text">Detail Order</span>
                                 </a> <br>
+                                
                                 @if ($myorder->status?->name != 'UnPaid')
                                 <a href="{{ route('orderupload.show',$myorder->id) }}" class="btn btn-secondary btn-icon-split mt-2">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-arrow-right"></i>
                                     </span>
                                     <span class="text">Upload Foto</span>
-                                </a>
+                                </a><br>
+                                @endif
+
+                                @if($myorder->status?->name == 'Uploaded Image')
+                                <a href="{{ route('admin.print-shipping',$myorder->id) }}" class="btn btn-secondary btn-icon-split mt-2">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-print"></i>
+                                    </span>
+                                    <span class="text">Cetak Resi Pengiriman</span>
+                                </a><br>
                                 @endif
                             </td>
                         </tr>

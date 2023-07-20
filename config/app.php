@@ -154,7 +154,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
+    'View' => Illuminate\Support\Facades\View::class,
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
