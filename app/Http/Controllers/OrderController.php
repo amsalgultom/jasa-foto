@@ -14,6 +14,7 @@ use GuzzleHttp\Client;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class OrderController extends Controller
@@ -242,39 +243,79 @@ class OrderController extends Controller
     }
 
     public function printShipping($order)
-{
-    // Mendapatkan data invoice berdasarkan ID  
-    
-    $orders = Order::find($order);
-    $no = 1;
-    $itemOrderProduct = ItemProductOrder::where('order_id', $orders->id)
-        ->join('products', 'item_product_orders.product_id', '=', 'products.id')
-        ->select('item_product_orders.*', 'products.*')
-        ->get();
-    $itemOrderModel = ItemModelOrder::where('order_id', $orders->id)
-        ->join('models', 'item_model_orders.model_id', '=', 'models.id')
-        ->select('item_model_orders.*', 'models.*')
-        ->get();
+    {
+        // Mendapatkan data invoice berdasarkan ID  
+        
+        $orders = Order::find($order);
+        $no = 1;
+        $itemOrderProduct = ItemProductOrder::where('order_id', $orders->id)
+            ->join('products', 'item_product_orders.product_id', '=', 'products.id')
+            ->select('item_product_orders.*', 'products.*')
+            ->get();
+        $itemOrderModel = ItemModelOrder::where('order_id', $orders->id)
+            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
+            ->select('item_model_orders.*', 'models.*')
+            ->get();
 
-    $customers = Customer::where('id', $orders->customer_id)->first();
+        $customers = Customer::where('id', $orders->customer_id)->first();
 
-    // Memuat view cetak dengan data invoice
-    $html = View::make('admin.print-shipping', compact('orders', 'customers','itemOrderProduct', 'itemOrderModel', 'no'))->render();
+        // Memuat view cetak dengan data invoice
+        $html = View::make('admin.print-shipping', compact('orders', 'customers','itemOrderProduct', 'itemOrderModel', 'no'))->render();
 
-    // Konfigurasi Dompdf
-    $options = new Options();
-    $options->setIsRemoteEnabled(true); // Mengizinkan gambar atau sumber daya eksternal
+        // Konfigurasi Dompdf
+        $options = new Options();
+        $options->setIsRemoteEnabled(true); // Mengizinkan gambar atau sumber daya eksternal
 
-    $dompdf = new Dompdf($options);
-    
-    $dompdf->setPaper('A6', 'potrait');
-    // Memuat konten HTML ke Dompdf
-    $dompdf->loadHtml($html);
+        $dompdf = new Dompdf($options);
+        
+        $dompdf->setPaper('A6', 'potrait');
+        // Memuat konten HTML ke Dompdf
+        $dompdf->loadHtml($html);
 
-    // Render konten HTML menjadi PDF
-    $dompdf->render();
+        // Render konten HTML menjadi PDF
+        $dompdf->render();
 
-    // Mengirimkan file PDF sebagai respons
-    return $dompdf->stream('Resi-Order-'.$orders->id.'.pdf');
-}
+        // Mengirimkan file PDF sebagai respons
+        return $dompdf->stream('Resi-Order-'.$orders->id.'.pdf');
+    }
+
+    public function orderDay()
+    {
+        // Mendapatkan data invoice berdasarkan ID  
+        $orders =  DB::table('orders')->where('date', date('Y-m-d'))
+            ->where('status_id', 2)
+            ->join('customers', 'orders.customer_id', '=', 'customers.id')
+            ->join('item_model_orders', 'orders.id', '=', 'item_model_orders.order_id')
+            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
+            ->select(
+                'orders.*', 
+                'customers.name as customername',
+                'models.name')
+            ->orderBy('models.name','desc')
+            ->get();
+        
+        $itemOrderProduct = ItemProductOrder::join('products', 'item_product_orders.product_id', '=', 'products.id')
+            ->select('item_product_orders.*', 'products.*')
+            ->get();
+        $itemOrderModel = ItemModelOrder::join('models', 'item_model_orders.model_id', '=', 'models.id')
+            ->select('item_model_orders.*', 'models.*')
+            ->get();
+
+        $no = 1;
+
+        $html = View::make('admin.orderday', compact('orders','itemOrderProduct','itemOrderModel', 'no'))->render();
+
+        $options = new Options();
+        $options->setIsRemoteEnabled(true); 
+
+        $dompdf = new Dompdf($options);
+        
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->loadHtml($html);
+
+        $dompdf->render();
+
+        return $dompdf->stream('order-'.date('d-m-Y').'.pdf');
+
+    }
 }

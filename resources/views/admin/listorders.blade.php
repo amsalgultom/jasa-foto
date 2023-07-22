@@ -12,6 +12,12 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-body">
+            <a href="{{ route('admin.orderday') }}" class="btn btn-secondary btn-icon-split mb-3">
+                <span class="icon text-white-50">
+                    <i class="fas fa-print"></i>
+                </span>
+                <span class="text">Cetak Order Hari Ini</span>
+            </a>
             <div class="table-responsive">
                 <table class="table table-bordered tabel-order tabel-list" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -41,7 +47,7 @@
                         <tr>
                             <td>{{ ++$no }}</td>
                             <td>{{ $myorder->customer?->name }}</td>
-                            <td>{{ \Carbon\Carbon::parse($myorder->date)->format('d-m-Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($myorder->date)->format('d M Y') }}</td>
                             <td>{{ $myorder->shipping_method . ' Rp '.number_format($myorder->shipping_costs, 0, ',', '.') }}</td>
                             <td>{{ 'Rp '.number_format($myorder->total, 0, ',', '.') }}</td>
                             <td>{{ $myorder->status?->name }}</td>

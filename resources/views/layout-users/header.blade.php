@@ -7,15 +7,15 @@
     <nav id="navbar-user" class="navbar-user">
       <ul>
         <li><a class="active" href="{{ route('home') }}">Home</a></li>
-        <li><a href="{{ route('procedure') }}">Prosedur</a></li>
+        <li><a href="{{ route('procedure') }}">Procedure</a></li>
         <li><a href="{{ route('ourservices') }}">Our Services</a></li>
         <hr>
         @if (Auth::user() && Auth::user()->role == 'client')
 
         <div class="d-flex w-100 justify-content-right none-dflex-mobile">
 
-          <li><a href="{{ route('order.service') }}">Buat Order</a></li>
-          <li><a href="/myorderservices/{{ Auth::user()->id }}">Order Saya</a></li>   
+          <li><a href="{{ route('order.service') }}">Join Slot</a></li>
+          <li><a href="/myorderservices/{{ Auth::user()->id }}">My Slot</a></li>   
           <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a></li>   
           <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
           @csrf

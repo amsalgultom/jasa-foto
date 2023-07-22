@@ -32,11 +32,12 @@
 </section><!-- End Hero -->
 
 <main id="main">
-
         <!-- ======= About Us Section ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
-
+            <div class="text-center mb-5">
+                <a href="{{ route('order.service') }}" class="btn btn-secondary text-center btn-join">JOIN SLOT</a>
+            </div>
             <div class="section-title">
                 <h2 class="brown">ABOUT US</h2>
             </div>
@@ -89,7 +90,7 @@
         <div class="container">
 
             <div class="section-title">
-                <h2 class="brown">Product</h2>
+                <h2 class="brown">Hasil Foto</h2>
             </div>
 
             <div class="row">
@@ -130,7 +131,7 @@
 
 
         <div class="banner">
-            <img src="{{ asset('img/banner/banner-1.webp') }}" class="img-banner" alt="">
+            <img src="{{ asset('img/banner/banner-2.jpg') }}" class="img-banner" alt="">
         </div>
 
 </main><!-- End #main -->

@@ -9,7 +9,9 @@
     <!-- ======= Recent Photos Section ======= -->
     <section id="recent-photos" class="recent-photos mt-4">
         <div class="container">
-
+            <div class="text-center my-5">
+                <a href="{{ route('order.service') }}" class="btn btn-secondary text-center btn-join">JOIN SLOT</a>
+            </div>
             <div class="section-title brown">
                 <h2 class="brown">CATALOG</h2>
                 <div class="w-75 mx-auto">
