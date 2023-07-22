@@ -31,7 +31,7 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/ourservices', [HomeController::class, 'ourservices'])->name('ourservices');
 Route::get('/procedur', [HomeController::class, 'procedure'])->name('procedure');
-Route::get('/orderservices', [HomeController::class, 'userOrder'])->name('order.service');
+Route::get('/orderservices', [HomeController::class, 'userOrder'])->name('order.service')->middleware('auth');;
 Route::get('/myorderservices/{user_id}', [HomeController::class, 'myorderservices'])->name('myorderservices');
 Route::get('/myorderservices/show/{order}', [HomeController::class, 'myorderservicesShow'])->name('myorderservices.show');
 Route::get('/myorderservices/result/{order}', [HomeController::class, 'resultorderservicesUpload'])->name('myorderservices.result');
@@ -68,6 +68,7 @@ Route::get('/listorders/{id}', [PDFController::class, 'generatePDF']);
 // Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 
 Route::get('/report', [AdminController::class, 'report'])->name('report');
-Route::get('/myorders/print-shippping/{order}', [OrderController::class, 'printShipping'])->name('admin.print-shipping');
+Route::get('/orders/print-shippping/{order}', [OrderController::class, 'printShipping'])->name('admin.print-shipping');
+Route::get('/orders/print-order-today', [OrderController::class, 'orderDay'])->name('admin.orderday');
 
 Route::post('/orderupload/store', [AdminController::class, 'store'])->name('orderupload.store');
