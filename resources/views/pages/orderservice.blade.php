@@ -289,7 +289,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <label for="origin">Kota:</label>
-                        <select name="city" id="origin" class="form-control w-100">
+                        <select name="city" id="origin" class="form-control w-100" required>
                             <option value="" hidden>-- Pilih Kota --</option>
                             @foreach ($origins as $origin)
                             <option value="{{ $origin['city_id'] }}">{{ $origin['city_name'] }}</option>
@@ -307,7 +307,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Alamat Lengkap:</strong>
-                            <textarea class="form-control" style="height:150px" name="address" placeholder="Jl. Raya Blok A. No51, Rt.001/01. Kel.Lorem, Kec.Lorem. Cipayung, Jakarta Timur"></textarea>
+                            <textarea class="form-control" style="height:150px" name="address" placeholder="Jl. Raya Blok A. No51, Rt.001/01. Kel.Lorem, Kec.Lorem. Cipayung, Jakarta Timur" required></textarea>
                         </div>
                     </div>
                     <div class="row">

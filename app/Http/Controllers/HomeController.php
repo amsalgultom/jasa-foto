@@ -38,15 +38,15 @@ class HomeController extends Controller
     {
         $client = new Client();
         $origins = [];
-        // $response = $client->request('GET', config('services.rajaongkir.base_url') . '/city', [
-        //     'headers' => [
-        //         'key' => config('services.rajaongkir.api_key')
-        //     ]
-        // ]);
+        $response = $client->request('GET', config('services.rajaongkir.base_url') . '/city', [
+            'headers' => [
+                'key' => config('services.rajaongkir.api_key')
+            ]
+        ]);
 
-        // $result = json_decode($response->getBody(), true);
+        $result = json_decode($response->getBody(), true);
 
-        // $origins = $result['rajaongkir']['results'];
+        $origins = $result['rajaongkir']['results'];
         $models = PhotoModel::orderBy('id', 'desc')->get();
         $products = Product::where('type', 'Product Foto')->get();
         $productsoptional = Product::where('type', 'Our Service')->get();
