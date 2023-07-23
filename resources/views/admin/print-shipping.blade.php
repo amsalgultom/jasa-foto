@@ -61,8 +61,8 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="row" style="">
-                <div class="col-6" style="">
+            <div class="row" >
+                <div class="col-6" >
                     <table style="line-height: 1; width: 100% !important;">
                         <thead>
                             <tr>

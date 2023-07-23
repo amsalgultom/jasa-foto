@@ -36,13 +36,14 @@ class AdminController extends Controller
         return redirect('listorders')->with('success','Upload Images successfully.');
     }
 
-    public function listOrders()
+    public function listOrders(Request $request)
     {
         $myorders = Order::orderBy('id', 'desc')->get();
+
         return view('admin.listorders', compact('myorders'))->with('no');
     }
 
-    /**
+    /**                                     
      * Display the specified resource.
      */
     public function orderUpload(Order $order)

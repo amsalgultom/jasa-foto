@@ -61,5 +61,60 @@
 }
 
 
+@media screen and (max-width: 992px) {
+  #hero {
+    height: 34vh;
+  }
+
+  #hero .carousel-container {
+    top: 8px;
+  }
+
+  .btn-join{
+    background-color: #ede9e3 !important;
+    border: 2px solid #7a6429 !important;
+    color: #7a6429 !important;
+    border-radius: 30px !important;
+    padding: 10px 20px !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #hero {
+    height: 37vh;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #hero {
+    height: 23vh;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #hero h2 {
+    font-size: 28px;
+  }
+}
+
+@media screen and  (min-width: 1024px) {
+
+  #hero .carousel-control-prev,
+  #hero .carousel-control-next {
+    width: 5%;
+  }
+
+}
+
+@media screen and  (max-height: 500px) {
+  #hero {
+    height: 85vh;
+    margin-top: 65px;
+  }
+}
+
+
 
 

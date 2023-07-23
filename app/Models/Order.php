@@ -28,6 +28,11 @@ class Order extends Model
     	return $this->belongsTo('App\Models\Customer');
     }
 
+    public function ItemModelOrder()
+    {
+    	return $this->hasOne('App\Models\ItemModelOrder');
+    }
+
     public function status()
     {
     	return $this->belongsTo('App\Models\Status');

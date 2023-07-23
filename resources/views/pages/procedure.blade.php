@@ -10,7 +10,7 @@
         <div class="container">
 
             <div class="section-title brown">
-                <h2 class="brown">Prosedur</h2>
+                <h2 class="brown">Procedure</h2>
                 <div class="w-75 mx-auto">
                     <p>Sebuah konsep foto standar yang menunjukan visual produk tersebut dari tampak depan, samping, belakang dan detail yang konsep fotonya sudah ditentukan oleh team ArtSpace.</p>
                 </div>
