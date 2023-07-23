@@ -89,7 +89,7 @@
                                                                                             <tfoot>
                                                                                                 <tr>
                                                                                                     <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px;" align="left" colspan="5">Subtotal:</th>
-                                                                                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px;" align="left"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs, 0, ',', '.') }}</span></td>
+                                                                                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px;" align="left"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs +$order->discount, 0, ',', '.') }}</span></td>
                                                                                                 </tr>
                                                                                                 <tr>
                                                                                                     <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left" colspan="5">Shipping:</th>
@@ -97,6 +97,14 @@
                                                                                                         <span>{{ 'Rp '.number_format($order->shipping_costs, 0, ',', '.') }}</span>&nbsp;<small>via JNE ({{ $order->shipping_method }})</small>
                                                                                                     </td>
                                                                                                 </tr>
+                                                                                                @if($order->voucher)
+                                                                                                <tr>
+                                                                                                    <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left" colspan="5">Voucher Discount:</th>
+                                                                                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
+                                                                                                        <span>{{ 'Rp '.number_format($order->discount, 0, ',', '.') }}</span>&nbsp;<small>({{ $order->voucher }})</small>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                @endif
                                                                                                 <tr>
                                                                                                     <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left" colspan="5">Total:</th>
                                                                                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">

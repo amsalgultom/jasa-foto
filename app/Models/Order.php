@@ -15,9 +15,12 @@ class Order extends Model
         'date',
         'shipping_costs',
         'shipping_method',
+        'voucher',
+        'discount',
         'total',
         'status_id',
         'image_referensi_product',
+        'photobackground',
     ];
 
     public function customer()

@@ -170,14 +170,34 @@
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
+                                                                                                <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;" align="left">Foto Background:</th>
+                                                                                                <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;" align="left">
+                                                                                                    @if($order->photobackground)
+                                                                                                    <img src="{{ asset('uploads-images/photobackgrounds/').'/'.$order->photobackground }}" width="150" alt="">
+                                                                                                    @else
+                                                                                                    -
+                                                                                                    @endif
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
                                                                                                 <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;" align="left">Subtotal:</th>
-                                                                                                <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;" align="left"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs, 0, ',', '.') }}</span></td>
+                                                                                                <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;" align="left"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs + $order->discount, 0, ',', '.') }}</span></td>
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Shipping:</th>
                                                                                                 <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
                                                                                                     <span>{{ 'Rp '.number_format($order->shipping_costs, 0, ',', '.') }}</span>&nbsp;<small>via JNE ({{ $order->shipping_method }})</small>
                                                                                                 </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Voucher Diskon:</th>
+                                                                                                <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
+                                                                                                @if($order->voucher)
+                                                                                                    <span>{{ 'Rp '.number_format($order->discount, 0, ',', '.') }}</span>&nbsp;<small> ({{ $order->voucher }})</small>
+                                                                                                </td>
+                                                                                                @else
+                                                                                                -
+                                                                                                @endif
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Total:</th>
