@@ -94,6 +94,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <h2 class="font-normal">Pilihan Foto Background Minggu ini</h2>
+                            <div class="alert alert-danger d-none" id="validasiModel" role="alert">
+                                Pilih salah satu model
+                                <button id="closeValidasi" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="row my-2">
+                                @foreach ($photobackgrounds as $pb)
+                                <div class="col-lg-3 col-md-4 col-6 mb-4">
+                                    <div class="image-models">
+                                        <img src="{{ asset('uploads-images/photobackgrounds/').'/'.$pb->image }}" class="img-model" alt="{{ $pb->name }}">
+                                    </div>
+                                    <div class="mx-auto">
+                                        <h4 class="title-model mt-4"><a href="">{{ $pb->name }}</a></h4>
+                                        <input class="checkbox-model" type="radio" style="width:100%; height: 20px;" name="photobackground" id="photobackground" value="{{ $pb->image }}" />
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                     <div class="mt-3 text-right">
                         <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="2">Next</button>
                     </div>
@@ -222,14 +246,28 @@
                                     </div>
                                 </div>
                             </div><br>
-                            <div id="addOptional"></div>
+                            <div id="addOptional"></div><br>
+                            <div class="row">
+                                <strong>Kode Voucher</strong>
+                                <div class="col-xs-12 col-sm-12 col-md-5">
+                                    <div class="form-group">
+                                        <input type="text" name="code_voucher" id="code_voucher" placeholder="xxxxxx" class="form-control">
+                                        <input type="hidden" name="this_voucher" id="this_voucher" value="0">
+                                        <div id="info-voucher"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-5">
+                                    <div class="form-group">
+                                        <div class="btn btn-primary" id="check_voucher">Check Voucher</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="mt-3 text-right">
-                    <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="2">Prev</button>
-                    <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="4">Next</button>
-                </div>
+                    <div class="mt-3 text-right">
+                        <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="2">Prev</button>
+                        <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="4">Next</button>
+                    </div>
             </section>
 
             <!-- Step 4 Content, default hidden on page load. -->
@@ -251,7 +289,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <label for="origin">Kota:</label>
-                        <select name="city" id="origin" class="form-control w-100" required>
+                        <select name="city" id="origin" class="form-control w-100">
                             <option value="" hidden>-- Pilih Kota --</option>
                             @foreach ($origins as $origin)
                             <option value="{{ $origin['city_id'] }}">{{ $origin['city_name'] }}</option>
@@ -702,37 +740,89 @@
             var nbChecked = 0;
             var element = document.getElementById("validasiModel");
             var prodAlert = document.getElementById("validasiProduk");
-            var product = document.getElementById( 'select_prod_id1' ).value;
-            var note = document.getElementById( 'note1' ).value;
-            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number")); 
+            var product = document.getElementById('select_prod_id1').value;
+            var note = document.getElementById('note1').value;
+            const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
 
             for (var i = 0; i < checkBoxes.length; i++) {
                 if (checkBoxes[i].checked) {
                     nbChecked++;
                 };
             };
-            if (stepNumber == 2){
-                if (nbChecked == 0 ){
+            if (stepNumber == 2) {
+                if (nbChecked == 0) {
                     element.classList.remove("d-none");
                     return false;
-                }
-                else {
+                } else {
                     navigateToFormStep(stepNumber);
                 }
             }
-            if (stepNumber == 3){
+            if (stepNumber == 3) {
                 if (product === "") {
                     prodAlert.classList.remove("d-none");
                     return false;
-                }
-                else {
+                } else {
                     navigateToFormStep(stepNumber);
                 }
-            }
-            else{
+            } else {
                 navigateToFormStep(stepNumber);
             }
-            
+
+        });
+    });
+
+    function getCSRFToken() {
+        return $('meta[name="csrf-token"]').attr('content');
+    }
+
+    $(document).ready(function() {
+        $('#check_voucher').on('click', function() {
+
+            var qtyproduct = 0;
+            $('input[name="qty_product[]"]').each(function() {
+                var value = parseFloat($(this).val());
+                if (!isNaN(value)) {
+                    qtyproduct += value;
+                }
+            })
+            console.log(qtyproduct)
+
+            var totalPrive = 0;
+            $('input[name="sub_total_product[]"]').each(function() {
+                var value = parseFloat($(this).val());
+                if (!isNaN(value)) {
+                    totalPrive += value;
+                }
+            })
+            console.log(totalPrive)
+            // Get the entered voucher code
+            var voucherCode = $('#code_voucher').val().trim();
+
+            // Send an AJAX request to validate the voucher code
+            $.ajax({
+                url: '/check-voucher', // Replace with your actual API endpoint URL
+                type: 'POST',
+                data: {
+                    voucher_code: voucherCode,
+                    total_price_order: totalPrive,
+                    total_price_product: qtyproduct
+                },
+                headers: {
+                    'X-CSRF-TOKEN': getCSRFToken() // Include the CSRF token in the request headers
+                },
+                success: function(response) {
+                    if (response.valid) {
+                        $('#info-voucher').html('<span class="text-success h6">Voucher berhasil digunakan</span>');
+                        $('#this_voucher').val(1)
+                    } else {
+                        $('#info-voucher').html('<span class="text-danger h6">Kode Voucher tidak sesuai, tidak dapat digunakan</span>');
+                        $('#this_voucher').val(0)
+                    }
+                },
+                error: function() {
+                    alert('Error occurred while checking the voucher. Please try again later.');
+                }
+            });
         });
     });
 </script>

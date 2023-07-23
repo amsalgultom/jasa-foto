@@ -10,6 +10,8 @@ use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PhotoBackgroundController;
+use App\Http\Controllers\VoucherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +49,9 @@ Route::controller(LoginRegisterController::class)->group(function() {
 });
 
 Route::resource('products', ProductController::class);
+Route::resource('vouchers', VoucherController::class);
 Route::resource('models', PhotoModelController::class);
+Route::resource('photobackgrounds', PhotoBackgroundController::class);
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 Route::get('/myorders/{user_id}', [OrderController::class, 'myorders'])->name('myorders');
@@ -72,3 +76,5 @@ Route::get('/orders/print-shippping/{order}', [OrderController::class, 'printShi
 Route::get('/orders/print-order-today', [OrderController::class, 'orderDay'])->name('admin.orderday');
 
 Route::post('/orderupload/store', [AdminController::class, 'store'])->name('orderupload.store');
+
+Route::post('/check-voucher', [VoucherController::class, 'validateVoucher'])->name('validateVoucher');

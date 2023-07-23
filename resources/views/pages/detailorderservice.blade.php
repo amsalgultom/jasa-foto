@@ -87,22 +87,48 @@
                         <tr>
                             <td scope="row" class="text-table">Referensi Foto Produk:</td>
                             <td class="text-table">
-                                @if($order->image_referensi_product)
+                                @if($order->image_referensi_product != '[]')
                                 <?php $data = json_decode($order->image_referensi_product); ?>
                                 @foreach($data as $img)
                                 <img src="{{ asset('uploads-images/referensi/').'/'.$img }}" width="150" alt="">
                                 @endforeach
+                                @else
+                                -
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row" class="text-table">Foto Background:</td>
+                            <td class="text-table">
+                                @if($order->photobackground)
+                                <img src="{{ asset('uploads-images/photobackgrounds/').'/'.$order->photobackground }}" width="150" alt="">
+                                @else
+                                -
                                 @endif
                             </td>
                         </tr>
                         <tr>
                             <td scope="row" class="text-table">Subtotal:</td>
-                            <td class="text-table"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs, 0, ',', '.') }}</span></td>
+                            <td class="text-table"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs + $order->discount, 0, ',', '.') }}</span></td>
                         </tr>
                         <tr>
                             <td scope="row" class="text-table">Shipping:</td>
                             <td class="text-table">
+                                @if($order->shipping_method)
                                 <span>{{ 'Rp '.number_format($order->shipping_costs, 0, ',', '.') }}</span>&nbsp;<small>via JNE ({{ $order->shipping_method }})</small>
+                                @else
+                                COD
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row" class="text-table">Voucher Diskon:</td>
+                            <td class="text-table">
+                                @if($order->voucher)
+                                <span>{{ 'Rp '.number_format($order->discount, 0, ',', '.') }}</span>&nbsp;<small>({{ $order->voucher }})</small>
+                                @else
+                                -
+                                @endif
                             </td>
                         </tr>
                         <tr>

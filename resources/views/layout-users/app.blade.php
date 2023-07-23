@@ -28,6 +28,9 @@
     <link href="{{ asset('css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-mobile.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     @stack('heads')
 </head>
 
