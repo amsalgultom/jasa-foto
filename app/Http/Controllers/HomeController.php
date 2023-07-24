@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Customer;
 use App\Models\ItemModelOrder;
 use App\Models\ItemProductOrder;
+use App\Models\PhotoBackground;
 use App\Models\Product;
 use App\Models\UploadResultImage;
 use GuzzleHttp\Client;
@@ -36,7 +37,7 @@ class HomeController extends Controller
     public function userOrder()
     {
         $client = new Client();
-
+        $origins = [];
         $response = $client->request('GET', config('services.rajaongkir.base_url') . '/city', [
             'headers' => [
                 'key' => config('services.rajaongkir.api_key')
@@ -49,7 +50,9 @@ class HomeController extends Controller
         $models = PhotoModel::orderBy('id', 'desc')->get();
         $products = Product::where('type', 'Product Foto')->get();
         $productsoptional = Product::where('type', 'Our Service')->get();
-        return view('pages.orderservice', compact('models', 'products', 'productsoptional', 'origins'));
+        $productsoptional = Product::where('type', 'Our Service')->get();
+        $photobackgrounds = PhotoBackground::where('status', 'Aktif')->get();
+        return view('pages.orderservice', compact('models', 'products', 'productsoptional', 'origins','photobackgrounds'));
     }
 
     public function myorderservices($user_id)

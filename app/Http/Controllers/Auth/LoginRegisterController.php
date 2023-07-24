@@ -58,7 +58,7 @@ class LoginRegisterController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('home')
+        return redirect()->route('order.service')
             ->withSuccess('You have successfully registered & logged in!');
     }
 
@@ -87,7 +87,7 @@ class LoginRegisterController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('home')
+            return redirect()->route('order.service')
                 ->withSuccess('You have successfully logged in!');
         }
 

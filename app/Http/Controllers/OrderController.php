@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\ItemModelOrder;
 use App\Models\ItemProductOrder;
 use App\Models\UploadResultImage;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Dompdf\Dompdf;
@@ -67,8 +68,24 @@ class OrderController extends Controller
                 $uploadedImages[] = $this->uploadImage($image);
             }
         }
-
-        $totalOrder = array_sum($request->sub_total_product) + $request->shipping_costs;
+        
+        $diskon = 0;
+        $code_voucher = null;
+        if($request->this_voucher && $request->code_voucher != ''){
+            $code_voucher = $request->code_voucher;
+            $voucher = Voucher::where('code_voucher', $code_voucher)->first();
+            if($voucher){
+                if($voucher->type == 'Percent' && $voucher->max_value_price_discount > 0){
+                    $diskon = $voucher->max_value_price_discount;
+                }elseif($voucher->type == 'Percent' && $voucher->max_value_price_discount < 1){
+                    $diskon = array_sum($request->sub_total_product) * ($voucher->value_discount / 100);
+                }else{
+                    $diskon = $voucher->value_discount;
+                }
+            }
+        }
+        $totalOrder = array_sum($request->sub_total_product) + $request->shipping_costs - $diskon;
+        
         $createOrder = [
             'user_id' => $request->user_id,
             'customer_id' => $generateIdCustomer->id,
@@ -76,6 +93,9 @@ class OrderController extends Controller
             'shipping_costs' => $request->shipping_costs,
             'shipping_method' => $request->shipping_method,
             'total' => $totalOrder,
+            'voucher' => $code_voucher,
+            'discount' => $diskon,
+            'photobackground' => $request->photobackground,
             'status_id' => 1,
             'image_referensi_product' => json_encode($uploadedImages),
         ];

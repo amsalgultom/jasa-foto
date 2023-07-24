@@ -38,6 +38,20 @@
             <i class="fa fa-users" aria-hidden="true"></i>
             <span>Client</span></a>
     </li>
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item {{ (request()->segment(1) == 'photobackgrounds') ? 'active' : '' }}">
+        <a class="nav-link" href="/photobackgrounds">
+            <i class="fa fa-image" aria-hidden="true"></i>
+            <span>Photo Backgrounds</span></a>
+    </li>
+    
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item {{ (request()->segment(1) == 'vouchers') ? 'active' : '' }}">
+        <a class="nav-link" href="/vouchers">
+            <i class="fa fa-gift" aria-hidden="true"></i>
+            <span>Vouchers</span></a>
+    </li>
     
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
