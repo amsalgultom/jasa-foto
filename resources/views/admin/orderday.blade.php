@@ -89,14 +89,6 @@
                     @endforeach
                     </td>
                     <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse;">
-                        @if($o->image_referensi_product != null)
-                        <img src="{{ public_path('uploads-images/referensi/1690047522_2cdbad1b-576b-4557-bc7e-d49e17b8aa80.jpg) }}" style="width: 150px; height: 150px;">
-                        {{ $o->image_referensi_product }}
-                        @else
-                        @endif
-
-                    </td>
-                    <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse;">
                     @foreach ($itemOrderProduct as $p)
                         @if($o->id == $p->order_id)
                             @if( $p->note != null )
