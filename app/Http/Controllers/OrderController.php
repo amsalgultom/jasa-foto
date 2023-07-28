@@ -17,7 +17,7 @@ use Dompdf\Options;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use PDF;
-
+use App\Jobs\GenerateOrderPdf;
 class OrderController extends Controller
 {
     /**
@@ -302,40 +302,9 @@ class OrderController extends Controller
     public function orderDay()
     {
         // Mendapatkan data invoice berdasarkan ID  
-        $orders =  DB::table('orders')->where('date', date('Y-m-d'))
-            ->where('status_id', 2)
-            ->join('customers', 'orders.customer_id', '=', 'customers.id')
-            ->join('item_model_orders', 'orders.id', '=', 'item_model_orders.order_id')
-            ->join('models', 'item_model_orders.model_id', '=', 'models.id')
-            ->select(
-                'orders.*', 
-                'customers.name as customername',
-                'models.name')
-            ->orderBy('models.name','desc')
-            ->get();
-        
-        $itemOrderProduct = ItemProductOrder::join('products', 'item_product_orders.product_id', '=', 'products.id')
-            ->select('item_product_orders.*', 'products.*')
-            ->get();
-        $itemOrderModel = ItemModelOrder::join('models', 'item_model_orders.model_id', '=', 'models.id')
-            ->select('item_model_orders.*', 'models.*')
-            ->get();
+        GenerateOrderPdf::dispatch();
 
-        $no = 1;
-
-        $html = View::make('admin.orderday', compact('orders','itemOrderProduct','itemOrderModel', 'no'))->render();
-
-        $options = new Options();
-        $options->setIsRemoteEnabled(true); 
-
-        $dompdf = new Dompdf($options);
-        
-        $dompdf->setPaper('A4', 'landscape');
-        $dompdf->loadHtml($html);
-
-        $dompdf->render();
-
-        return $dompdf->stream('order-'.date('d-m-Y').'.pdf');
+    return redirect()->back()->with('message', 'PDF generation is in progress. Please wait...');
 
     }
 }
