@@ -301,10 +301,32 @@ class OrderController extends Controller
 
     public function orderDay()
     {
-        // Mendapatkan data invoice berdasarkan ID  
-        GenerateOrderPdf::dispatch();
+        $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+               ->where('date', date('Y-m-d'))
+               ->where('status_id', 2)
+               ->select('customers.name as cusname', 'orders.*')
+               ->get();
+            //    print_r($orders);die;
+        
+        $itemOrderProduct = ItemProductOrder::get();
+        $itemOrderModel = ItemModelOrder::all();
 
-    return redirect()->back()->with('message', 'PDF generation is in progress. Please wait...');
+        $no = 1;
+
+        $html = View::make('admin.orderday', compact('orders','itemOrderProduct','itemOrderModel', 'no'))->render();
+
+        $options = new Options();
+        // $options->setIsRemoteEnabled(true); 
+        $options->set('isRemoteEnabled',true); 
+        
+        $dompdf = new Dompdf($options);
+        
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->loadHtml($html);
+
+        $dompdf->render();
+
+        return $dompdf->stream('order-'.date('d-m-Y').'.pdf');
 
     }
 }
