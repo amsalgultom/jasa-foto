@@ -21,7 +21,12 @@ class GenerateOrderPdf implements ShouldQueue
 
     public function handle()
     {
-        $orders =  Order::where('date', date('Y-m-d'))->get();
+        $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
+               ->where('date', date('Y-m-d'))
+               ->where('status_id', 2)
+               ->select('customers.name as cusname', 'orders.*')
+               ->get();
+            //    print_r($orders);die;
         
         $itemOrderProduct = ItemProductOrder::get();
         $itemOrderModel = ItemModelOrder::all();

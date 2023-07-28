@@ -101,6 +101,7 @@
                 <th scope="col" style="font-size: 14px;border: 1px solid black;border-collapse: collapse; width: 20%;">Item Catalog</th>
                 <th scope="col" style="font-size: 14px;border: 1px solid black;border-collapse: collapse; width: 20%;">Model</th>
                 <th scope="col" style="font-size: 14px;border: 1px solid black;border-collapse: collapse; width: 20%;">Referensi Foto</th>
+                <th scope="col" style="font-size: 14px;border: 1px solid black;border-collapse: collapse; width: 20%;">Background</th>
             </tr>
         </thead>
         <tbody>
@@ -109,30 +110,38 @@
                 <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse; text-align: center;">
                     {{ $no++ }}
                 </td>
-                <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse;">
-                    &nbsp;{{ $o->customername }}
+                <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse; text-align: center;">
+                    &nbsp;{{ $o->cusname }}
                 </td>
                 <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse;">
                     @foreach ($itemOrderProduct as $p)
                     @if($o->id == $p->order_id)
-                    &nbsp;{{ $p->qty_product }} &nbsp;{{ $p->name_product }} <br>
-                    &nbsp;{{ $p->note }} <br>
+                    &nbsp;{{ $p->qty_product }}x &nbsp;{{ $p->name_product }} &nbsp;@if($p->note),({{ $p->note }})@endif <br>
+                    
                     @endif
                     @endforeach
                 </td>
-                <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse;">
+                <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse; text-align: center;">
                     @foreach ($itemOrderModel as $m)
                     @if($o->id == $m->order_id)
                     &nbsp;{{ $m->name }} <br>
                     @endif
                     @endforeach
                 </td>
-                <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse;">
+                <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse; text-align: center;">
                     @if($o->image_referensi_product != '[]')
                     <?php $data = json_decode($o->image_referensi_product); ?>
                     @foreach($data as $img)
                     <img src="{{ asset('uploads-images/referensi/').'/'.$img }}" width="150" alt=""  loading="lazy">
                     @endforeach
+                    @else
+                    -
+                    @endif
+                </td>
+                <td style="font-size: 14px;border: 1px solid black;border-collapse: collapse; text-align: center;">
+                @if($o->photobackground != '')
+                    <?php $data = json_decode($o->photobackground); ?>
+                    <img src="{{ asset('uploads-images/referensi/').'/'.$img }}" width="150" alt=""  loading="lazy">
                     @else
                     -
                     @endif
