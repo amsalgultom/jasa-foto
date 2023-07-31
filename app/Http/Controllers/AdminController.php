@@ -38,7 +38,7 @@ class AdminController extends Controller
 
     public function listOrders(Request $request)
     {
-        $myorders = Order::where('status_id',2)->orderBy('id', 'desc')->get();
+        $myorders = Order::orderBy('id', 'desc')->get();
 
         return view('admin.listorders', compact('myorders'))->with('no');
     }
@@ -64,7 +64,7 @@ class AdminController extends Controller
 
     public function report(Request $request)
     {
-        $myorders = Order::orderBy('id', 'desc')->get();
+        $myorders = Order::where('status_id',2)->orderBy('id', 'desc')->get();
 
         if ($request->ajax()) {
             $data = Order::select('*');
