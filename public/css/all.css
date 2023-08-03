@@ -2149,3 +2149,9 @@ ul.form-stepper li a .form-stepper-circle {
   background-color: #7a6429 !important;
   color: #ede9e3 !important;
 }
+
+.img-about-mobile{
+  float: left; 
+  width: 50%; 
+  margin-right: 30px;
+}

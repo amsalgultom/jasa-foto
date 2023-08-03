@@ -89,7 +89,12 @@
 
 @media screen and (max-width: 450px) {
   #hero {
-    height: 23vh;
+    height: 27vh;
+  }
+
+  .img-about-mobile{
+    float: unset; 
+    width: 100%; 
   }
 }
 
