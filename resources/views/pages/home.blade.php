@@ -42,29 +42,23 @@
                 <h2 class="brown">ABOUT US</h2>
             </div>
 
-        <div class="row gy-4">
-          <div class="col-lg-12">
-            <div class="content ps-0 text-center-mobile">
-                <h1 class="brown title-about m-0 text-center-mobile">
-                <img src="{{ asset('img/about-kompres.jpg') }}" class="img-about img-about-mobile img-fluid rounded-4 mb-4">Art Space</h1>
+         <div class="row gy-4">
+          <div class="col-lg-6 box-about">
+            <img src="{{ asset('img/about-kompres.jpg') }}" class="img-about img-fluid rounded-4 mb-4" alt="">
+          </div>
+          <div class="col-lg-6">
+            <div class="content ps-0 ps-lg-5 text-center-mobile">
+                <h1 class="brown title-about m-0 text-center-mobile">Art Space</h1>
                 <small class="brown">VISUAL DIGITAL MARKETING COMPANY</small>
-                <p class="brown text-justify mt-2">
-
-                Art Space adalah sebuah inovatif layanan visual yang berdedikasi dalam fotografi dan video produk berkualitas tinggi untuk kebutuhan digital marketing. Sejak pendiriannya pada tahun 2016, Art Space telah menjadi mitra tepercaya bagi pemilik merek dan pelaku bisnis yang ingin meningkatkan daya tarik dan kesan produk mereka di pasar yang semakin kompetitif.
-                <br><br>
-                Dengan keahlian dan pengalaman selama bertahun-tahun, Art Space telah mengukir reputasi sebagai studio kreatif yang menghadirkan sentuhan artistik dan profesionalisme dalam setiap karya yang dihasilkan. Tim kreatif mereka dipimpin oleh para ahli fotografi dan videografi berbakat, yang berkomitmen untuk menciptakan visual yang menarik, memikat, dan sesuai dengan identitas merek klien.
-                <br><br>
-                Art Space memahami betapa pentingnya visual yang menarik dalam memikat perhatian konsumen dan membangun kesan positif. Oleh karena itu, mereka berfokus pada setiap detail dalam pengambilan gambar dan produksi video untuk menghadirkan kualitas yang tak tertandingi.         
-                <br><br>
-                Tak hanya sekadar menangkap momen, Art Space juga berusaha merangkul keunikan setiap produk dan merek. Mereka tidak hanya menampilkan produk dengan estetika yang menakjubkan, tetapi juga mampu menangkap esensi dan cerita di balik setiap produk, sehingga menghadirkan narasi visual yang kuat dan mampu menyentuh hati audiens.
-                <br><br>
-                Selain itu, Art Space juga menyediakan layanan konsultasi visual yang bijaksana, membantu klien mengembangkan konsep yang tepat untuk kampanye digital mereka. Dengan pendekatan yang berfokus pada hasil, Art Space berkomitmen untuk membantu merek mencapai tingkat keunggulan yang lebih tinggi dan meraih hasil yang mengesankan di pasar digital yang semakin dinamis.
-                <br><br>
-                Jadi, apakah Anda seorang pemilik merek yang ingin memaksimalkan potensi produk Anda atau seorang pelaku bisnis yang ingin mencapai dampak yang berarti dalam digital marketing, Art Space adalah mitra ideal untuk merajut visual yang mencengangkan dan mencerahkan perjalanan bisnis Anda menuju kesuksesan.
+                <hr class="line">
+                <p class="brown text-justify">
+                    Art Space adalah sebuah layanan visual atau jasa foto produk yang berdiri sejak tahun 2016 dan berfokus pada konten digital marketing. 
+                </p>
+                <p class="brown text-justify">
+                    Art Space bertujuan membantu para owner brand untuk meningkatkan kualitas foto dan video dari produk yang dipasarkan.
                 </p>
             </div>
           </div>
-          
         </div>
 
       </div>
