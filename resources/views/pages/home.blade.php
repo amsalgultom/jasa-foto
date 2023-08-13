@@ -42,7 +42,7 @@
                 <h2 class="brown">ABOUT US</h2>
             </div>
 
-        <div class="row gy-4">
+         <div class="row gy-4">
           <div class="col-lg-6 box-about">
             <img src="{{ asset('img/about-kompres.jpg') }}" class="img-about img-fluid rounded-4 mb-4" alt="">
           </div>
