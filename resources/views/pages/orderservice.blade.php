@@ -314,6 +314,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <div id="results"></div>
+                                <div id="resultscod"></div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center my-5">
@@ -690,6 +691,12 @@
 
                             $('#results').html(html);
                         });
+                        var htmlcod = '';
+                        htmlcod += '<div class="form-check">';
+                        htmlcod += '<input class="form-check-input" type="radio" name="shipping_method" id="shipping_method" value="COD">';
+                        htmlcod += '<div>COD (Bayar di Tempat)</div>';
+                        htmlcod += '</div>';
+                        $('#resultscod').html(htmlcod);
                     }
                 },
                 error: function(xhr) {
