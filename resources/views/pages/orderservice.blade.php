@@ -695,6 +695,7 @@
                         htmlcod += '<div class="form-check">';
                         htmlcod += '<input class="form-check-input" type="radio" name="shipping_method" id="shipping_method" value="COD">';
                         htmlcod += '<div>COD (Bayar di Tempat)</div>';
+                        htmlcod += '<div><b>*Saran</div>';
                         htmlcod += '</div>';
                         $('#resultscod').html(htmlcod);
                     }
