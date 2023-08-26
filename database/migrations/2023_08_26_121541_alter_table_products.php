@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('table_products', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->bigInteger('photobackground_id')->nullable();
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('table_products', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             //
         });
     }
