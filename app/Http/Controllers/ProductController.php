@@ -17,7 +17,7 @@ class ProductController extends Controller
                             ->select('models.*','products.*', 'models.name as mondelname', 'products.name as prodname', 'products.image as prodimage')
                             ->orderBy('products.id', 'desc')
                             ->get();
-        // print_r(json_encode($products));die;
+
         return view('products.index',compact('products'))->with('no');
     }
 
@@ -38,6 +38,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'model_id' => 'required',
+            'photobackground_id' => 'required',
             'name' => 'required',
             'type' => 'required',
             'price' => 'required',
@@ -79,6 +80,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'model_id' => 'required',
+            'photobackground_id' => 'required',
             'name' => 'required',
             'type' => 'required',
             'price' => 'required',
