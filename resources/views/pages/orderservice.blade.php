@@ -546,7 +546,7 @@
                         response.forEach(function(product) {
                             var option = $('<option>', {
                                 value: product.id, // Assuming your product data has an 'id' property
-                                text: product.name, // Assuming your product data has a 'name' property
+                                text: 'Product '+product.name+', untuk model : '+product.mondelname,
                                 'data-weight': product.weight,
                                 'data-harga': product.price,
                                 'data-nameprod': product.name
@@ -674,7 +674,7 @@
                         response.forEach(function(product) {
                             var option = $('<option>', {
                                 value: product.id, // Assuming your product data has an 'id' property
-                                text: product.name, // Assuming your product data has a 'name' property
+                                text: 'Product '+product.name+', untuk model : '+product.mondelname,
                                 'data-weight': product.weight,
                                 'data-harga': product.price,
                                 'data-nameprod': product.name
@@ -946,7 +946,7 @@
                 response.forEach(function(product) {
                     var option = $('<option>', {
                         value: product.id, // Assuming your product data has an 'id' property
-                        text: 'Product '+product.name+', untuk model : '+product.mondelname, // Assuming your product data has a 'name' property
+                        text: 'Product '+product.name+', untuk model : '+product.mondelname, 
                         'data-weight': product.weight,
                         'data-harga': product.price,
                         'data-nameprod': product.name
@@ -998,7 +998,7 @@
             response.forEach(function(product) {
                 var option = $('<option>', {
                     value: product.id, // Assuming your product data has an 'id' property
-                    text: product.name, // Assuming your product data has a 'name' property
+                    text: 'Product '+product.name+', untuk model : '+product.mondelname,
                     'data-weight': product.weight,
                     'data-harga': product.price,
                     'data-nameprod': product.name
