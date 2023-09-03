@@ -53,12 +53,18 @@ Route::resource('vouchers', VoucherController::class);
 Route::resource('models', PhotoModelController::class);
 Route::resource('photobackgrounds', PhotoBackgroundController::class);
 
-Route::get('/orders', [OrderController::class, 'index'])->name('orders');
-Route::get('/myorders/{user_id}', [OrderController::class, 'myorders'])->name('myorders');
-Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
-Route::get('/myorders/show/{order}', [OrderController::class, 'show'])->name('myorders.show');
-Route::post('/myorders/payment', [OrderController::class, 'payment'])->name('myorders.payment');
-Route::get('/myorders/result/{order}', [OrderController::class, 'resultUpload'])->name('myorders.result');
+
+Route::controller(OrderController::class)->group(function() {
+Route::get('/orders', 'index')->name('orders');
+Route::get('/myorders/{user_id}', 'myorders')->name('myorders');
+Route::post('/orders/store', 'store')->name('orders.store');
+Route::get('/myorders/show/{order}', 'show')->name('myorders.show');
+Route::post('/myorders/payment', 'payment')->name('myorders.payment');
+Route::get('/myorders/result/{order}', 'resultUpload')->name('myorders.result');
+});
+
+Route::get('/get-data-product', [ProductController::class, 'getDataProduct'])->name('get-data-product');
+Route::get('/get-data-product-optional', [ProductController::class, 'getDataProductOptional'])->name('get-data-product-optional');
 
 Route::get('/get-origins', [App\Http\Controllers\ShippingController::class, 'getOrigins']);
 Route::get('/get-destinations', [App\Http\Controllers\ShippingController::class, 'getDestinations']);

@@ -23,9 +23,9 @@
                             <th>Model</th>
                             <th>Nama Produk</th>
                             <th>Tipe</th>
+                            <th>Background</th>
                             <th>Harga</th>
                             <th>Berat (gram)</th>
-                            <th>Gambar</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -35,28 +35,30 @@
                             <th>Model</th>
                             <th>Nama Produk</th>
                             <th>Tipe</th>
+                            <th>Background</th>
                             <th>Harga</th>
                             <th>Berat (gram)</th>
-                            <th>Gambar</th>
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         @foreach ($products as $product)
                         <tr>
-                            <td>{{ ++$no }}</td>
+                            <!-- <td>{{ ++$no }}</td> -->
+                            <td>{{ $product->id }}</td>
                             <td>{{ $product->mondelname }}</td>
                             <td>{{ $product->prodname }}</td>
                             <td>{{ $product->type }}</td>
+                            <td>{{ $product->background }}</td>
                             <td>{{ 'Rp '.number_format($product->price, 0, ',', '.') }}</td>
                             <td>{{ $product->weight }}(g)</td>
-                            <td class="text-center">
+                            <!-- <td class="text-center">
                                 @if ($product->prodimage !== null)
                                 <img src="{{ asset('uploads-images/products/').'/'.$product->prodimage }}" alt="{{ $product->prodname }}" width="100">
                                 @else
                                 Gambar tidak tersedia
                                 @endif
-                            </td>
+                            </td> -->
                             <td>
                                 <form action="{{ route('products.destroy',$product->id) }}" method="POST">
 

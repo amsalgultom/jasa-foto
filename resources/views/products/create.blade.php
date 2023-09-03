@@ -57,6 +57,17 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="form-group">
+                    <strong>Background:</strong>
+                    <select class="form-control w-100 select-form" name="photobackground_id" required>
+                        <option value="" hidden selected>-- Pilih Background --</option>
+                        @foreach ($photobackgrounds as $pb)
+                        <option value="{{$pb->id}}">{{$pb->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
                     <strong>Harga:</strong>
                     <input type="number" name="price" class="form-control" placeholder="Harga" required>
                 </div>
