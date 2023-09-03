@@ -85,7 +85,7 @@
                                     <p class="tgl-model">Catalog Shoot</p>
                                     <p class="tgl-model">Tanggal tersedia : <span> {{ date('d-m-Y', strtotime($model->available_date ))}}</span></p>
                                     <div class="mx-auto">
-                                        <input class="checkbox-model" type="checkbox" style="width:100%; height: 20px;" name="model_id[]" onclick="buttonPriceModel(this)" data-name="{{ $model->name }}" value="{{ $model->id }}" />
+                                        <input class="checkbox-model" type="checkbox" style="width:100%; height: 20px;" name="model_id[]" onclick="buttonPriceModel(this)" data-name="{{ $model->id }}" value="{{ $model->id }}" />
                                         <input type="hidden" name="name_model[]" id="nameModel{{ $model->id }}" value="{{ $model->name }}" disabled>
                                         <input type="hidden" name="available_date_model[]" id="available_dateModel{{ $model->id }}" value="{{ $model->available_date }}" disabled>
                                     </div>
@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="mx-auto">
                                         <h4 class="title-model mt-4"><a href="">{{ $pb->name }}</a></h4>
-                                        <input class="checkbox-model" type="radio" style="width:100%; height: 20px;" name="photobackground" id="photobackground" value="{{ $pb->image }}" />
+                                        <input class="checkbox-model" type="radio" style="width:100%; height: 20px;" name="photobackground" id="photobackground" value="{{ $pb->id }}" />
                                     </div>
                                 </div>
                                 @endforeach
@@ -140,11 +140,8 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-5">
                                     <strong>Product</strong><br>
-                                    <select name="product_id[]" id="select_prod_id1" class="form-control select-so w-100" required>
+                                    <select name="product_id" onclick="getProduct(this)" class="form-control select-so w-100" required>
                                         <option value="" hidden>-- Pilih Product --</option>
-                                        @foreach ($products as $prod)
-                                        <option value="{{$prod->id}}" data-weight="{{$prod->weight}}" data-harga="{{$prod->price}}" data-nameprod="{{$prod->name}}" class="{{$prod->model?->name}}">Produk {{$prod->name}}, untuk model : {{$prod->model?->name}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -211,7 +208,7 @@
                                     <select name="product_id[]" id="select_prod_optional1" class="form-control select-so w-100">
                                         <option value="">-- Pilih Our Service --</option>
                                         @foreach ($productsoptional as $prodoptional)
-                                        <option value="{{$prodoptional->id}}" data-harga="{{$prod->price}}" data-nameprod="{{$prodoptional->name}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
+                                        <option value="{{$prodoptional->id}}" data-harga="{{$prodoptional->price}}" data-nameprod="{{$prodoptional->name}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -445,11 +442,8 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-5">
                         <strong>Product</strong><br>
-                        <select name="product_id[]" id="select_prod_id` + i + `" class="form-control select-so w-100" required>
+                        <select name="product_id[]" id="select_prod_id` + i + `" onclick="getProduct(this)" class="form-control select-so w-100" required>
                             <option value="" hidden>-- Pilih Product --</option>
-                            @foreach ($products as $prod)
-                            <option value="{{$prod->id}}" data-weight="{{$prod->weight}}" data-harga="{{$prod->price}}" data-nameprod="{{$prod->name}}" class="{{$prod->model?->name}}">Produk {{$prod->name}}, untuk model : {{$prod->model?->name}}</option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3">
@@ -541,7 +535,7 @@
                     <select name="product_id[]" id="select_prod_optional` + i + `" class="form-control select-so w-100">
                         <option value="">-- Pilih Our Service --</option>
                         @foreach ($productsoptional as $prodoptional)
-                        <option value="{{$prodoptional->id}}" data-harga="{{$prod->price}}" data-nameprod="{{$prodoptional->name}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
+                        <option value="{{$prodoptional->id}}" data-harga="{{$prodoptional->price}}" data-nameprod="{{$prodoptional->name}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -748,7 +742,7 @@
             var nbChecked = 0;
             var element = document.getElementById("validasiModel");
             var prodAlert = document.getElementById("validasiProduk");
-            var product = document.getElementById('select_prod_id1').value;
+            // var product = document.getElementById('select_prod_id1').value;
             var note = document.getElementById('note1').value;
             const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
 
@@ -766,12 +760,12 @@
                 }
             }
             if (stepNumber == 3) {
-                if (product === "") {
-                    prodAlert.classList.remove("d-none");
-                    return false;
-                } else {
-                    navigateToFormStep(stepNumber);
-                }
+                // if (product === "") {
+                //     prodAlert.classList.remove("d-none");
+                //     return false;
+                // } else {
+                //     navigateToFormStep(stepNumber);
+                // }
             } else {
                 navigateToFormStep(stepNumber);
             }
@@ -833,5 +827,47 @@
             });
         });
     });
+
+    function getProduct(selectElement) {
+        var selectedModels = [];
+        var checkboxes = document.getElementsByName('model_id[]');
+
+        // Mendapatkan daftar model yang dipilih
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                selectedModels.push(checkboxes[i].getAttribute('data-name'));
+            }
+        }
+        var pb = $('#photobackground').val();
+        console.log(pb);
+    $.ajax({
+        url: '/get-data-product?model_id='+selectedModels+'&photobackground='+pb,
+        type: 'GET',
+        success: function(response) {
+            // Clear existing options
+            $(selectElement).empty();
+            
+            // Add new options based on response data
+            response.forEach(function(product) {
+                var option = $('<option>', {
+                    value: product.id, // Assuming your product data has an 'id' property
+                    text: product.name // Assuming your product data has a 'name' property
+                });
+                $(selectElement).append(option);
+            });
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+    function populateDropdown(data) {
+        var dropdown = $('#select_prod_id2'); // Change to your dropdown's ID
+        dropdown.empty();
+        $.each(data, function(index, value) {
+            dropdown.append($('<option>').text(value.name).attr('value', value.id));
+        });
+    }
 </script>
 @endpush
