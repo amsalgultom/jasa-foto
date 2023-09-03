@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhotoBackground;
 use App\Models\PhotoModel;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,10 +14,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::join('models', 'products.model_id', '=', 'models.id')
-            ->select('models.*', 'products.*', 'models.name as mondelname', 'products.name as prodname', 'products.image as prodimage')
-            ->orderBy('products.id', 'desc')
-            ->get();
+        $products = Product::join('models', 'products.model_id','=','models.id')
+                            ->leftjoin('photobackgrounds', 'products.photobackground_id','=','photobackgrounds.id')
+                            ->select('models.*','products.*','products.*', 'models.name as mondelname', 'products.name as prodname', 'products.image as prodimage','photobackgrounds.name as background')
+                            ->orderBy('products.id', 'desc')
+                            ->get();
 
         return view('products.index', compact('products'))->with('no');
     }
@@ -28,7 +30,8 @@ class ProductController extends Controller
     {
 
         $models = PhotoModel::orderBy('id', 'desc')->get();
-        return view('products.create', compact('models'));
+        $photobackgrounds = PhotoBackground::orderBy('id', 'desc')->get();
+        return view('products.create', compact('models','photobackgrounds'));
     }
 
     /**
@@ -70,7 +73,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $models = PhotoModel::orderBy('id', 'desc')->get();
-        return view('products.edit', compact('product', 'models'));
+        $photobackgrounds = PhotoBackground::orderBy('id', 'desc')->get();
+        return view('products.edit',compact('product', 'models','photobackgrounds'));
     }
 
     /**
@@ -110,14 +114,29 @@ class ProductController extends Controller
     }
 
     public function getDataProduct(Request $request){
-        $model_ids = [];
-        $model_ids[] = $request->input('model_id');
-        // print_r($model_ids);die;
+        
+        $model_ids = $request->input('model_id');
         $photobackground = $request->input('photobackground');
-        $get_product = Product::where('type', 'Product Foto')
-            ->whereIn('model_id', $model_ids)
-            ->where('photobackground_id', $photobackground)
+        $get_product = Product::join('models', 'products.model_id','=','models.id')
+            ->select('products.*', 'models.name as mondelname')
+            ->where('products.type', 'Product Foto')
+            ->whereIn('models.id', explode(',', $model_ids))
+            ->where('products.photobackground_id', $photobackground)
+            ->orderBy('products.id', 'desc')
             ->get();
+        return response()->json($get_product);
+    }
+
+    public function getDataProductOptional(Request $request){
+        $model_ids = $request->input('model_id');
+        $photobackground = $request->input('photobackground');
+        $get_product = Product::join('models', 'products.model_id','=','models.id')
+                    ->select('products.*', 'models.name as mondelname')
+                    ->where('products.type', 'Our Service')
+                    ->whereIn('models.id', explode(',', $model_ids))
+                    ->where('products.photobackground_id', $photobackground)
+                    ->orderBy('products.id', 'desc')
+                    ->get();
         return response()->json($get_product);
     }
 }

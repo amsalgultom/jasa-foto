@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     <div class="mt-3 text-right">
-                        <button class="btn btn-primary btn-navigate-form-step" type="button" step_number="2">Next</button>
+                        <button class="btn btn-primary btn-navigate-form-step" onclick="getProduct()" type="button" step_number="2">Next</button>
                     </div>
                 </div>
             </section>
@@ -140,7 +140,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-5">
                                     <strong>Product</strong><br>
-                                    <select name="product_id" onclick="getProduct(this)" class="form-control select-so w-100" required>
+                                    <select name="product_id" id="select_prod_id1" class="form-control select-so w-100" required>
                                         <option value="" hidden>-- Pilih Product --</option>
                                     </select>
                                 </div>
@@ -191,7 +191,7 @@
                 </div>
                 <div class="mt-3 text-right">
                     <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="1">Prev</button>
-                    <button class="btn btn-primary btn-navigate-form-step" id="calculateSum" type="button" onclick="validateProduct()" step_number="3">Next</button>
+                    <button class="btn btn-primary btn-navigate-form-step" id="calculateSum" type="button" onclick="getProductOptional()" step_number="3">Next</button>
                 </div>
             </section>
             <!-- Step 3 Content, default hidden on page load. -->
@@ -207,9 +207,6 @@
                                     <strong>Our Service</strong><br>
                                     <select name="product_id[]" id="select_prod_optional1" class="form-control select-so w-100">
                                         <option value="">-- Pilih Our Service --</option>
-                                        @foreach ($productsoptional as $prodoptional)
-                                        <option value="{{$prodoptional->id}}" data-harga="{{$prodoptional->price}}" data-nameprod="{{$prodoptional->name}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -442,7 +439,9 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-5">
                         <strong>Product</strong><br>
-                        <select name="product_id[]" id="select_prod_id` + i + `" onclick="getProduct(this)" class="form-control select-so w-100" required>
+                        
+                        <button class="btn btn-primary d-none" id="checkprod` + i + `" onclick="getProduct` + i + `()" >Check Product</button>
+                        <select name="product_id[]" id="select_prod_id` + i + `" class="form-control select-so w-100">
                             <option value="" hidden>-- Pilih Product --</option>
                         </select>
                     </div>
@@ -517,7 +516,53 @@
                             option.style.display = 'none';
                         }
                     }
-                });`;
+                });
+                function getProduct` + i + `() {
+                    var selectedModels = [];
+                    var checkboxes = document.getElementsByName('model_id[]');
+                    var selectedRadio = document.querySelector('input[name="photobackground"]:checked');
+
+                    // Mendapatkan daftar model yang dipilih
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].checked) {
+                            selectedModels.push(checkboxes[i].getAttribute('data-name'));
+                        }
+                    }
+                    console.log(selectedRadio.value);
+                $.ajax({
+                    url: '/get-data-product?model_id='+selectedModels+'&photobackground='+selectedRadio.value,
+                    type: 'GET',
+                    success: function(response) {
+                        
+                        // Clear existing options
+                        $('#select_prod_id` + i + `').empty();
+                        var optionhidden = $('<option>', {
+                                value: '',
+                                text: '-- Pilih Product --',
+                                'hidden':''
+                            });
+                        $('#select_prod_id` + i + `').append(optionhidden);
+                        // Add new options based on response data
+                        response.forEach(function(product) {
+                            var option = $('<option>', {
+                                value: product.id, // Assuming your product data has an 'id' property
+                                text: product.name, // Assuming your product data has a 'name' property
+                                'data-weight': product.weight,
+                                'data-harga': product.price,
+                                'data-nameprod': product.name
+                            });
+                            $('#select_prod_id` + i + `').append(option);
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+            $(document).ready(function() {
+                $('#checkprod` + i + `').click();
+            });
+                `;
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.innerHTML = scrtipJS;
@@ -532,11 +577,9 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-5">
                     <strong>Our Service</strong><br>
+                    <button class="btn btn-primary d-none" id="checkprodoptional` + i + `" onclick="getProductOptional` + i + `()" >Check Product</button>
                     <select name="product_id[]" id="select_prod_optional` + i + `" class="form-control select-so w-100">
                         <option value="">-- Pilih Our Service --</option>
-                        @foreach ($productsoptional as $prodoptional)
-                        <option value="{{$prodoptional->id}}" data-harga="{{$prodoptional->price}}" data-nameprod="{{$prodoptional->name}}" class="{{$prodoptional->model?->name}}">Produk {{$prodoptional->name}}, untuk model : {{$prodoptional->model?->name}}</option>
-                        @endforeach
                     </select>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -601,7 +644,53 @@
                     var total = $("#price_product_optional` + i + `").val() * $("#qty_product_optional` + i + `").val();
                     $("#sub_total_product_optional` + i + `").val(total);
                 });
-                });`;
+                });
+                function getProductOptional` + i + `() {
+                    var selectedModels = [];
+                    var checkboxes = document.getElementsByName('model_id[]');
+                    var selectedRadio = document.querySelector('input[name="photobackground"]:checked');
+
+                    // Mendapatkan daftar model yang dipilih
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].checked) {
+                            selectedModels.push(checkboxes[i].getAttribute('data-name'));
+                        }
+                    }
+                    console.log(selectedRadio.value);
+                $.ajax({
+                    url: '/get-data-product-optional?model_id='+selectedModels+'&photobackground='+selectedRadio.value,
+                    type: 'GET',
+                    success: function(response) {
+                        
+                        // Clear existing options
+                        $('#select_prod_optional` + i + `').empty();
+                        var optionhidden = $('<option>', {
+                                value: '',
+                                text: '-- Pilih Product --',
+                                'hidden':''
+                            });
+                        $('#select_prod_optional` + i + `').append(optionhidden);
+                        // Add new options based on response data
+                        response.forEach(function(product) {
+                            var option = $('<option>', {
+                                value: product.id, // Assuming your product data has an 'id' property
+                                text: product.name, // Assuming your product data has a 'name' property
+                                'data-weight': product.weight,
+                                'data-harga': product.price,
+                                'data-nameprod': product.name
+                            });
+                            $('#select_prod_optional` + i + `').append(option);
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+            $(document).ready(function() {
+                $('#checkprodoptional` + i + `').click();
+            });
+                `;
             var script = document.createElement('script');
             script.type = 'text/javascript';
             script.innerHTML = scrtipJSS;
@@ -742,7 +831,7 @@
             var nbChecked = 0;
             var element = document.getElementById("validasiModel");
             var prodAlert = document.getElementById("validasiProduk");
-            // var product = document.getElementById('select_prod_id1').value;
+            var product = document.getElementById('select_prod_id1').value;
             var note = document.getElementById('note1').value;
             const stepNumber = parseInt(formNavigationBtn.getAttribute("step_number"));
 
@@ -760,12 +849,12 @@
                 }
             }
             if (stepNumber == 3) {
-                // if (product === "") {
-                //     prodAlert.classList.remove("d-none");
-                //     return false;
-                // } else {
-                //     navigateToFormStep(stepNumber);
-                // }
+                if (product === "") {
+                    prodAlert.classList.remove("d-none");
+                    return false;
+                } else {
+                    navigateToFormStep(stepNumber);
+                }
             } else {
                 navigateToFormStep(stepNumber);
             }
@@ -828,9 +917,10 @@
         });
     });
 
-    function getProduct(selectElement) {
+    function getProduct() {
         var selectedModels = [];
         var checkboxes = document.getElementsByName('model_id[]');
+        var selectedRadio = document.querySelector('input[name="photobackground"]:checked');
 
         // Mendapatkan daftar model yang dipilih
         for (var i = 0; i < checkboxes.length; i++) {
@@ -838,36 +928,97 @@
                 selectedModels.push(checkboxes[i].getAttribute('data-name'));
             }
         }
-        var pb = $('#photobackground').val();
-        console.log(pb);
+        console.log(selectedRadio.value);
     $.ajax({
-        url: '/get-data-product?model_id='+selectedModels+'&photobackground='+pb,
+        url: '/get-data-product?model_id='+selectedModels+'&photobackground='+selectedRadio.value,
         type: 'GET',
         success: function(response) {
-            // Clear existing options
-            $(selectElement).empty();
-            
-            // Add new options based on response data
-            response.forEach(function(product) {
-                var option = $('<option>', {
-                    value: product.id, // Assuming your product data has an 'id' property
-                    text: product.name // Assuming your product data has a 'name' property
+            console.log(response)
+            if (response.length != 0){
+                $('#select_prod_id1').empty();
+                var optionhidden = $('<option>', {
+                        value: '',
+                        text: '-- Pilih Product --',
+                        'hidden':''
+                    });
+                $('#select_prod_id1').append(optionhidden);
+                // Add new options based on response data
+                response.forEach(function(product) {
+                    var option = $('<option>', {
+                        value: product.id, // Assuming your product data has an 'id' property
+                        text: 'Product '+product.name+', untuk model : '+product.mondelname, // Assuming your product data has a 'name' property
+                        'data-weight': product.weight,
+                        'data-harga': product.price,
+                        'data-nameprod': product.name
+                    });
+                    $('#select_prod_id1').append(option);
                 });
-                $(selectElement).append(option);
-            });
+            }else{
+                $('#select_prod_id1').empty();
+                var optionhidden = $('<option>', {
+                        value: '',
+                        text: '-- Product tidak tersedia, silahkan pilih model lain --',
+                    });
+                    
+                $('#select_prod_id1').append(optionhidden);
+            }
         },
         error: function(error) {
             console.log(error);
         }
     });
 }
+    function getProductOptional() {
+        var selectedModels = [];
+        var checkboxes = document.getElementsByName('model_id[]');
+        var selectedRadio = document.querySelector('input[name="photobackground"]:checked');
 
-    function populateDropdown(data) {
-        var dropdown = $('#select_prod_id2'); // Change to your dropdown's ID
-        dropdown.empty();
-        $.each(data, function(index, value) {
-            dropdown.append($('<option>').text(value.name).attr('value', value.id));
-        });
-    }
+        // Mendapatkan daftar model yang dipilih
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                selectedModels.push(checkboxes[i].getAttribute('data-name'));
+            }
+        }
+        console.log(selectedRadio.value);
+    $.ajax({
+        url: '/get-data-product-optional?model_id='+selectedModels+'&photobackground='+selectedRadio.value,
+        type: 'GET',
+        success: function(response) {
+            
+            if (response.length != 0){
+            // Clear existing options
+            $('#select_prod_optional1').empty();
+            var optionhidden = $('<option>', {
+                    value: '',
+                    text: '-- Pilih Product --',
+                    'hidden':''
+                });
+            $('#select_prod_optional1').append(optionhidden);
+            // Add new options based on response data
+            response.forEach(function(product) {
+                var option = $('<option>', {
+                    value: product.id, // Assuming your product data has an 'id' property
+                    text: product.name, // Assuming your product data has a 'name' property
+                    'data-weight': product.weight,
+                    'data-harga': product.price,
+                    'data-nameprod': product.name
+                });
+                $('#select_prod_optional1').append(option);
+            });
+        }else{
+            $('#select_prod_optional1').empty();
+                var optionhidden = $('<option>', {
+                        value: '',
+                        text: '-- Product optional tidak tersedia --',
+                    });
+                    
+                $('#select_prod_optional1').append(optionhidden);
+        }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
 </script>
 @endpush

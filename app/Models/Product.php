@@ -16,10 +16,15 @@ class Product extends Model
         'weight',
         'image',
         'model_id',
+        'photobackground_id',
     ];
     
     public function model()
     {
     	return $this->belongsTo('App\Models\PhotoModel');
+    }
+    public function photobackground()
+    {
+    	return $this->belongsTo('App\Models\PhotoBackground');
     }
 }

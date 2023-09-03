@@ -64,6 +64,7 @@ Route::get('/myorders/result/{order}', 'resultUpload')->name('myorders.result');
 });
 
 Route::get('/get-data-product', [ProductController::class, 'getDataProduct'])->name('get-data-product');
+Route::get('/get-data-product-optional', [ProductController::class, 'getDataProductOptional'])->name('get-data-product-optional');
 
 Route::get('/get-origins', [App\Http\Controllers\ShippingController::class, 'getOrigins']);
 Route::get('/get-destinations', [App\Http\Controllers\ShippingController::class, 'getDestinations']);
