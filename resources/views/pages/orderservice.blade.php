@@ -190,7 +190,7 @@
                     </div>
                 </div>
                 <div class="mt-3 text-right">
-                    <button class="btn btn-secondary btn-navigate-form-step" type="button" step_number="1">Prev</button>
+                    <a href="{{ route('order.service') }}" class="btn btn-secondary">Prev</a>
                     <button class="btn btn-primary btn-navigate-form-step" id="calculateSum" type="button" onclick="getProductOptional()" step_number="3">Next</button>
                 </div>
             </section>
