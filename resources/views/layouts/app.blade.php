@@ -29,7 +29,6 @@
     <link href="https://cdn.datatables.net/datetime/1.4.1/css/dataTables.dateTime.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css" rel="stylesheet">
 
-
 </head>
 
 <body id="page-top">
@@ -82,7 +81,6 @@
         <!-- Page level plugins -->
         <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-
         <!-- Page level custom scripts -->
         @if (request()->segment(1) != 'report')
         <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
