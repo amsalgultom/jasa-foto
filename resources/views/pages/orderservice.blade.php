@@ -205,7 +205,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-5">
                                     <strong>Our Service</strong><br>
-                                    <select name="[][]" id="select_prod_optional1" class="form-control select-so w-100">
+                                    <select name="product_id[]" id="select_prod_optional1" class="form-control select-so w-100">
                                         <option value="">-- Pilih Our Service --</option>
                                     </select>
                                 </div>
@@ -451,7 +451,7 @@
                         <strong>Product</strong><br>
                         
                         <button class="btn btn-primary d-none" id="checkprod` + i + `" onclick="getProduct` + i + `()" >Check Product</button>
-                        <select name="[][]" id="select_prod_id` + i + `" class="form-control select-so w-100">
+                        <select name="product_id[]" id="select_prod_id` + i + `" class="form-control select-so w-100">
                             <option value="" hidden>-- Pilih Product --</option>
                         </select>
                     </div>
@@ -588,7 +588,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-5">
                     <strong>Our Service</strong><br>
                     <button class="btn btn-primary d-none" id="checkprodoptional` + i + `" onclick="getProductOptional` + i + `()" >Check Product</button>
-                    <select name="[][]" id="select_prod_optional` + i + `" class="form-control select-so w-100">
+                    <select name="product_id[]" id="select_prod_optional` + i + `" class="form-control select-so w-100">
                         <option value="">-- Pilih Our Service --</option>
                     </select>
                 </div>
