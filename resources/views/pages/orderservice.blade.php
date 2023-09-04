@@ -67,7 +67,7 @@
                 <div class="row multiple">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <h2 class="font-normal">Pilih Model</h2>
+                            <h2 class="font-normal"  id="mdlFocus">Pilih Model</h2>
                             <div class="alert alert-danger d-none" id="validasiModel" role="alert">
                                 Pilih salah satu model
                                 <button id="closeValidasi" type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -96,10 +96,10 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <h2 class="font-normal">Pilihan Foto Background Minggu ini</h2>
-                            <div class="alert alert-danger d-none" id="validasiModel" role="alert">
-                                Pilih salah satu model
-                                <button id="closeValidasi" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <h2 class="font-normal" id="bgFocus">Pilihan Foto Background Minggu ini</h2>
+                            <div class="alert alert-danger d-none" id="validasiBackground" role="alert">
+                                Pilih salah satu Foto Background
+                                <button id="closeValidasibg" type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="mx-auto">
                                         <h4 class="title-model mt-4"><a href="">{{ $pb->name }}</a></h4>
-                                        <input class="checkbox-model" type="radio" style="width:100%; height: 20px;" name="photobackground" id="photobackground" value="{{ $pb->id }}" />
+                                        <input class="checkbox-background" type="radio" style="width:100%; height: 20px;" name="photobackground" onclick="buttonRadio(this)" id="photobackground" value="{{ $pb->id }}" />
                                     </div>
                                 </div>
                                 @endforeach
@@ -332,7 +332,13 @@
 @push('scripts')
 <script>
     var scriptjs = '';
+    function buttonRadio(radio){
+        var element = document.getElementById("validasiBackground");
 
+        if (radio.checked) {
+            element.classList.add('d-none');
+        }
+    }
     function buttonPriceModel(checkbox) {
         var hiddenInputName = document.getElementById("nameModel" + checkbox.value);
         var element = document.getElementById("validasiModel");
@@ -415,6 +421,10 @@
 
     $("#closeValidasi").click(function() {
         var element = document.getElementById("validasiModel");
+        element.classList.add('d-none');
+    });
+    $("#closeValidasiBg").click(function() {
+        var element = document.getElementById("validasiBackground");
         element.classList.add('d-none');
     });
     $("#closeValidasiProd").click(function() {
@@ -828,8 +838,11 @@
         formNavigationBtn.addEventListener("click", () => {
 
             var checkBoxes = document.getElementsByClassName('checkbox-model');
+            var radioBoxes = document.getElementsByClassName('checkbox-background');
             var nbChecked = 0;
+            var nbRadio = 0;
             var element = document.getElementById("validasiModel");
+            var element1 = document.getElementById("validasiBackground");
             var prodAlert = document.getElementById("validasiProduk");
             var product = document.getElementById('select_prod_id1').value;
             var note = document.getElementById('note1').value;
@@ -840,11 +853,24 @@
                     nbChecked++;
                 };
             };
+
+            for (var x = 0; x < radioBoxes.length; x++) {
+                if (radioBoxes[x].checked) {
+                    nbRadio++;
+                };
+            };
             if (stepNumber == 2) {
                 if (nbChecked == 0) {
                     element.classList.remove("d-none");
+                    $('html, body').animate({scrollTop: $("#mdlFocus").offset().top}, 1000);
                     return false;
-                } else {
+                }
+                else if (nbRadio == 0) {
+                    element1.classList.remove("d-none");
+                    $('html, body').animate({scrollTop: $("#bgFocus").offset().top}, 500);
+                    return false;
+                } 
+                else {
                     navigateToFormStep(stepNumber);
                 }
             }
