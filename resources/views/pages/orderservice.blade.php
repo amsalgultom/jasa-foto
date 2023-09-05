@@ -770,7 +770,7 @@
                                         formattedCost = 'Rp ' + cost.cost[0].value.toLocaleString('id-ID');
                                     }
                                     html += '<div class="form-check">';
-                                    html += '<input class="form-check-input" type="radio" name="shipping_method" id="shipping_method" onchange="buttonOngkirModel(this)" value="' + cost.service + '">';
+                                    html += '<input class="form-check-input" type="radio" required name="shipping_method" id="shipping_method" onchange="buttonOngkirModel(this)" value="' + cost.service + '">';
                                     html += '<input type="hidden" name="shipping_costs" id="shipping_costs' + cost.service + '" value="' + cost.cost[0].value + '" disabled>';
                                     html += '<div>' + cost.description + '</div>';
                                     html += '<div>Harga: ' + formattedCost + '</div>';
