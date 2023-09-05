@@ -140,7 +140,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-5">
                                     <strong>Product</strong><br>
-                                    <select name="product_id" id="select_prod_id1" class="form-control select-so w-100" required>
+                                    <select name="product_id[]" id="select_prod_id1" class="form-control select-so w-100" required>
                                         <option value="" hidden>-- Pilih Product --</option>
                                     </select>
                                 </div>
