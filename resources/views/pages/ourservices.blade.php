@@ -5,7 +5,7 @@
 
 
 <main id="main">
-    
+
     <!-- ======= Recent Photos Section ======= -->
     <section id="recent-photos" class="recent-photos mt-4">
         <div class="container">
@@ -80,11 +80,11 @@
                     <p class="text-catalog">Detail</p>
                 </div>
             </div>
-            
+
 
         </div>
     </section><!-- End Recent Photos Section -->
-    
+
 
     <!-- ======= Recent Photos Section ======= -->
     <section id="recent-photos" class="recent-photos">
@@ -93,8 +93,8 @@
             <div class="section-title brown">
                 <h2 class="brown">LOOKBOOK</h2>
                 <div class="w-75 mx-auto">
-                    <p>Konsep foto exclusive dari segi background, model dan pose serta hasil yang diterima  lebih berkonten dan bervariatif.</p>
-                </div>  
+                    <p>Konsep foto exclusive dari segi background, model dan pose serta hasil yang diterima lebih berkonten dan bervariatif.</p>
+                </div>
             </div>
 
             <div class="row">
@@ -123,15 +123,15 @@
         </div>
     </section><!-- End Recent Photos Section -->
 
-     <!-- ======= Recent Photos Section ======= -->
-     <section id="recent-photos" class="recent-photos">
+    <!-- ======= Recent Photos Section ======= -->
+    <section id="recent-photos" class="recent-photos">
         <div class="container">
 
             <div class="section-title">
                 <h2 class="brown">CREATIVE DESK</h2>
                 <div class="w-75 mx-auto">
                     <p>Layanan foto produk tanpa model atau biasanya disebut dengan Creative Desk. Hasil yang didapat variatif dan menunjukan varian warna produk.</p>
-                </div>  
+                </div>
             </div>
 
             <div class="row">
@@ -177,7 +177,7 @@
                 <h2 class="brown">PRIVATE SHOOT</h2>
                 <div class="w-75 mx-auto">
                     <p>Private shoot adalah layanan dari segi background, model, jadwal dll disesuaikan dengan konsep dari pihak Client.</p>
-                </div>  
+                </div>
             </div>
 
             <div class="row justify-content-center">
@@ -228,56 +228,88 @@
                 <h2 class="brown">Video</h2>
                 <div class="w-75 mx-auto">
                     <p>Paket yang berisi konten untuk menambahkan detail dan visual dari produk yang dijual.</p>
-                </div>  
+                </div>
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-lg-2 col-md-2 col-6 mt-3 mb-4">
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
                     <div class="video-crop">
                         <video controls class="img-product">
-                            <source src="{{ asset('video/PKV-1.mov') }}" >
+                            <source src="https://drive.google.com/uc?export=download&id=1Xr4RyLlz1YmWCnzOxOwH-JytcFPF6lfm">
                         </video>
-                        <p class="text-video">BTS</p>
+                        <p class="text-video">Mini teaser durasi 30 detik</p>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-6 mt-3 mb-4">
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
                     <div class="video-crop">
                         <video controls class="img-product">
-                            <source src="{{ asset('video/PKV-1.mov') }}" >
+                            <source src="https://drive.google.com/uc?export=download&id=1kYIIVT5apnG_rK3QvSIMMYuREPOOKZ1d">
                         </video>
-                        <p class="text-video">ADS</p>
+                        <p class="text-video">Video Reels</p>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-6 mt-3 mb-4">
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
                     <div class="video-crop">
                         <video controls class="img-product">
-                            <source src="{{ asset('video/PKV-1.mov') }}" >
-                        </video>
-                        <p class="text-video">Mini Teaser</p>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-2 col-6 mt-3 mb-4">
-                    <div class="video-crop">
-                        <video controls class="img-product">
-                            <source src="{{ asset('video/PKV-1.mov') }}" >
-                        </video>
-                        <p class="text-video">Teaser</p>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-2 col-6 mt-3 mb-4">
-                    <div class="video-crop">
-                        <video controls class="img-product">
-                            <source src="{{ asset('video/PKV-1.mov') }}" >
+                            <source src="https://drive.google.com/uc?export=download&id=1tIQkxuECWz11yHPmc8JUcOEsJTFK2h4s">
                         </video>
                         <p class="text-video">Tutorial</p>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 col-6 mt-3 mb-4">
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
                     <div class="video-crop">
                         <video controls class="img-product">
-                            <source src="{{ asset('video/PKV-1.mov') }}" >
+                            <source src="https://drive.google.com/uc?export=download&id=1-4iZFmbjLv7IcYr-9bTWTDbrWxwBE-xY">
                         </video>
-                        <p class="text-video">Review</p>
+                        <p class="text-video">Video ADS</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
+                    <div class="video-crop">
+                        <video controls class="img-product">
+                            <source src="https://drive.google.com/uc?export=download&id=1gv1-tJ1b5SCgNJNFzpwBOR-hLxJcvw1_">
+                        </video>
+                        <p class="text-video">Video Mirror</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
+                    <div class="video-crop">
+                        <video controls class="img-product">
+                            <source src="https://drive.google.com/uc?export=download&id=1JCr9do9nHzNswN18rAdQaHwPDG_oRA7K">
+                        </video>
+                        <p class="text-video">Video Mirror ala ala</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
+                    <div class="video-crop">
+                        <video controls class="img-product">
+                            <source src="https://drive.google.com/uc?export=download&id=1zoQiPlcY_HnxCSPj0lY8dVcHUWSASa2a">
+                        </video>
+                        <p class="text-video">VIDEO CREATIVE DESK</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
+                    <div class="video-crop">
+                        <video controls class="img-product">
+                            <source src="https://drive.google.com/uc?export=download&id=1sBl8cdr6NAGTZx5N4K6NPd1dEjBhHK_v">
+                        </video>
+                        <p class="text-video">VIDEO REVIEW 1 MENIT</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
+                    <div class="video-crop">
+                        <video controls class="img-product">
+                            <source src="https://drive.google.com/uc?export=download&id=1WH7TMKyd_802k1wb7nE651ZYJOYTpJrr">
+                        </video>
+                        <p class="text-video">Teaser</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-6 mt-3 mb-5">
+                    <div class="video-crop">
+                        <video controls class="img-product">
+                            <source src="https://drive.google.com/uc?export=download&id=1JHKbySxMbmaqkI9NeWEkAVa99jJY4CTF">
+                        </video>
+                        <p class="text-video">Teaser serian</p>
                     </div>
                 </div>
             </div>
