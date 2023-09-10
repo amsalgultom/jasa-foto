@@ -173,7 +173,7 @@
                                                                                                 <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;" align="left">Foto Background:</th>
                                                                                                 <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;" align="left">
                                                                                                     @if($order->photobackground)
-                                                                                                    <img src="{{ asset('uploads-images/photobackgrounds/').'/'.$order->photobackground }}" width="150" alt="">
+                                                                                                    <img src="{{ asset('uploads-images/photobackgrounds/').'/'.$order->photobackground?->image }}" width="150" alt="">
                                                                                                     @else
                                                                                                     -
                                                                                                     @endif

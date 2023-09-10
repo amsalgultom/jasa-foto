@@ -101,7 +101,7 @@
                             <td scope="row" class="text-table">Foto Background:</td>
                             <td class="text-table">
                                 @if($order->photobackground)
-                                <img src="{{ asset('uploads-images/photobackgrounds/').'/'.$order->photobackground }}" width="150" alt="">
+                                <img src="{{ asset('uploads-images/photobackgrounds/').'/'.$order->photobackground?->image }}" width="150" alt="">
                                 @else
                                 -
                                 @endif
