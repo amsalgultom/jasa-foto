@@ -52,10 +52,10 @@
                 <small class="brown">VISUAL DIGITAL MARKETING COMPANY</small>
                 <hr class="line">
                 <p class="brown text-justify">
-                    Art Space adalah sebuah layanan visual atau jasa foto produk yang berdiri sejak tahun 2016 dan berfokus pada konten digital marketing. 
+                Art Space adalah studio visual profesional yang ahli dalam fotografi dan videografi untuk digital marketing. Kami menciptakan visual menarik dengan sentuhan artistik dan kualitas yang esklusif.
                 </p>
                 <p class="brown text-justify">
-                    Art Space bertujuan membantu para owner brand untuk meningkatkan kualitas foto dan video dari produk yang dipasarkan.
+                Art Space juga membantu kalian para owner untuk mengembangkan konsep kampanye digital yang menarik. Jika kalian ingin produk kalian menarik dan terkonsep dalam dunia online, Art Space adalah pilihan terbaik!
                 </p>
             </div>
           </div>
