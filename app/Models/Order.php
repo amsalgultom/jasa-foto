@@ -20,7 +20,7 @@ class Order extends Model
         'total',
         'status_id',
         'image_referensi_product',
-        'photobackground',
+        'photobackground_id',
     ];
 
     public function customer()
@@ -36,6 +36,11 @@ class Order extends Model
     public function status()
     {
     	return $this->belongsTo('App\Models\Status');
+    }
+
+    public function photobackground()
+    {
+    	return $this->belongsTo('App\Models\PhotoBackground');
     }
     
 

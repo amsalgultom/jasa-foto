@@ -95,7 +95,7 @@ class OrderController extends Controller
             'total' => $totalOrder,
             'voucher' => $code_voucher,
             'discount' => $diskon,
-            'photobackground' => $request->photobackground,
+            'photobackground_id' => $request->_id,
             'status_id' => 1,
             'image_referensi_product' => json_encode($uploadedImages),
         ];

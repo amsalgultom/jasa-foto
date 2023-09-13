@@ -101,12 +101,12 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/gallery/gallery-2.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/gallery/gallery-2-new.jpeg') }}" class="img-product" alt="">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/gallery/gallery-3.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/gallery/gallery-3-new.jpeg') }}" class="img-product" alt="">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
@@ -116,12 +116,12 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/gallery/gallery-5.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/gallery/gallery-5-new.jpeg') }}" class="img-product" alt="">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/gallery/gallery-6.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/gallery/gallery-6-new.jpg') }}" class="img-product" alt="">
                     </div>
                 </div>
             </div>
