@@ -21,7 +21,7 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="p-4">
-                                                                <h2>Upload Foto <span class="il">Order Id : </span> #{{ $order->id }}</h2>
+                                                                <h2>Hasil Foto <span class="il">Order Id : </span> #{{ $order->id }}</h2>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -40,17 +40,18 @@
                                                                         <tr>
                                                                             <td valign="top" style="padding:48px 48px 0px">
                                                                                 <div id="m_7158390659536495837body_content_inner" style="color:#636363;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:14px;line-height:150%;text-align:left" align="left">
-                                                                                    <h2 style="color:#7a6429;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left">
+                                                                                    <!-- <h2 style="color:#7a6429;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left">
                                                                                         <span class="il">Hasil Foto : </span>
-                                                                                    </h2>
-                                                                                    <p>Klik Foto untuk mendownload</p>
-                                                                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                                    </h2> -->
+                                                                                    <h5>Silahkan Cek pada URL berikut : <a href="{{ $order->result_drive }}" target="_blank">{{ $order->result_drive }}</a></h5><br>
+                                                                                    
+                                                                                    <!-- <div class="col-xs-12 col-sm-12 col-md-12">
                                                                                         <div class="form-group">
                                                                                             @foreach ($itemResultImages as $img)
                                                                                             <a href="{{ asset('uploads-images/results/').'/'.$img->images }}" download><img src="{{ asset('uploads-images/results/').'/'.$img->images }}" alt="Upload Foto #{{ $order->id }}" width="480"></a>
                                                                                             @endforeach
                                                                                         </div>
-                                                                                    </div>
+                                                                                    </div> -->
                                                                                 </div>
                                                                             </td>
                                                                         </tr>

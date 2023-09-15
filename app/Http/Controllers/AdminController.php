@@ -35,6 +35,12 @@ class AdminController extends Controller
 
         return redirect('listorders')->with('success','Upload Images successfully.');
     }
+    public function store_drive(Request $request)
+    {
+        Order::where('id', $request->order_id)->update(['status_id' => 3,'result_drive' => $request->url_drive]);
+
+        return redirect('listorders')->with('success','Upload URL Drive successfully.');
+    }
 
     public function listOrders(Request $request)
     {
