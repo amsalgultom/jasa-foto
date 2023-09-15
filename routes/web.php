@@ -82,5 +82,6 @@ Route::get('/orders/print-shippping/{order}', [OrderController::class, 'printShi
 Route::get('/orders/print-order-today', [OrderController::class, 'orderDay'])->name('admin.orderday');
 
 Route::post('/orderupload/store', [AdminController::class, 'store'])->name('orderupload.store');
+Route::post('/orderupload/store_drive', [AdminController::class, 'store_drive'])->name('orderupload.store_drive');
 
 Route::post('/check-voucher', [VoucherController::class, 'validateVoucher'])->name('validateVoucher');

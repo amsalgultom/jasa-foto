@@ -16,6 +16,11 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Login ArtSpace Photoshoot</h1>
                             </div>
+                            @if ($errors->has('validlogin'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $errors->first('validlogin') }}
+                            </div>
+                            @endif
                             <form action="{{ route('authenticate') }}" method="post">
                                 @csrf
                                 <div class="form-group">

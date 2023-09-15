@@ -21,6 +21,7 @@ class Order extends Model
         'status_id',
         'image_referensi_product',
         'photobackground_id',
+        'result_drive',
     ];
 
     public function customer()
