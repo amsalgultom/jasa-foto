@@ -22,6 +22,7 @@ class Order extends Model
         'image_referensi_product',
         'photobackground_id',
         'result_drive',
+        'tax_payment',
     ];
 
     public function customer()

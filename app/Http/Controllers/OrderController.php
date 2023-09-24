@@ -88,15 +88,23 @@ class OrderController extends Controller
                     }
                 }
             }
+            $totalOrder = 0;
+            $tax_payment = 0;
+            $totalOrderWithTax = 0;
             $totalOrder = array_sum($request->sub_total_product) + $request->shipping_costs - $diskon;
 
+            if($totalOrder){
+                $tax_payment = ($totalOrder * 5) / 100;
+            }
+            $totalOrderWithTax = $totalOrder + $tax_payment;
             $createOrder = [
                 'user_id' => $request->user_id,
                 'customer_id' => $generateIdCustomer->id,
                 'date' => now(),
                 'shipping_costs' => $request->shipping_costs,
                 'shipping_method' => $request->shipping_method,
-                'total' => $totalOrder,
+                'total' => $totalOrderWithTax,
+                'tax_payment' => $tax_payment,
                 'voucher' => $code_voucher,
                 'discount' => $diskon,
                 'photobackground_id' => $request->photobackground,

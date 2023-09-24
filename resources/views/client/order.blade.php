@@ -67,7 +67,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8">
                             <div class="form-group">
-                                <strong>Catatan</strong>
+                                <strong>Request</strong>
                                 <textarea class="form-control" style="height:100px" name="note[]" placeholder="Notes"></textarea>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-8">
                     <div class="form-group">
-                        <strong>Catatan</strong>
+                        <strong>Request</strong>
                         <textarea class="form-control" style="height:100px" name="note[]" placeholder="Notes"></textarea>
                     </div>
                 </div>
