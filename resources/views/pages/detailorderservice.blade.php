@@ -109,12 +109,12 @@
                         </tr>
                         <tr>
                             <td scope="row" class="text-table">Subtotal:</td>
-                            <td class="text-table"><span>{{ 'Rp '.number_format($order->total - $order->shipping_costs + $order->discount, 0, ',', '.') }}</span></td>
+                            <td class="text-table"><span>{{ 'Rp '.number_format($order->total - $order->tax_payment - $order->shipping_costs + $order->discount, 0, ',', '.') }}</span></td>
                         </tr>
                         <tr>
                             <td scope="row" class="text-table">Shipping:</td>
                             <td class="text-table">
-                                @if($order->shipping_method)
+                                @if($order->shipping_method && $order->shipping_method != 'COD')
                                 <span>{{ 'Rp '.number_format($order->shipping_costs, 0, ',', '.') }}</span>&nbsp;<small>via JNE ({{ $order->shipping_method }})</small>
                                 @else
                                 COD
@@ -126,6 +126,16 @@
                             <td class="text-table">
                                 @if($order->voucher)
                                 <span>{{ 'Rp '.number_format($order->discount, 0, ',', '.') }}</span>&nbsp;<small>({{ $order->voucher }})</small>
+                                @else
+                                -
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope="row" class="text-table">Pajak Pembayaran:</td>
+                            <td class="text-table">
+                                @if($order->tax_payment)
+                                <span>{{ 'Rp '.number_format($order->tax_payment, 0, ',', '.') }}</span>
                                 @else
                                 -
                                 @endif
