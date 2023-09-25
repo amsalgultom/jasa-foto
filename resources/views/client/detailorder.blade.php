@@ -186,7 +186,11 @@
                                                                                             <tr>
                                                                                                 <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Shipping:</th>
                                                                                                 <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
+                                                                                                @if($order->shipping_method == 'COD')
+                                                                                                <span>{{ $order->shipping_method }}</span>
+                                                                                                @else
                                                                                                     <span>{{ 'Rp '.number_format($order->shipping_costs, 0, ',', '.') }}</span>&nbsp;<small>via JNE ({{ $order->shipping_method }})</small>
+                                                                                                @endif
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
@@ -194,6 +198,16 @@
                                                                                                 <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
                                                                                                 @if($order->voucher)
                                                                                                     <span>{{ 'Rp '.number_format($order->discount, 0, ',', '.') }}</span>&nbsp;<small> ({{ $order->voucher }})</small>
+                                                                                                </td>
+                                                                                                @else
+                                                                                                -
+                                                                                                @endif
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th scope="row" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Pajak Pembayaran:</th>
+                                                                                                <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
+                                                                                                @if($order->tax_payment)
+                                                                                                    <span>{{ 'Rp '.number_format($order->tax_payment, 0, ',', '.') }}</span>
                                                                                                 </td>
                                                                                                 @else
                                                                                                 -

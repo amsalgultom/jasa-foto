@@ -40,14 +40,15 @@
                                                                             <h2 style="color:#7a6429;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left">
                                                                                 <span class="il">Hasil Foto : </span>
                                                                             </h2>
-                                                                            <p>Klik Foto untuk mendownload</p>
-                                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                            <p>Silahkan Cek pada URL berikut</p>
+                                                                            <a href="{{ $order->result_drive }}" target="_blank">result_drive</a>
+                                                                            <!-- <div class="col-xs-12 col-sm-12 col-md-12">
                                                                                 <div class="form-group">
                                                                                     @foreach ($itemResultImages as $img)
                                                                                     <a href="{{ asset('uploads-images/results/').'/'.$img->images }}" download><img src="{{ asset('uploads-images/results/').'/'.$img->images }}" alt="Upload Foto #{{ $order->id }}" width="480"></a>
                                                                                     @endforeach
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> -->
                                                                         </div>
                                                                     </td>
                                                                 </tr>

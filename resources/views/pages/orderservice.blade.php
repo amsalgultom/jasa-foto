@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Catatan</strong>
+                                        <strong>Request</strong>
                                         <textarea class="form-control note" style="height:100px" id="note1" name="note_product[]" placeholder="Notes"></textarea>
                                         <label class="text-danger">*Harap produk yang dikirim sesuai</label>
                                     </div>
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>Catatan</strong>
+                                        <strong>Request</strong>
                                         <textarea class="form-control note" style="height:100px" id="note_optional1" name="note_product[]" placeholder="Notes"></textarea>
                                         <!-- <label class="text-danger">*Harap produk yang dikirim sesuai</label> -->
                                     </div>
@@ -475,7 +475,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Catatan</strong>
+                            <strong>Request</strong>
                             <textarea class="form-control" style="height:100px" id="note` + i + `" name="note_product[]" placeholder="Notes"></textarea>
                             <label class="text-danger">*Harap produk yang dikirim sesuai</label>
                         </div>
@@ -612,7 +612,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Catatan</strong>
+                        <strong>Request</strong>
                         <textarea class="form-control note" style="height:100px" id="note_optional` + i + `" name="note_product[]" placeholder="Notes"></textarea>
                         <!-- <label class="text-danger">*Harap produk yang dikirim sesuai</label> -->
                     </div>
@@ -788,7 +788,7 @@
                         htmlcod += '<div class="form-check">';
                         htmlcod += '<input class="form-check-input" type="radio" name="shipping_method" id="shipping_method" value="COD">';
                         htmlcod += '<div>COD (Bayar di Tempat)</div>';
-                        htmlcod += '<div><b>*Saran</div>';
+                        htmlcod += '<div><b>*Disarankan</div>';
                         htmlcod += '</div>';
                         $('#resultscod').html(htmlcod);
                     }

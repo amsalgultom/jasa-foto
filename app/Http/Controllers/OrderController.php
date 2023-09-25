@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use App\Jobs\GenerateOrderPdf;
+use App\Models\Log;
+
 class OrderController extends Controller
 {
     /**
@@ -48,108 +50,133 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $rq = $request->all();
+        try {
+            DB::beginTransaction(); // Start a database transaction
+            $rq = $request->all();
 
-        // Create Customer
-        $createCustomer = [
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'city' => $request->city,
-            'post_code' => $request->post_code,
-            'address' => $request->address,
-        ];
-        $generateIdCustomer = Customer::create($createCustomer);
+            // Create Customer
+            $createCustomer = [
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'city' => $request->city,
+                'post_code' => $request->post_code,
+                'address' => $request->address,
+            ];
+            $generateIdCustomer = Customer::create($createCustomer);
 
-        // Create Order
+            // Create Order
 
-        $uploadedImages = [];
-        if ($request->hasFile('image_referensi_product')) {
-            foreach ($request->file('image_referensi_product') as $image) {
-                $uploadedImages[] = $this->uploadImage($image);
-            }
-        }
-        
-        $diskon = 0;
-        $code_voucher = null;
-        if($request->this_voucher && $request->code_voucher != ''){
-            $code_voucher = $request->code_voucher;
-            $voucher = Voucher::where('code_voucher', $code_voucher)->first();
-            if($voucher){
-                if($voucher->type == 'Percent' && $voucher->max_value_price_discount > 0){
-                    $diskon = $voucher->max_value_price_discount;
-                }elseif($voucher->type == 'Percent' && $voucher->max_value_price_discount < 1){
-                    $diskon = array_sum($request->sub_total_product) * ($voucher->value_discount / 100);
-                }else{
-                    $diskon = $voucher->value_discount;
+            $uploadedImages = [];
+            if ($request->hasFile('image_referensi_product')) {
+                foreach ($request->file('image_referensi_product') as $image) {
+                    $uploadedImages[] = $this->uploadImage($image);
                 }
             }
+
+            $diskon = 0;
+            $code_voucher = null;
+            if ($request->this_voucher && $request->code_voucher != '') {
+                $code_voucher = $request->code_voucher;
+                $voucher = Voucher::where('code_voucher', $code_voucher)->first();
+                if ($voucher) {
+                    if ($voucher->type == 'Percent' && $voucher->max_value_price_discount > 0) {
+                        $diskon = $voucher->max_value_price_discount;
+                    } elseif ($voucher->type == 'Percent' && $voucher->max_value_price_discount < 1) {
+                        $diskon = array_sum($request->sub_total_product) * ($voucher->value_discount / 100);
+                    } else {
+                        $diskon = $voucher->value_discount;
+                    }
+                }
+            }
+            $totalOrder = 0;
+            $tax_payment = 0;
+            $totalOrderWithTax = 0;
+            $totalOrder = array_sum($request->sub_total_product) + $request->shipping_costs - $diskon;
+
+            if($totalOrder){
+                $tax_payment = ($totalOrder * 5) / 100;
+            }
+            $totalOrderWithTax = $totalOrder + $tax_payment;
+            $createOrder = [
+                'user_id' => $request->user_id,
+                'customer_id' => $generateIdCustomer->id,
+                'date' => now(),
+                'shipping_costs' => $request->shipping_costs,
+                'shipping_method' => $request->shipping_method,
+                'total' => $totalOrderWithTax,
+                'tax_payment' => $tax_payment,
+                'voucher' => $code_voucher,
+                'discount' => $diskon,
+                'photobackground_id' => $request->photobackground,
+                'status_id' => 1,
+                'image_referensi_product' => json_encode($uploadedImages),
+            ];
+            $generateIdOrder = Order::create($createOrder);
+
+            // Crete Item Model Order
+            $resultmodel = array_map(function ($a, $b, $c) {
+                return [
+                    'model_id' => $a,
+                    'name_model' => $b,
+                    'available_date_model' => $c
+                ];
+            }, $rq['model_id'], $rq['name_model'], $rq['available_date_model']);
+
+            $resultmodels = collect($resultmodel);
+            foreach ($resultmodels as $resM) {
+                $requestModelOrder = [
+                    'order_id' => $generateIdOrder->id,
+                    'model_id' => $resM['model_id'],
+                    'name' => $resM['name_model'],
+                    'available_date' => $resM['available_date_model']
+                ];
+
+                ItemModelOrder::create($requestModelOrder);
+            }
+
+            // Create Item Product Order
+            $resultproduct = array_map(function ($a, $b, $c, $d, $e, $f) {
+                return [
+                    'product_id' => $a,
+                    'name_product' => $b,
+                    'price_product' => $c,
+                    'qty_product' => $d,
+                    'sub_total_product' => $e,
+                    'note_product' => $f
+                ];
+            }, $rq['product_id'], $rq['name_product'], $rq['price_product'], $rq['qty_product'], $rq['sub_total_product'], $rq['note_product']);
+
+            $resultproducts = collect($resultproduct);
+
+            foreach ($resultproducts as $resP) {
+                $requestProductOrder = [
+                    'order_id' => $generateIdOrder->id,
+                    'product_id' => $resP['product_id'],
+                    'name_product' => $resP['name_product'],
+                    'price_product' => $resP['price_product'],
+                    'qty_product' => $resP['qty_product'],
+                    'sub_total_product' => $resP['sub_total_product'],
+                    'note_product' => $resP['note_product']
+                ];
+
+                ItemProductOrder::create($requestProductOrder);
+            }
+            DB::commit();
+
+            return redirect()->route('myorderservices', $request->user_id)->with('success', 'Order created successfully.');
+        } catch (\Exception $e) {
+            // Something went wrong, so we roll back the transaction
+            DB::rollBack();
+
+            // Create Logs
+            $createLogs = [
+                'type' => 'Order',
+                'message' => $e
+            ];
+            Log::create($createLogs);
+
+            return redirect()->back()->with('error', 'An error occurred while creating the order.');
         }
-        $totalOrder = array_sum($request->sub_total_product) + $request->shipping_costs - $diskon;
-        
-        $createOrder = [
-            'user_id' => $request->user_id,
-            'customer_id' => $generateIdCustomer->id,
-            'date' => now(),
-            'shipping_costs' => $request->shipping_costs,
-            'shipping_method' => $request->shipping_method,
-            'total' => $totalOrder,
-            'voucher' => $code_voucher,
-            'discount' => $diskon,
-            'photobackground_id' => $request->_id,
-            'status_id' => 1,
-            'image_referensi_product' => json_encode($uploadedImages),
-        ];
-        $generateIdOrder = Order::create($createOrder);
-
-        // Crete Item Model Order
-        $resultmodel = array_map(function ($a, $b, $c) {
-            return [
-                'model_id' => $a,
-                'name_model' => $b,
-                'available_date_model' => $c
-            ];
-        }, $rq['model_id'], $rq['name_model'], $rq['available_date_model']);
-
-        $resultmodels = collect($resultmodel);
-        foreach ($resultmodels as $resM) {
-            $requestModelOrder = [
-                'order_id' => $generateIdOrder->id,
-                'model_id' => $resM['model_id'],
-                'name' => $resM['name_model'],
-                'available_date' => $resM['available_date_model']
-            ];
-
-            ItemModelOrder::create($requestModelOrder);
-        }
-
-        // Create Item Product Order
-        $resultproduct = array_map(function ($a, $b, $c, $d, $e, $f) {
-            return [
-                'product_id' => $a,
-                'name_product' => $b,
-                'price_product' => $c,
-                'qty_product' => $d,
-                'sub_total_product' => $e,
-                'note_product' => $f
-            ];
-        }, $rq['product_id'], $rq['name_product'], $rq['price_product'], $rq['qty_product'], $rq['sub_total_product'], $rq['note_product']);
-
-        $resultproducts = collect($resultproduct);
-
-        foreach ($resultproducts as $resP) {
-            $requestProductOrder = [
-                'order_id' => $generateIdOrder->id,
-                'product_id' => $resP['product_id'],
-                'name_product' => $resP['name_product'],
-                'price_product' => $resP['price_product'],
-                'qty_product' => $resP['qty_product'],
-                'sub_total_product' => $resP['sub_total_product'],
-                'note_product' => $resP['note_product']
-            ];
-
-            ItemProductOrder::create($requestProductOrder);
-        }
-        return redirect()->route('myorderservices', $request->user_id)->with('success', 'Order created successfully.');
     }
 
     private function uploadImage($image)
@@ -220,7 +247,7 @@ class OrderController extends Controller
         $serverKey = config('midtrans.server_key');
         $hashed = hash("sha512", $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
         if ($hashed == $request->signature_key) {
-            if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture' ) {
+            if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
                 Order::where('id', $request->order_id)->update(['status_id' => 2]);
             }
         }
@@ -265,7 +292,7 @@ class OrderController extends Controller
     public function printShipping($order)
     {
         // Mendapatkan data invoice berdasarkan ID  
-        
+
         $orders = Order::find($order);
         $no = 1;
         $itemOrderProduct = ItemProductOrder::where('order_id', $orders->id)
@@ -280,14 +307,14 @@ class OrderController extends Controller
         $customers = Customer::where('id', $orders->customer_id)->first();
 
         // Memuat view cetak dengan data invoice
-        $html = View::make('admin.print-shipping', compact('orders', 'customers','itemOrderProduct', 'itemOrderModel', 'no'))->render();
+        $html = View::make('admin.print-shipping', compact('orders', 'customers', 'itemOrderProduct', 'itemOrderModel', 'no'))->render();
 
         // Konfigurasi Dompdf
         $options = new Options();
         $options->setIsRemoteEnabled(true); // Mengizinkan gambar atau sumber daya eksternal
 
         $dompdf = new Dompdf($options);
-        
+
         $dompdf->setPaper('A6', 'potrait');
         // Memuat konten HTML ke Dompdf
         $dompdf->loadHtml($html);
@@ -296,37 +323,36 @@ class OrderController extends Controller
         $dompdf->render();
 
         // Mengirimkan file PDF sebagai respons
-        return $dompdf->stream('Resi-Order-'.$orders->id.'.pdf');
+        return $dompdf->stream('Resi-Order-' . $orders->id . '.pdf');
     }
 
     public function orderDay()
     {
         $orders = Order::join('customers', 'orders.customer_id', '=', 'customers.id')
-               ->where('date', date('Y-m-d'))
-               ->where('status_id', 2)
-               ->select('customers.name as cusname', 'orders.*')
-               ->get();
-            //    print_r($orders);die;
-        
+            ->where('date', date('Y-m-d'))
+            ->where('status_id', 2)
+            ->select('customers.name as cusname', 'orders.*')
+            ->get();
+        //    print_r($orders);die;
+
         $itemOrderProduct = ItemProductOrder::get();
         $itemOrderModel = ItemModelOrder::all();
 
         $no = 1;
 
-        $html = View::make('admin.orderday', compact('orders','itemOrderProduct','itemOrderModel', 'no'))->render();
+        $html = View::make('admin.orderday', compact('orders', 'itemOrderProduct', 'itemOrderModel', 'no'))->render();
 
         $options = new Options();
         // $options->setIsRemoteEnabled(true); 
-        $options->set('isRemoteEnabled',true); 
-        
+        $options->set('isRemoteEnabled', true);
+
         $dompdf = new Dompdf($options);
-        
+
         $dompdf->setPaper('A4', 'landscape');
         $dompdf->loadHtml($html);
 
         $dompdf->render();
 
-        return $dompdf->stream('order-'.date('d-m-Y').'.pdf');
-
+        return $dompdf->stream('order-' . date('d-m-Y') . '.pdf');
     }
 }

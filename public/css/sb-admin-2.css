@@ -11480,7 +11480,7 @@ body.sidebar-toggled footer.sticky-footer {
     content: "Tipe";
   }
   .tabel-mid-order td:nth-of-type(3):before {
-    content: "Catatan";
+    content: "Request";
   }
   .tabel-mid-order td:nth-of-type(4):before {
     content: "Harga";
