@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhotoModel;
 use Illuminate\Http\Request;
 use App\Models\Voucher;
 
@@ -13,7 +14,7 @@ class VoucherController extends Controller
     public function index()
     {
         $vouchers = Voucher::all();
-        return view('vouchers.index',compact('vouchers'))->with('no');
+        return view('vouchers.index', compact('vouchers'))->with('no');
     }
 
     /**
@@ -21,7 +22,9 @@ class VoucherController extends Controller
      */
     public function create()
     {
-        return view('vouchers.create');
+
+        $models = PhotoModel::get();
+        return view('vouchers.create', compact('models'));
     }
 
     /**
@@ -38,9 +41,9 @@ class VoucherController extends Controller
             'min_product_order' => 'required',
             'status' => 'required',
         ]);
-  
+
         Voucher::create($request->all());
-        return redirect()->route('vouchers.index')->with('success','Voucher created successfully.');
+        return redirect()->route('vouchers.index')->with('success', 'Voucher created successfully.');
     }
 
     /**
@@ -48,7 +51,7 @@ class VoucherController extends Controller
      */
     public function show(Voucher $voucher)
     {
-        return view('vouchers.show',compact('voucher'));
+        return view('vouchers.show', compact('voucher'));
     }
 
     /**
@@ -56,7 +59,8 @@ class VoucherController extends Controller
      */
     public function edit(Voucher $voucher)
     {
-        return view('vouchers.edit',compact('voucher'));
+        $models = PhotoModel::get();
+        return view('vouchers.edit', compact('voucher', 'models'));
     }
 
     /**
@@ -75,8 +79,8 @@ class VoucherController extends Controller
         ]);
 
         $voucher->update($request->all());
-  
-        return redirect()->route('vouchers.index')->with('success','Voucher updated successfully');
+
+        return redirect()->route('vouchers.index')->with('success', 'Voucher updated successfully');
     }
 
     /**
@@ -85,8 +89,8 @@ class VoucherController extends Controller
     public function destroy(Voucher $voucher)
     {
         $voucher->delete();
-  
-        return redirect()->route('vouchers.index')->with('success','Voucher deleted successfully');
+
+        return redirect()->route('vouchers.index')->with('success', 'Voucher deleted successfully');
     }
 
     public function validateVoucher(Request $request)
@@ -94,13 +98,20 @@ class VoucherController extends Controller
         $voucherCode = $request->input('voucher_code');
         $minOrderAmount = $request->input('total_price_order');
         $minProductAmount = $request->input('total_price_product');
+        $include_model = $request->input('include_model');
 
         // Query the database to check if the voucher code exists
-        $isValidVoucher = Voucher::where('code_voucher', $voucherCode)
-                                  ->where('status', 'Aktif')
-                                  ->where('min_price_order', '<=', $minOrderAmount)
-                                  ->where('min_product_order', '<=', $minProductAmount)
-                                  ->exists();
+        $query = Voucher::where('code_voucher', $voucherCode)
+            ->where('status', 'Aktif')
+            ->where('min_price_order', '<=', $minOrderAmount)
+            ->where('min_product_order', '<=', $minProductAmount);
+            $query->where(function ($subquery) use ($include_model) {
+                foreach ($include_model as $modelId) {
+                    $subquery->orWhere('include_model', '=', $modelId);
+                }
+            });
+
+            $isValidVoucher = $query->exists();
 
         return response()->json(['valid' => $isValidVoucher]);
     }

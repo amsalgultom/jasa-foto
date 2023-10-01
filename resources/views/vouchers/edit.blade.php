@@ -66,6 +66,16 @@
                     <input type="number" name="min_product_order" class="form-control" placeholder="Minimal Price Order"  value="{{ $voucher->min_product_order }}" required>
                 </div>
                 <div class="form-group">
+                    <strong>Promotion For Model:</strong>
+                    <!-- <select data-placeholder="Ketik untuk mencari model..." class="chosen-select form-control" name="include_model"> -->
+                    <select class="form-control" name="include_model" required>
+                        <option value="0" selected>-- Semua Model --</option>
+                        @foreach($models as $model)
+                        <option value="{{$model->id}}" {{ $voucher->include_model == $model->id ? 'selected' : '' }}>{{$model->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <strong>Status:</strong>
                     <select class="form-control w-100 select-form" name="status" required>
                         <option value="" hidden selected>-- Pilih Status --</option>

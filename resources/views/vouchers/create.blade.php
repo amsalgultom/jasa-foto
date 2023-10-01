@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', 'ART SPACE - Vouchers')
 
+@push('heads')
+<!-- <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" /> -->
+@endpush
+
 @section('content')
 
 <!-- Begin Page Content -->
@@ -68,6 +72,18 @@
                     <input type="number" name="min_product_order" class="form-control" placeholder="Minimal Price Order" required>
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Promotion For Model:</strong>
+                    <!-- <select data-placeholder="Ketik untuk mencari model..." class="chosen-select form-control" name="include_model"> -->
+                    <select class="form-control" name="include_model" required>
+                        <option value="0" selected>-- Semua Model --</option>
+                        @foreach($models as $model)
+                        <option value="{{$model->id}}">{{$model->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-6 col-md-12">
                 <div class="form-group">
                     <strong>Deskripsi Voucher:</strong>
@@ -97,3 +113,14 @@
 
 <!-- End of Main Content -->
 @endsection
+
+@push('scripts')
+
+<!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+
+<script>
+    $(".chosen-select").chosen({
+        no_results_text: "Oops, nothing found!"
+    })
+</script> -->
+@endpush

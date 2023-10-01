@@ -17,5 +17,16 @@ class Voucher extends Model
         'min_price_order',
         'min_product_order',
         'status',
+        'include_model',
     ];
+
+    // public function setIncludeModelAttribute($value)
+    // {
+    //     // Ensure that $value is an array
+    //     if (is_array($value)) {
+    //         $this->attributes['include_model'] = implode(',', $value);
+    //     } else {
+    //         $this->attributes['include_model'] = $value;
+    //     }
+    // }
 }
