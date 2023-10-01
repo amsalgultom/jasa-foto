@@ -2099,16 +2099,16 @@ ul.form-stepper li a .form-stepper-circle {
 .prosedur .step-procedure .img-procedure{
   position: relative;
   color: #000;
-  height: 150px;
+  height: 100px;
 }
 
 .prosedur .step-procedure:nth-child(even) img{
-  padding: 10px;
+  /* padding: 10px; */
   float: left;
 }
 .prosedur .step-procedure:nth-child(odd) img{
   float: right;
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .prosedur .step-procedure:nth-child(even) .title-procedure{
@@ -2154,4 +2154,8 @@ ul.form-stepper li a .form-stepper-circle {
   float: left; 
   width: 50%; 
   margin-right: 30px;
+}
+
+.img-alamat{
+  width: 70%;
 }

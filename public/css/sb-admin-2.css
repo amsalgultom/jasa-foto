@@ -11297,9 +11297,20 @@ body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
 
+.d-mobile{
+  display: none;
+}
+
 @media (max-width: 991px){
 
   .none-dflex-mobile{
+    display: block !important;
+  }
+  .fs-16px{
+    font-size: 16px !important;
+  }
+
+  .d-mobile{
     display: block !important;
   }
 }
@@ -11309,15 +11320,15 @@ body.sidebar-toggled footer.sticky-footer {
   .d-mobile-none{
     display: none;
   }
-  .tabel-order, .tabel-client, .tabel-model, .tabel-produk, .tabel-report, .tabel-top-order, .tabel-mid-order, .tabel-bottom-order {
+  .tabel-order, .tabel-client, .tabel-model, .tabel-produk, .tabel-report, .tabel-top-order, .tabel-mid-order, .tabel-bottom-order, .tabel-alamat {
     border: 0;
   }
 
-  .tabel-order caption, .tabel-client caption, .tabel-model caption, .tabel-produk caption , .tabel-report caption , .tabel-top-order caption , .tabel-mid-order caption , .tabel-bottom-order caption{
+  .tabel-order caption, .tabel-client caption, .tabel-model caption, .tabel-produk caption, .tabel-alamat caption, .tabel-report caption , .tabel-top-order caption , .tabel-mid-order caption , .tabel-bottom-order caption{
     font-size: 1.3em;
   }
   
-  .tabel-order thead, .tabel-client thead, .tabel-model thead, .tabel-produk thead, .tabel-report thead , .tabel-top-order thead , .tabel-mid-order thead , .tabel-bottom-order thead{
+  .tabel-order thead, .tabel-client thead, .tabel-model thead, .tabel-produk thead, .tabel-report thead , .tabel-top-order thead , .tabel-mid-order thead , .tabel-bottom-order thead, .tabel-alamat thead{
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -11328,17 +11339,17 @@ body.sidebar-toggled footer.sticky-footer {
     width: 1px;
   }
   
-  .tabel-order tr, .tabel-client tr, .tabel-model tr, .tabel-produk tr, .tabel-report tr , .tabel-top-order tr , .tabel-mid-order tr , .tabel-bottom-order tr{
+  .tabel-order tr, .tabel-client tr, .tabel-model tr, .tabel-produk tr, .tabel-report tr , .tabel-top-order tr , .tabel-mid-order tr , .tabel-bottom-order tr, .tabel-alamat tr{
     border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: .625em;
   }
   
-  .tabel-order tfoot, .tabel-client tfoot, .tabel-model tfoot, .tabel-produk tfoot, .tabel-report tfoot , .tabel-top-order tfoot , .tabel-mid-order tfoot , .tabel-bottom-order tfoot{
+  .tabel-order tfoot, .tabel-client tfoot, .tabel-model tfoot, .tabel-produk tfoot, .tabel-report tfoot , .tabel-top-order tfoot , .tabel-mid-order tfoot , .tabel-bottom-order tfoot , .tabel-alamat tfoot{
     display: none;
   }
   
-  .tabel-order td, .tabel-client td, .tabel-model td, .tabel-produk td, .tabel-report td , .tabel-top-order td , .tabel-mid-order td {
+  .tabel-order td, .tabel-client td, .tabel-model td, .tabel-produk td, .tabel-report td , .tabel-top-order td , .tabel-mid-order td, .tabel-alamat td {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: .8em;
@@ -11352,14 +11363,14 @@ body.sidebar-toggled footer.sticky-footer {
     text-align: left;
   }
   
-  .tabel-order td::before, .tabel-client td::before, .tabel-model td::before, .tabel-produk td::before, .tabel-report td::before, .tabel-top-order td::before , .tabel-mid-order td::before , .tabel-bottom-order td::before{
+  .tabel-order td::before, .tabel-client td::before, .tabel-model td::before, .tabel-produk td::before, .tabel-report td::before, .tabel-top-order td::before , .tabel-mid-order td::before , .tabel-bottom-order td::before, .tabel-alamat td::before{
     content: attr(data-label);
     float: left;
     font-weight: bold;
     /* text-transform: uppercase; */
   }
   
-  .tabel-order td:last-child, .tabel-client td:last-child, .tabel-model td:last-child, .tabel-produk td:last-child, .tabel-report td:last-child , .tabel-top-order td:last-child , .tabel-mid-order td:last-child , .tabel-bottom-order td:last-child{
+  .tabel-order td:last-child, .tabel-client td:last-child, .tabel-model td:last-child, .tabel-produk td:last-child, .tabel-report td:last-child , .tabel-top-order td:last-child , .tabel-mid-order td:last-child , .tabel-bottom-order td:last-child, .tabel-alamat td:last-child{
     border-bottom: 0;
   }
 
@@ -11371,7 +11382,7 @@ body.sidebar-toggled footer.sticky-footer {
   }
   .tabel-order td:nth-of-type(3):before {
     content: "Tanggal";
-  }
+  } 
   .tabel-order td:nth-of-type(4):before {
     content: "Harga Pengiriman";
   }
@@ -11492,6 +11503,12 @@ body.sidebar-toggled footer.sticky-footer {
     content: "Subtotal";
   }
 
+  .tabel-alamat td:nth-of-type(1):before {
+    content: "";
+  }
+  .tabel-alamat td:nth-of-type(2):before {
+    content: "";
+  }
   
 }
 

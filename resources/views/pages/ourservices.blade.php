@@ -142,27 +142,27 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/creative-desk/CD-2.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/creative-desk/CD-2.jpeg') }}" class="img-product" alt="">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/creative-desk/CD-3.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/creative-desk/CD-3.jpeg') }}" class="img-product" alt="">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/creative-desk/CD-4.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/creative-desk/CD-4.jpeg') }}" class="img-product" alt="">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/creative-desk/CD-5.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/creative-desk/CD-5.jpeg') }}" class="img-product" alt="">
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-6 mb-4">
                     <div class="image-product">
-                        <img src="{{ asset('img/creative-desk/CD-6.jpg') }}" class="img-product" alt="">
+                        <img src="{{ asset('img/creative-desk/CD-6.jpeg') }}" class="img-product" alt="">
                     </div>
                 </div>
             </div>

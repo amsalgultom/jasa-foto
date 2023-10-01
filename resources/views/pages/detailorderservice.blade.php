@@ -8,7 +8,7 @@
     <section>
         <div class="container">
             <div class="card mt-5">
-                <div class="card-header id-order">  
+                <div class="card-header id-order">
                     <h2><span class="il">Order Id : </span> #{{ $order->id }}</h2>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -43,7 +43,7 @@
                         </tbody>
                     </table>
                 </div>
-                 
+
                 <div class="mb-table">
                     <table cellspacing="0" cellpadding="6" border="1" class="table-model-order mx-auto tabel-mid-order">
                         <thead>
@@ -149,6 +149,36 @@
                         </tr>
                         </tfoot>
                     </table>
+
+                    <h4 class="mt-4 text-center">Alamat Pengiriman Barang </h4>
+
+                    <div class="mb-table">
+                        <table cellspacing="0" cellpadding="6" border="1" class="table-model-order mx-auto tabel-alamat">
+                            <thead>
+                                <tr>
+                                    <th class="text-center text-table" scope="col">Melalui Ekpedisi</th>
+                                    <th class="text-center text-table" scope="col">Melalui Gojek Instan/Same Day</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center text-table">
+                                        <p class="d-mobile fs-16px">Melalui Ekpedisi</p>
+                                        Art Space Studio <br> (nama harus dispasi)
+                                        <p>Jalan Taiman No. 28A RT 02 RW 10, Kampung Gedong, Pasar Rebo, Kota Jakarta Timur</p>
+                                        <p>Note: <br> Rumah Kaca Gede, Dinding Bata</p>
+                                    </td>
+                                    <td class="text-center text-table">
+                                        <p class="d-mobile fs-16px">Melalui Gojek Instan/Same Day</p>
+                                        <p>Search Lokasi Seperti Nama Dibawah:</p>
+                                        <img src="{{ asset('img/alamat-gojek.jpg') }}" class="img-alamat" alt="">
+                                        <p>Note: <br> Rumah samping laundry, Rumah depan warung, gerbang hitam kaca gede, tembok batu bata didepan</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     @if($order->status?->name == 'UnPaid')
                     <div class="text-center my-5">
                         <form action="{{ route('myorderservices.payment') }}" method="POST">
