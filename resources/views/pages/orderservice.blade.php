@@ -904,6 +904,14 @@
             })
             console.log(qtyproduct)
 
+            var incModel = [];
+            incModel.push(0);
+            $('input[name="model_id[]"]:checked').each(function() {
+                incModel.push($(this).val());
+            });
+            
+            console.log(incModel)
+
             var totalPrive = 0;
             $('input[name="sub_total_product[]"]').each(function() {
                 var value = parseFloat($(this).val());
@@ -922,7 +930,8 @@
                 data: {
                     voucher_code: voucherCode,
                     total_price_order: totalPrive,
-                    total_price_product: qtyproduct
+                    total_price_product: qtyproduct,
+                    include_model: incModel,
                 },
                 headers: {
                     'X-CSRF-TOKEN': getCSRFToken() // Include the CSRF token in the request headers
