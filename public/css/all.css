@@ -2119,12 +2119,10 @@ ul.form-stepper li a .form-stepper-circle {
 }
 
 .prosedur .step-procedure:nth-child(even) .description-procedure {
-  text-align: justify; /* For Edge */
   -moz-text-align-last: left; /* For Firefox prior 58.0 */
   text-align-last: left;
 }
 .prosedur .step-procedure:nth-child(odd) .description-procedure{
-  text-align: justify; /* For Edge */
   -moz-text-align-last: right; /* For Firefox prior 58.0 */
   text-align-last: right;
 }
