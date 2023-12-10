@@ -24,7 +24,7 @@
                     <p class="text-catalog">Depan</p>
                 </div>
                 <div class="slide">
-                    <img src="{{ asset('img/catalog/C22.jpg') }}">
+                    <img src="{{ asset('img/catalog/C22-new.jpg') }}">
                     <p class="text-catalog">Samping</p>
                 </div>
                 <div class="slide">
