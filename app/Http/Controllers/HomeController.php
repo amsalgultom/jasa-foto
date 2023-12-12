@@ -47,7 +47,7 @@ class HomeController extends Controller
         $result = json_decode($response->getBody(), true);
 
         $origins = $result['rajaongkir']['results'];
-        $models = PhotoModel::orderBy('id', 'desc')->get();
+        $models = PhotoModel::orderBy('available_date', 'desc')->get();
         $products = Product::where('type', 'Product Foto')->get();
         $productsoptional = Product::where('type', 'Our Service')->get();
         $productsoptional = Product::where('type', 'Our Service')->get();
