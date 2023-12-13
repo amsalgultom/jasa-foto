@@ -17,10 +17,19 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index()
-    {
-        $models = PhotoModel::orderBy('id', 'desc')->get();
-        return view('pages.home', compact('models'));
-    }
+{
+    $models = PhotoModel::select('models.*')
+        ->join(
+            \DB::raw('(SELECT MAX(id) as id FROM models GROUP BY name) as latest_models'),
+            function ($join) {
+                $join->on('models.id', '=', 'latest_models.id');
+            }
+        )
+        ->orderBy('available_date', 'desc')
+        ->get();
+
+    return view('pages.home', compact('models'));
+}
     public function ourservices()
     {
         return view('pages.ourservices');
