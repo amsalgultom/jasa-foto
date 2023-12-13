@@ -21,6 +21,7 @@
                         <tr>
                             <th>No</th>
                             <th>Model</th>
+                            <th>Tanggal Model</th>
                             <th>Nama Produk</th>
                             <th>Tipe</th>
                             <th>Background</th>
@@ -33,6 +34,7 @@
                         <tr>
                             <th>No</th>
                             <th>Model</th>
+                            <th>Tanggal Model</th>
                             <th>Nama Produk</th>
                             <th>Tipe</th>
                             <th>Background</th>
@@ -47,6 +49,7 @@
                             <!-- <td>{{ ++$no }}</td> -->
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->mondelname }}</td>
+                            <td>{{ \Carbon\Carbon::parse($product->model_available_date)->format('d/m/Y') }}</td>
                             <td>{{ $product->prodname }}</td>
                             <td>{{ $product->type }}</td>
                             <td>{{ $product->background }}</td>

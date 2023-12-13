@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         $products = Product::join('models', 'products.model_id','=','models.id')
                             ->leftjoin('photobackgrounds', 'products.photobackground_id','=','photobackgrounds.id')
-                            ->select('models.*','products.*','products.*', 'models.name as mondelname', 'products.name as prodname', 'products.image as prodimage','photobackgrounds.name as background')
+                            ->select('models.*','products.*','products.*', 'models.name as mondelname', 'models.available_date as model_available_date', 'products.name as prodname', 'products.image as prodimage','photobackgrounds.name as background')
                             ->orderBy('products.id', 'desc')
                             ->get();
 

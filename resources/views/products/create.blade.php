@@ -34,7 +34,7 @@
                     <select class="form-control w-100 select-form" name="model_id" required>
                         <option value="" hidden selected>-- Pilih Model --</option>
                         @foreach ($models as $model)
-                        <option value="{{$model->id}}">{{$model->name}}</option>
+                        <option value="{{$model->id}}">{{$model->name}} - {{ \Carbon\Carbon::parse($model->available_date)->format('d/m/Y') }}</option>
                         @endforeach
                     </select>
                 </div>
