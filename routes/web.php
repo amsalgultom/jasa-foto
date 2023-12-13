@@ -48,11 +48,14 @@ Route::controller(LoginRegisterController::class)->group(function() {
     Route::post('/logout', 'logout')->name('logout');
 });
 
+Route::middleware(['auth'])->group(function () {
+
 Route::resource('products', ProductController::class);
 Route::resource('vouchers', VoucherController::class);
 Route::resource('models', PhotoModelController::class);
 Route::resource('photobackgrounds', PhotoBackgroundController::class);
-
+Route::get('/clients', [CustomerController::class, 'index'])->name('clients');
+});
 
 Route::controller(OrderController::class)->group(function() {
 Route::get('/orders', 'index')->name('orders');
@@ -61,6 +64,8 @@ Route::post('/orders/store', 'store')->name('orders.store');
 Route::get('/myorders/show/{order}', 'show')->name('myorders.show');
 Route::post('/myorders/payment', 'payment')->name('myorders.payment');
 Route::get('/myorders/result/{order}', 'resultUpload')->name('myorders.result');
+Route::get('/listorders', [AdminController::class, 'listOrders'])->name('listorders');
+Route::get('/report', [AdminController::class, 'report'])->name('report');
 });
 
 Route::get('/get-data-product', [ProductController::class, 'getDataProduct'])->name('get-data-product');
@@ -70,14 +75,11 @@ Route::get('/get-origins', [App\Http\Controllers\ShippingController::class, 'get
 Route::get('/get-destinations', [App\Http\Controllers\ShippingController::class, 'getDestinations']);
 Route::get('/calculate-shipping', [App\Http\Controllers\ShippingController::class, 'calculateShipping']);
 
-Route::get('/clients', [CustomerController::class, 'index'])->name('clients');
 Route::get('/orderupload/show/{order}', [AdminController::class, 'orderUpload'])->name('orderupload.show');
 
-Route::get('/listorders', [AdminController::class, 'listOrders'])->name('listorders');
 Route::get('/listorders/{id}', [PDFController::class, 'generatePDF']);
 // Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
 
-Route::get('/report', [AdminController::class, 'report'])->name('report');
 Route::get('/orders/print-shippping/{order}', [OrderController::class, 'printShipping'])->name('admin.print-shipping');
 Route::get('/orders/print-order-today', [OrderController::class, 'orderDay'])->name('admin.orderday');
 
